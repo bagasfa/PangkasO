@@ -75,7 +75,7 @@
 <ul class="navbar-nav navbar-right">
   <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
     @if(auth()->user()->foto == !NULL)
-      <img alt="image" src="{{url('assets/users/avatar/'.auth()->user()->foto)}}" class="rounded-circle mr-1">
+      <img alt="image" src="{{url('assets/images/users/avatar/'.auth()->user()->foto)}}" class="rounded-circle mr-1">
     @else
       <img alt="image" src="{{ asset('assets/img/dummy/avatar/avatar-1.png') }}" class="rounded-circle mr-1">
     @endif

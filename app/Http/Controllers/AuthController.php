@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Rules\MatchOldPassword;
-use Illuminate\Support\Facades\Hash;
 use App\User;
 use Auth;
 
@@ -35,18 +33,18 @@ class AuthController extends Controller
             'avatar' => 'required|image|mimes:jpeg,png,jpg|max:8192'
         ]);
         $upAvatar = 'user-'.date('dmYhis').'.'.$request->avatar->getClientOriginalExtension();
-        $request->avatar->move('assets/users/avatar', $upAvatar);
+        $request->avatar->move('assets/images/users/avatar', $upAvatar);
         
-        $users = new User;
-        $users->name = $request->name;
-        $users->email = $request->email;
-        $users->password = bcrypt($request->password);
-        $users->id_role = $request->role;
-        $users->avatar = $upAvatar;
-        $users->gender = $request->gender;
-        $users->address = $request->address;
-        $users->phone_number = $request->phone;
-        $users->save();
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->id_role = $request->role;
+        $user->avatar = $upAvatar;
+        $user->gender = $request->gender;
+        $user->address = $request->address;
+        $user->phone_number = $request->phone;
+        $user->save();
         return redirect('/login')->with('message', 'Registrasi berhasil!');
     }
 

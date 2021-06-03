@@ -140,8 +140,8 @@
               <label id="upload-label" for="upload" class="font-weight-light text-muted">Upload Foto disini ...</label>
               <div class="input-group-append">
                 <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2"></i><small style="font-size: 12px;" class="text-bold">Pilih Foto</small></label>
-                </div>
               </div>
+            </div>
 
             <!-- Uploaded image area-->
             <p class="font-italic text-center">Gambar preview akan ditampilkan dibawah</p>

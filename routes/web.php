@@ -24,6 +24,16 @@ Route::get('/logout','AuthController@logout');
 Route::group(['middleware' => ['auth','checkRole:1,2,3']], function(){
 	// Dashboard
 	Route::get('/admin-panel/dashboard','HomeController@dashboard');
+	// Roles
 	Route::get('/admin-panel/roles','AdminPanel\RolesController@index');
+	// UsersManagement - Users Data
+	Route::get('/admin-panel/admins','AdminPanel\UsersDataController@admins');
+	Route::post('/admin-panel/admins/add','AdminPanel\UsersDataController@addAdmin');
+	Route::get('/admin-panel/owners','AdminPanel\UsersDataController@owners');
+	Route::post('/admin-panel/owners/add','AdminPanel\UsersDataController@addOwner');
+	Route::get('/admin-panel/customers','AdminPanel\UsersDataController@customers');
+	// User Configuration
+	Route::get('/admin-panel/profile','AdminPanel\UserConfigurationController@profile');
+	Route::get('/admin-panel/profile/edit','AdminPanel\UserConfigurationController@editProfile');
 });
 ?>
