@@ -88,6 +88,14 @@
       <a href="{{url('/admin-panel/password')}}" class="dropdown-item has-icon">
         <i class="fas fa-key"></i> Password
       </a>
+      @if(auth()->user()->id_role == 3)
+      <a href="{{url('/admin-panel/password')}}" class="dropdown-item has-icon">
+        <i class="fas fa-id-card"></i> Verify Identity
+      </a>
+      <a href="{{url('/admin-panel/password')}}" class="dropdown-item has-icon">
+        <i class="fas fa-cogs"></i> Barbershop Setting
+      </a>
+      @endif
       <div class="dropdown-divider"></div>
       <a href="{{url('/logout')}}" class="dropdown-item has-icon text-danger">
         <i class="fas fa-sign-out-alt"></i> Logout

@@ -10,8 +10,10 @@ class UsersDataController extends Controller
 {
 
     // Admin Things
-    public function admins(){
-        $admin = User::select('name','email','gender','address','phone_number','avatar','identity','created_at')->where('id_role',2)->paginate(20);
+    public function admins(Request $request){
+        $admin = User::where('id_role',2)->when($request->search, function($query) use($request){
+            $query->where('name', 'LIKE', '%'.$request->search.'%');
+        })->paginate(20);
         $counter = User::where('id_role',2)->count();
 
         return view('Back.UsersManagement.UsersData.admin', compact('admin','counter'));
@@ -40,8 +42,10 @@ class UsersDataController extends Controller
     }
 
     // Owner Things
-    public function owners(){
-        $owner = User::select('name','email','gender','address','phone_number','avatar','identity','created_at')->where('id_role',3)->paginate(20);
+    public function owners(Request $request){
+        $owner = User::where('id_role',3)->when($request->search, function($query) use($request){
+            $query->where('name', 'LIKE', '%'.$request->search.'%');
+        })->paginate(20);
         $counter = User::where('id_role',3)->count();
 
         return view('Back.UsersManagement.UsersData.owner', compact('owner','counter'));
@@ -70,8 +74,10 @@ class UsersDataController extends Controller
     }
 
     // Customer Things
-    public function customers(){
-        $customer = User::select('name','email','gender','address','phone_number','avatar','identity','created_at')->where('id_role',4)->paginate(20);
+    public function customers(Request $request){
+        $customer = User::where('id_role',4)->when($request->search, function($query) use($request){
+            $query->where('name', 'LIKE', '%'.$request->search.'%');
+        })->paginate(20);
         $counter = User::where('id_role',4)->count();
 
         return view('Back.UsersManagement.UsersData.customer', compact('customer','counter'));

@@ -24,4 +24,16 @@ class UserConfigurationController extends Controller
         return view('Back.UserConfiguration.password');
     }
 
+    public function updatePassword(Request $request){
+        $request->validate([
+            'oldPassword' => ['required', new MatchOldPassword],
+            'newPassword' => ['required'],
+            'confirmPassword' => ['same:newPassword'],
+        ]);
+
+        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->newPassword)]);
+
+        return redirect('/admin-panel/dashboard')->with('message','Password berhasil diperbarui !');
+    }
+
 }

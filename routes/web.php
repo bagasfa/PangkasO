@@ -34,6 +34,9 @@ Route::group(['middleware' => ['auth','checkRole:1,2,3']], function(){
 	Route::get('/admin-panel/customers','AdminPanel\UsersDataController@customers');
 	// User Configuration
 	Route::get('/admin-panel/profile','AdminPanel\UserConfigurationController@profile');
-	Route::get('/admin-panel/profile/edit','AdminPanel\UserConfigurationController@editProfile');
+	Route::post('/admin-panel/profile/edit','AdminPanel\UserConfigurationController@editProfile');
+	Route::get('/admin-panel/password','AdminPanel\UserConfigurationController@password');
+	Route::post('/admin-panel/updatePassword','AdminPanel\UserConfigurationController@updatePassword');
+
 });
 ?>

@@ -82,6 +82,17 @@ a:not(.btn-social-icon):not(.btn-social):not(.page-link) .fab {
   font-size: 15px;
 }
 
+.eye{
+  background-color:#efefef; 
+  padding-top: 11px; 
+  padding-bottom: 10px; 
+  padding-right: 15px;
+  padding-left: 10px; 
+  margin-top: 0px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
 .bg-primary {
   background-color: #6777ef !important; }
 

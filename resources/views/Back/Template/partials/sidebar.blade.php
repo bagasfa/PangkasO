@@ -12,16 +12,23 @@
         <i class="fas fa-home"></i><span>Dashboard</span>
       </a>
     </li>
-    <!-- Menu Khusus SuperAdmin -->
     @if(auth()->user()->id_role == 1)
     <li id="history" class="">
-      <a href="{{ url('/admin-panel/history') }}">
+      <a href="{{ url('/admin-panel/log_history') }}">
         <i class="fas fa-history"></i> <span>History</span>
+      </a>
+    </li>
+    @elseif(auth()->user()->id_role == 2)
+    <li id="history" class="">
+      <a href="{{ url('/admin-panel/history') }}">
+        <i class="fas fa-history"></i> <span>History Users</span>
       </a>
     </li>
     @endif
     <!-- Separation -->
+    @if(auth()->user()->id_role == 1 || auth()->user()->id_role == 2)
     <li class="menu-header">Users Management</li>
+    @endif
     @if(auth()->user()->id_role == 1)
     <li id="roles" class="">
       <a href="{{ url('/admin-panel/roles') }}">
@@ -29,16 +36,19 @@
       </a>
     </li>
     @endif
+    @if(auth()->user()->id_role == 1 || auth()->user()->id_role == 2)
     <li id="users" class="nav-item dropdown">
       <a href="#" class="nav-link has-dropdown">
         <i class="fas fa-users"></i> <span>Users Data</span>
       </a>
       <ul class="dropdown-menu">
+        @if(auth()->user()->id_role == 1)
         <li>
           <a class="nav-link" href="{{url('/admin-panel/admins')}}">
             <i class="fas fa-user-cog"></i> <span>Admin</span>
           </a>
         </li>
+        @endif
         <li>
           <a class="nav-link" href="{{url('/admin-panel/owners')}}">
             <i class="fas fa-user-friends"></i> <span>Owner</span>
@@ -68,6 +78,48 @@
         </li>
       </ul>
     </li>
+    @endif
 
+    <!-- Owner Menu Sidebar -->
+    @if(auth()->user()->id_role == 3)
+    <li>
+      <a class="nav-link" href="{{url('/owner-panel/orders')}}">
+        <i class="fas fa-receipt"></i> <span>Orders</span>
+      </a>
+    </li>
+    <li class="menu-header">Barbershop Management</li>
+    <li>
+      <a class="nav-link" href="{{url('/owner-panel/banner')}}">
+        <i class="fas fa-image"></i> <span>Barbershop Banner</span>
+      </a>
+    </li>
+    <li id="hairstyle" class="nav-item dropdown">
+      <a href="#" class="nav-link has-dropdown">
+        <i class="fas fa-cut"></i> <span>Hairstyle Catalog</span>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <a class="nav-link" href="{{url('/owner-panel/male-hairstyle')}}">
+            <i class="fas fa-mars"></i> <span>Male</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" href="{{url('/owner-panel/female-hairstyle')}}">
+            <i class="fas fa-venus"></i> <span>Female</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a class="nav-link" href="{{url('/owner-panel/service-pref')}}">
+        <i class="fas fa-hand-holding-heart"></i> <span>Service Preferences</span>
+      </a>
+    </li>
+    <li>
+      <a class="nav-link" href="{{url('/owner-panel/trasactions-history')}}">
+        <i class="fas fa-history"></i> <span>Transactions History</span>
+      </a>
+    </li>
+    @endif
   </ul>
 </aside>

@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
           $table->string('address');
           $table->string('phone_number')->unique();
           $table->string('avatar')->nullable();
-          $table->string('identity')->nullable();
+          $table->string('verify_status')->nullable();
           $table->bigInteger('id_role')->unsigned();
           $table->foreign('id_role')
                 ->references('id')

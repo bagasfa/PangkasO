@@ -18,7 +18,7 @@
           <div class="card-header">
             <form method="GET" class="form-inline">
               <div class="form-group">
-                <input type="text" name="search" class="form-control" placeholder="Cari Customer" value="">
+                <input type="text" name="search" class="form-control" placeholder="Cari Customer" value="{{ request()->get('search') }}">
               </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-primary">Cari</button>
@@ -83,7 +83,7 @@
                 </tr>
                 @empty
                 <tr>
-                  <td colspan="4"><center>Data kosong</center></td>
+                  <td colspan="10"><center>Data kosong</center></td>
                 </tr>
                 @endforelse
               </tbody>

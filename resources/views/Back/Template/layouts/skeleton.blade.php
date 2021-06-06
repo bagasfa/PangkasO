@@ -17,6 +17,7 @@
   @yield('app')
 </div>
 
+<script type="text/javascript" src="{{asset('assets/js/bootstrap-show-password.js')}}"></script>
 <script src="{{asset('assets/js/custom.js')}}"></script>
 <script src="{{asset('assets/js/scripts.js')}}"></script>
 <script src="{{asset('assets/js/toastr.min.js')}}"></script>
@@ -25,6 +26,7 @@
 <script src="{{ mix('js/vendor.js') }}"></script>
 <script src="{{ mix('js/app.js') }}"></script>
 @stack('javascript')
+
 <!-- Toaster -->
 <script>
   @if(Session::has('message'))
@@ -33,5 +35,15 @@
     toastr.error("{{ Session::get('bye') }}");
   @endif
 </script>
+
+  <!-- Toastr Validation -->
+  <script>
+    @if($errors->any())
+      @foreach($errors->all() as $error)
+        toastr.error("{{ $error }}");
+      @endforeach
+    @endif
+  </script>
+  
 </body>
 </html>
