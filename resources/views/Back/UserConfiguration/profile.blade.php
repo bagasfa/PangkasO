@@ -52,20 +52,41 @@
                   <input name="email" type="email" class="form-control" id="inputEmail" placeholder="E-Mail" value="{{auth()->user()->email}}" required="">
               </div>
               <!-- Gender -->
-              <div class="form-group">
+              <div class="form-check ">
                 <label for="gender">Jenis Kelamin</label><br>
                 @if(auth()->user()->gender == 'L')
-                <input class="form-check-input" type="radio" name="gender" value="L" id="gender" checked="">Laki - Laki
-                <input class="form-check-input" type="radio" name="gender" value="P" id="gender">Perempuan
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" value="L" id="male" checked="">
+                  <label class="form-check-label" for="male">Laki - Laki</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" value="P" id="female">
+                  <label class="form-check-label" for="female">Perempuan</label>
+                </div>
                 @elseif(auth()->user()->gender == 'P')
-                <input class="form-check-input" type="radio" name="gender" value="L" id="gender">Laki - Laki
-                <input class="form-check-input" type="radio" name="gender" value="P" id="gender" checked="">Perempuan
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" value="L" id="male">
+                  <label class="form-check-label" for="male">Laki - Laki</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" value="P" id="female" checked="">
+                  <label class="form-check-label" for="female">Perempuan</label>
+                </div>
+                @else
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" value="L" id="male" checked="">
+                  <label class="form-check-label" for="male">Laki - Laki</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" value="P" id="female">
+                  <label class="form-check-label" for="female">Perempuan</label>
+                </div>
                 @endif
               </div>
               <!-- Phone -->
               <div class="form-group">
-                <label for="phone">Nomor Telepon</label>
-                <input name="phone" type="tel" class="form-control" id="phone" placeholder="Nomor Telepon" value="{{auth()->user()->phone_number}}" required="">
+                <label for="phone_number">Nomor Telepon</label>
+                <input name="phone_number" type="tel" class="form-control" id="phone_number" placeholder="Nomor Telepon" value="{{auth()->user()->phone_number}}" required="">
               </div>
               <!-- Address -->
               <div class="form-group">
@@ -75,7 +96,11 @@
               
               <br>
               <div class="form-group text-center">
+                @if(auth()->user()->id_role == 1 || auth()->user()->id_role == 2)
                 <a href="{{url('admin-panel/dashboard')}}">
+                @elseif(auth()->user()->id_role == 3)
+                <a href="{{url('owner-panel/dashboard')}}">
+                @endif
                   <button type="button" class="btn btn-danger col-md-3 col-lg-3">BATAL</button>
                 </a>
                 <button type="submit" class="btn btn-primary col-md-3 col-lg-3">SIMPAN</button>

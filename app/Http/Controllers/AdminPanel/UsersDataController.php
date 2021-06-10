@@ -4,82 +4,246 @@ namespace App\Http\Controllers\AdminPanel;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use App\User;
+use App\History;
+use Validator;
+use File;
+use DataTables;
 
 class UsersDataController extends Controller
 {
 
     // Admin Things
     public function admins(Request $request){
-        $admin = User::where('id_role',2)->when($request->search, function($query) use($request){
-            $query->where('name', 'LIKE', '%'.$request->search.'%');
-        })->paginate(20);
         $counter = User::where('id_role',2)->count();
 
-        return view('Back.UsersManagement.UsersData.admin', compact('admin','counter'));
+        return view('Back.UsersManagement.UsersData.admin', compact('counter'));
     }
 
-    public function addAdmin(Request $request){
-        $validateData = $request->validate([
-            'email' => 'required|unique:users,email',
-            'password' => 'required|min:8',
-            'avatar' => 'required|image|mimes:jpeg,png,jpg|max:8192'
-        ]);
-        $upAvatar = 'user-'.date('dmYhis').'.'.$request->avatar->getClientOriginalExtension();
-        $request->avatar->move('assets/images/users/avatar', $upAvatar);
-        
+    public function storeAdmin(Request $request){
+
+        $messages = array(
+            'name.required' => 'Kolom nama tidak boleh kosong!',
+            'email.required' => 'Kolom Email tidak boleh kosong!',
+            'email.unique' => 'Email telah digunakan!',
+            'password.required' => 'Kolom Password tidak boleh kosong!',
+            'password.min' => 'Password tidak boleh kurang dari 8 karakter!',
+            'phone_number.required' => 'Kolom Nomor Telepon tidak boleh kosong!',
+            'phone_number.unique' => 'Nomor Telepon telah digunakan!',
+        );
+
+        $validator = Validator::make($request->all(),[
+                'name' => 'required|string',
+                'email' => 'required|unique:users,email',
+                'password' => 'required|min:8',
+                'phone_number' => 'required|unique:users,phone_number'
+        ],$messages);
+
+        if($validator->fails()){
+            $error = $validator->errors()->first();
+                return response()->json([
+                    'error' => $error,
+                ]);
+        }
+
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->id_role = $request->role;
-        $user->avatar = $upAvatar;
-        $user->gender = $request->gender;
-        $user->address = $request->address;
-        $user->phone_number = $request->phone;
+        $user->phone_number = $request->phone_number;
+        $user->id_role = 2;
+        $user->remember_token = '';
         $user->save();
-        return redirect('/admin-panel/admins')->with('message', 'Berhasil menambahkan Admin!');
+
+        $history = new History;
+        $history->user_id = auth()->user()->id;
+        $history->nama = auth()->user()->name;
+        $history->aksi = "Tambah";
+        $history->keterangan = "Menambahkan Akun '".$request->email."' sebagai Admin";
+        $history->save();
+
+        // Mail::to($request->email)->send(new PenggunaMail());
+
+        return response([
+            'message' => 'sukses',
+        ]);
+    }
+
+    public function destroyAdmin($id){
+        $avatar = User::where('id', $id)->value('avatar');
+        File::delete('/assets/images/users/avatar/'. $avatar);
+
+        $user = User::find($id);
+        History::where('id',$user->id)->delete();
+        $user->delete();
+
+        $history = new History;
+        $history->user_id = auth()->user()->id;
+        $history->nama = auth()->user()->name;
+        $history->aksi = "Hapus";
+        $history->keterangan = "Menghapus Akun '".$user->email."' beserta Historynya";
+        $history->save();
+
+        return response([
+            'message' => "delete sukses"
+        ]);
+    }
+
+    public function LoadTableUsers(){
+        return view('Back.DataTables.UsersManagement.UsersDatatable');
+    }
+
+    public function LoadDataAdmin(){
+        $admin = User::where('id_role','2')->get();
+
+            return Datatables::of($admin)->addIndexColumn()
+            ->editColumn('created_at', function($admin){
+                return date('h:i:s | d-m-Y', strtotime($admin->created_at));
+            })
+            ->addColumn('aksi', function($row){
+                $btn =  '<a href="javascript:void(0)" data-id="'.$row->id.'" data-name="'.$row->name.'" class="btn btn-outline-danger btn-delete-admin">
+                <i class="fas fa-trash"></i>
+                </a>';
+                return $btn;
+         })
+         ->rawColumns(['aksi'])
+            ->make(true);
     }
 
     // Owner Things
     public function owners(Request $request){
-        $owner = User::where('id_role',3)->when($request->search, function($query) use($request){
-            $query->where('name', 'LIKE', '%'.$request->search.'%');
-        })->paginate(20);
         $counter = User::where('id_role',3)->count();
 
-        return view('Back.UsersManagement.UsersData.owner', compact('owner','counter'));
+        return view('Back.UsersManagement.UsersData.owner', compact('counter'));
     }
 
-    public function addOwner(Request $request){
-        $validateData = $request->validate([
-            'email' => 'required|unique:users,email',
-            'password' => 'required|min:8',
-            'avatar' => 'required|image|mimes:jpeg,png,jpg|max:8192'
-        ]);
-        $upAvatar = 'user-'.date('dmYhis').'.'.$request->avatar->getClientOriginalExtension();
-        $request->avatar->move('assets/images/users/avatar', $upAvatar);
-        
+    public function storeOwner(Request $request){
+
+        $messages = array(
+            'name.required' => 'Kolom nama tidak boleh kosong!',
+            'email.required' => 'Kolom Email tidak boleh kosong!',
+            'email.unique' => 'Email telah digunakan!',
+            'password.required' => 'Kolom Password tidak boleh kosong!',
+            'phone_number.required' => 'Kolom Nomor Telepon tidak boleh kosong!',
+            'phone_number.unique' => 'Nomor Telepon telah digunakan!',
+        );
+
+        $validator = Validator::make($request->all(),[
+                'name' => 'required|string',
+                'email' => 'required|unique:users,email',
+                'password' => 'required',
+                'phone_number' => 'required|unique:users,phone_number'
+        ],$messages);
+
+        if($validator->fails()){
+            $error = $validator->errors()->first();
+                return response()->json([
+                    'error' => $error,
+                ]);
+        }
+
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->id_role = $request->role;
-        $user->avatar = $upAvatar;
-        $user->gender = $request->gender;
-        $user->address = $request->address;
-        $user->phone_number = $request->phone;
+        $user->phone_number = $request->phone_number;
+        $user->id_role = 3;
+        $user->remember_token = '';
         $user->save();
-        return redirect('/admin-panel/owners')->with('message', 'Berhasil menambahkan Owners!');
+
+        $history = new History;
+        $history->user_id = auth()->user()->id;
+        $history->nama = auth()->user()->name;
+        $history->aksi = "Tambah";
+        $history->keterangan = "Menambahkan Akun '".$request->email."' sebagai Owner";
+        $history->save();
+
+        // Mail::to($request->email)->send(new PenggunaMail());
+
+        return response([
+            'message' => 'sukses',
+        ]);
+    }
+
+    public function destroyOwner($id){
+        $avatar = User::where('id', $id)->value('avatar');
+        File::delete('/assets/images/users/avatar/'. $avatar);
+
+        $user = User::find($id);
+        History::where('id',$user->id)->delete();
+        $user->delete();
+
+        $history = new History;
+        $history->user_id = auth()->user()->id;
+        $history->nama = auth()->user()->name;
+        $history->aksi = "Hapus";
+        $history->keterangan = "Menghapus Akun '".$user->email."' beserta Historynya";
+        $history->save();
+
+        return response([
+            'message' => "delete sukses"
+        ]);
+    }
+
+    public function LoadDataOwner(){
+        $owner = User::where('id_role','3')->get();
+
+            return Datatables::of($owner)->addIndexColumn()
+            ->editColumn('created_at', function($owner){
+                return date('h:i:s | d-m-Y', strtotime($owner->created_at));
+            })
+            ->addColumn('aksi', function($row){
+                $btn =  '<a href="javascript:void(0)" data-id="'.$row->id.'" data-name="'.$row->name.'" class="btn btn-outline-danger btn-delete-owner">
+                <i class="fas fa-trash"></i>
+                </a>';
+                return $btn;
+         })
+         ->rawColumns(['aksi'])
+            ->make(true);
     }
 
     // Customer Things
     public function customers(Request $request){
-        $customer = User::where('id_role',4)->when($request->search, function($query) use($request){
-            $query->where('name', 'LIKE', '%'.$request->search.'%');
-        })->paginate(20);
         $counter = User::where('id_role',4)->count();
 
-        return view('Back.UsersManagement.UsersData.customer', compact('customer','counter'));
+        return view('Back.UsersManagement.UsersData.customer', compact('counter'));
+    }
+
+    public function destroyCustomer($id){
+        $avatar = User::where('id', $id)->value('avatar');
+        File::delete('/assets/images/users/avatar/'. $avatar);
+
+        $user = User::find($id);
+        History::where('id',$user->id)->delete();
+        $user->delete();
+
+        $history = new History;
+        $history->user_id = auth()->user()->id;
+        $history->nama = auth()->user()->name;
+        $history->aksi = "Hapus";
+        $history->keterangan = "Menghapus Akun '".$user->email."' beserta Historynya";
+        $history->save();
+
+        return response([
+            'message' => "delete sukses"
+        ]);
+    }
+
+    public function LoadDataCustomer(){
+        $customer = User::where('id_role','4')->get();
+
+            return Datatables::of($customer)->addIndexColumn()
+            ->editColumn('created_at', function($customer){
+                return date('h:i:s | d-m-Y', strtotime($customer->created_at));
+            })
+            ->addColumn('aksi', function($row){
+                $btn =  '<a href="javascript:void(0)" data-id="'.$row->id.'" data-name="'.$row->name.'" class="btn btn-outline-danger btn-delete-customer">
+                <i class="fas fa-trash"></i>
+                </a>';
+                return $btn;
+         })
+         ->rawColumns(['aksi'])
+            ->make(true);
     }
 }

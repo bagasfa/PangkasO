@@ -1,15 +1,15 @@
 @extends('Back.Template.layouts.app')
 
-@section('title', '(Customer) Users Data')
+@section('title', 'History Aktivitas')
 
 @section('content')
 <script type="text/javascript">
-  document.getElementById('users').classList.add('active');
+  document.getElementById('history').classList.add('active');
 </script>
 <section class="section">
   
   <div class="section-header">
-    <h1>User Data - Customer</h1>
+    <h1>History Aktivitas</h1>
   </div>
 
   <div class="section-body">
@@ -17,11 +17,11 @@
         <div class="card">
 
           <div class="counter">
-            <b>Total Customer</b> : {{$counter}}
+            <b>Total History</b> : {{$counter}}
           </div>
 
           <div class="card-body table-responsive">
-              <div id="datatable-customer"></div>
+              <div id="datatable-history"></div>
           </div>
 
           <div class="card-footer text-right">
@@ -35,5 +35,5 @@
 </section>
 @endsection
 @push('javascript')
-  <script src="{{asset('assets/js/AdminPanel/UsersManagement/usersData.js')}}"></script>
+  <script src="{{asset('assets/js/AdminPanel/Dashboard/history.js')}}"></script>
 @endpush

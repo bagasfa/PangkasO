@@ -1,20 +1,28 @@
 <aside id="sidebar-wrapper">
-  <div class="sidebar-brand brand-logo">
+  <div class="sidebar-brand">
     <a href="">{{ config('app.name') }}</a>
   </div>
-  <div class="sidebar-brand sidebar-brand-sm brand-logo">
+  <div class="sidebar-brand sidebar-brand-sm">
     <a href="#">{{ strtoupper(substr(config('app.name'), 0, 2)) }}</a>
   </div>
   <ul class="sidebar-menu">
     <li class="menu-header">Dashboard</li>
+    @if(auth()->user()->id_role == 1 || auth()->user()->id_role == 2)
     <li id="dashboard" class="">
       <a class="nav-link" href="{{url('/admin-panel/dashboard')}}">
         <i class="fas fa-home"></i><span>Dashboard</span>
       </a>
     </li>
+    @elseif(auth()->user()->id_role == 3)
+    <li id="dashboard" class="">
+      <a class="nav-link" href="{{url('/owner-panel/dashboard')}}">
+        <i class="fas fa-home"></i><span>Dashboard</span>
+      </a>
+    </li>
+    @endif
     @if(auth()->user()->id_role == 1)
     <li id="history" class="">
-      <a href="{{ url('/admin-panel/log_history') }}">
+      <a href="{{ url('/admin-panel/activity-history') }}">
         <i class="fas fa-history"></i> <span>History</span>
       </a>
     </li>

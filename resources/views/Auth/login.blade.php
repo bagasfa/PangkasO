@@ -14,7 +14,7 @@
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/toastr.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/stisla.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
 
 </head>
@@ -173,7 +173,7 @@
   <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
   <script src="{{asset('assets/js/toastr.min.js')}}"></script>
   <script src="{{ asset('assets/js/scripts.js') }}"></script>
-  <script src="{{ asset('assets/js/custom.js') }}"></script>
+  <script src="{{ asset('assets/js/upload_images.js') }}"></script>
 
   <!-- Toaster -->
   <script>

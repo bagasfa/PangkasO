@@ -18,6 +18,7 @@ class CreateHairstyleTable extends Migration
             $table->string('name')->unique();
             $table->string('gender');
             $table->integer('price');
+            $table->string('deskripsi')->nullable();
             $table->bigInteger('owner_id')->unsigned();
             $table->foreign('owner_id')
                 ->references('id')

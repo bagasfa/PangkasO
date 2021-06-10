@@ -18,8 +18,14 @@ class AuthController extends Controller
         // Checking Email dan Password
         if(Auth::attempt($request->only('email','password'))){
             // Jika Berhasil Login
-            // dd('success');
-            return redirect('/admin-panel/dashboard')->with('message', 'Welcome, '.auth()->user()->name);
+            $role = auth()->user()->id_role;
+            if($role == 1 || $role == 2){
+                $url = '/admin-panel/dashboard';
+            }
+            elseif($role == 3){
+                $url = '/owner-panel/dashboard';
+            }
+            return redirect($url)->with('message', 'Welcome, '.auth()->user()->name);
         }
         // Email atau Password salah
         return redirect('/login')->with('bye', 'Email atau Password anda Salah!');

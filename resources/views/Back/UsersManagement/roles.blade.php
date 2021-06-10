@@ -16,61 +16,17 @@
     <div class="col-12 col-md-12 col-lg-12">
         <div class="card">
           <div class="card-header">
-            <form method="GET" class="form-inline">
-              <div class="form-group">
-                <input type="text" name="search" class="form-control" placeholder="Cari Role" value="{{ request()->get('search') }}">
-              </div>
-              <div class="form-group">
-                <button type="submit" class="btn btn-primary">Cari</button>
-              </div>
-            </form>
+            <button type="button" class="btn btn-primary" id="btn-modal-roles"><i class="fa fa-plus"></i> Tambah Roles</button>
           </div>
-          <div class="card-header">
-            <button type="button" data-toggle="modal" data-target="#addData" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Roles</button>
-          </div>
+
           <div class="counter">
             <b>Total Roles</b> : {{$counter}}
           </div>
 
           <div class="card-body table-responsive">
-            <table class="table table-bordered table-hover">
-              <thead>
-                <tr>
-                  <th scope="col" width="100px"><center>#</center></th>
-                  <th scope="col">Nama Roles</th>
-                  <th scope="col"><center>Ditambahkan</center></th>
-                  <th scope="col"><center>Aksi</center></th>
-                </tr>
-              </thead>
-              <tbody>
-                @forelse($roles as $key => $r)
-                <tr>
-                  <td align="center">{{ $roles->firstItem() + $key }}</td>
-                  <td>{{ $r->role_name }}</td>
-                  <td align="center">{{ $r->created_at }}</td>
-                  <td align="center">
-                    <a href="{{url('/admin-panel/roles/'.$r->id. '/edit')}}">
-                      <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="Edit">
-                        <i class="fas fa-edit"></i>
-                      </button>
-                    </a>
-                    &nbsp;
-                    <a href="{{url('/admin-panel/roles/'.$r->id. '/delete')}}">
-                      <button type="button" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="right" title="Hapus">
-                        <i class="fas fa-trash"></i>
-                      </button>
-                    </a>
-                  </td>
-                </tr>
-                @empty
-                <tr>
-                  <td colspan="4"><center>Data kosong</center></td>
-                </tr>
-                @endforelse
-              </tbody>
-            </table>
-            <div class="pull-right">{{ $roles->links() }}</div>
+              <div id="datatable-roles"></div>
           </div>
+
           <div class="card-footer text-right">
             <nav class="d-inline-block">
               
@@ -81,30 +37,65 @@
   </div>
 </section>
 
-<!-- Modal -->
-<div class="modal fade" id="addData" tabindex="-1" role="dialog" aria-labelledby="addData" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content"> 
-      <div class="modal-header">
-        <h5 class="modal-title" id="DataLabel">Tambah Data Roles</h5>
-      </div>
-      <div class="modal-body">
-    <form action="{{url('/admin-panel/roles/add')}}" method="POST">
-    {{csrf_field()}}
-    <div class="form-group">
-        <label for="inputRoles">Nama Roles <i style="color: red;">*</i></label>
-        <input name="roles" type="text" class="form-control" id="inputRoles" placeholder="Nama Roles" required="">
-    </div>
-    <br>
-    <span style="font-size: 12px;"><i style="color: red;"> * </i> : Data harus terisi</span>
-
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-      <button type="submit" class="btn btn-primary">Tambahkan</button>
-      </form>
+<!-- Add Roles Modal-->
+<div class="modal fade" id="RolesModal" tabindex="-1" role="dialog" aria-labelledby="AddRolesModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="AddRolesModal">Add Roles</h5>
+            <button class="close btn-close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          <form accept-charset="utf-8" id="FormAddRoles" enctype="multipart/form-data" method="post">
+            @csrf
+            <label for="roles_name">Nama Role</label>
+            <input type="text" class="form-control" id="role_name" name="role_name">
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-danger btn-close" type="button" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary btn-submit-roles">Submit</button>
+            <button class="btn btn-primary btn-loading" type="button" style="display: none;" disabled>
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Memproses...
+            </button>
+          </form>
+        </div>
     </div>
   </div>
 </div>
-<!-- Modal -->
+
+<!-- Edit Roles Modal-->
+<div class="modal fade" id="editRolesModal" tabindex="-1" role="dialog" aria-labelledby="EditRolesModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="EditRolesModal">Edit Roles</h5>
+        <button class="close btn-close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form accept-charset="utf-8" enctype="multipart/form-data" method="post" id="FormEditRoles">
+          @csrf
+          <input type="hidden" id="id-roles" value="">
+          <label for="roles_name">Nama Role</label>
+          <input type="text" class="form-control" id="edit_role_name" name="role_name">
+      </div>
+      <div class="modal-footer">
+          <button class="btn btn-danger btn-close" type="button" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-save-roles">Save</button>
+          <button class="btn btn-primary btn-loading" type="button" style="display: none;" disabled>
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Memproses...
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
+@push('javascript')
+  <script type="text/javascript" src="{{asset('assets/js/AdminPanel/UsersManagement/roles.js')}}"></script>
+@endpush

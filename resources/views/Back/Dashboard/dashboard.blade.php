@@ -25,3 +25,24 @@
     </div>
   </section>
 @endsection
+@push('javascript')
+  <script src="{{asset('assets/js/toastr.min.js')}}"></script>
+  <!-- Toaster -->
+  <script>
+    @if(Session::has('message'))
+      toastr.success("{{ Session::get('message') }}");
+    @elseif(Session::has('bye'))
+      toastr.error("{{ Session::get('bye') }}");
+    @endif
+  </script>
+
+  <!-- Toastr Validation -->
+  <script>
+    @if($errors->any())
+      @foreach($errors->all() as $error)
+        toastr.error("{{ $error }}");
+      @endforeach
+    @endif
+  </script>
+@stack('javascript')
+@endpush

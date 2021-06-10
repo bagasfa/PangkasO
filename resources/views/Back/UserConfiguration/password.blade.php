@@ -67,3 +67,6 @@
 
 </section>
 @endsection
+@push('javascript')
+<script src="{{asset('assets/js/bootstrap-show-password.js')}}"></script>
+@endpush
