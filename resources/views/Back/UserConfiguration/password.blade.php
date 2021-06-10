@@ -15,7 +15,7 @@
     <div class="col-12 col-md-6 col-lg-6">
         <div class="card">
           <div class="card-header">
-            <a href="{{ url('/dashboard') }}"> 
+            <a href="{{ redirect()->back()->getTargetUrl() }}"> 
               <button type="button" class="btn btn-outline-danger">
                 <i class="fas fa-arrow-circle-left"></i> Kembali
               </button>

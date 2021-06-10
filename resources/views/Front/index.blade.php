@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
-        <link rel="icon" href="assets/images/items/1.jpg" type="image/x-icon"/>
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <title>Pangkaso</title>
+    <link rel="icon" href="assets/images/items/1.jpg" type="image/x-icon"/>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
-       <!-- Custom styles for this template -->
-        <link href="assets/css/bootstrap.css" rel="stylesheet">
-        <link href="assets/css/ui.css" rel="stylesheet">
-        <link href="assets/css/responsive.css" rel="stylesheet">
-        
-        <link href="assets/css/all.min.css" rel="stylesheet">
-        <script src="assets/js/jquery.min.js" type="text/javascript"></script>
-        <script src="assets/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+   <!-- Custom styles for this template -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/ui.css" rel="stylesheet">
+    <link href="assets/css/responsive.css" rel="stylesheet">
+    <link href="assets/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/toastr.css') }}">
                 
     </head>
     <body>
@@ -48,7 +46,7 @@
 <div class="row align-items-center">
   <div class="col-lg-2 col-6">
     <a href="#" class="brand-wrap">
-      Company Name
+      <img src="assets/img/logo.jpg">
     </a> <!-- brand-wrap.// -->
   </div>
   <div class="col-lg-6 col-12 col-sm-12">
@@ -72,8 +70,8 @@
       <div class="widget-header icontext">
         <a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
         <div class="text">
-          <span class="text-muted">Welcome!</span>
-          <div> 
+          <span class="text-muted">Good Morning!</span>
+          <div>
             <a href="{{url('/login')}}">Sign in</a>
           </div>
         </div>
@@ -588,6 +586,27 @@
   </div><!-- //container -->
 </footer>
 <!-- ========================= FOOTER END // ========================= -->
-        
-    </body>
+<!-- Javascript Family         -->
+    <script src="{{asset('assets/js/jquery.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/js/toastr.min.js')}}"></script>
+
+    <!-- Toaster -->
+    <script>
+      @if(Session::has('message'))
+        toastr.success("{{ Session::get('message') }}");
+      @elseif(Session::has('bye'))
+        toastr.error("{{ Session::get('bye') }}");
+      @endif
+    </script>
+
+    <!-- Toastr Validation -->
+    <script>
+      @if($errors->any())
+        @foreach($errors->all() as $error)
+          toastr.error("{{ $error }}");
+        @endforeach
+      @endif
+    </script>
+  </body>
 </html>

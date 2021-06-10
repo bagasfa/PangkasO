@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use App\User;
 use Auth;
 
@@ -15,17 +16,26 @@ class AuthController extends Controller
 
     // Proses Login
     public function postLogin(Request $request){
+
         // Checking Email dan Password
         if(Auth::attempt($request->only('email','password'))){
             // Jika Berhasil Login
             $role = auth()->user()->id_role;
-            if($role == 1 || $role == 2){
-                $url = '/admin-panel/dashboard';
+            // Superadmin, Admin, Owner Login
+            if ($role == 1 || $role == 2 || $role == 3) {
+                
+                if($role == 1 || $role == 2){
+                    $url = '/admin-panel/dashboard';
+                }
+                elseif($role == 3){
+                    $url = '/owner-panel/dashboard';
+                }
+                return redirect($url)->with('message', 'Welcome, '.auth()->user()->name);
             }
-            elseif($role == 3){
-                $url = '/owner-panel/dashboard';
+            // Customer Login
+            elseif($role == 4){
+                return Redirect::to($request->request->get('http_referrer'))->with('message', 'Welcome, '.auth()->user()->name);
             }
-            return redirect($url)->with('message', 'Welcome, '.auth()->user()->name);
         }
         // Email atau Password salah
         return redirect('/login')->with('bye', 'Email atau Password anda Salah!');

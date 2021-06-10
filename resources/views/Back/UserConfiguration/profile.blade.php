@@ -96,11 +96,7 @@
               
               <br>
               <div class="form-group text-center">
-                @if(auth()->user()->id_role == 1 || auth()->user()->id_role == 2)
-                <a href="{{url('admin-panel/dashboard')}}">
-                @elseif(auth()->user()->id_role == 3)
-                <a href="{{url('owner-panel/dashboard')}}">
-                @endif
+                <a href="{{ redirect()->back()->getTargetUrl() }}">
                   <button type="button" class="btn btn-danger col-md-3 col-lg-3">BATAL</button>
                 </a>
                 <button type="submit" class="btn btn-primary col-md-3 col-lg-3">SIMPAN</button>
