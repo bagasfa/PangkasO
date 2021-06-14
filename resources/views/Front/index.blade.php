@@ -69,12 +69,21 @@
       </div>
       <div class="widget-header icontext">
         <a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
+        @if(auth()->check())
+        <div class="text">
+          <span class="text-muted">Hello, {{auth()->user()->name}}!</span>
+          <div>
+            <a href="{{url('/logout')}}">Logout</a>
+          </div>
+        </div>
+        @else
         <div class="text">
           <span class="text-muted">Good Morning!</span>
           <div>
             <a href="{{url('/login')}}">Sign in</a>
           </div>
         </div>
+        @endif
       </div>
     </div> <!-- widgets-wrap.// -->
   </div> <!-- col.// -->

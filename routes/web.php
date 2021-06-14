@@ -48,6 +48,16 @@ Route::group(['middleware' => ['auth','checkRole:1,2']], function(){
 	Route::get('/admin-panel/customers/load/table-customer', 'AdminPanel\UsersDataController@LoadTableUsers');
     Route::get('/admin-panel/customers/load/data-customer', 'AdminPanel\UsersDataController@LoadDataCustomer');
     Route::get('/admin-panel/customers/delete/{id}', 'AdminPanel\UsersDataController@destroyCustomer');
+
+    // UsersManagement - Verify Identity
+    // Owners
+    Route::get('/admin-panel/verify-owners','AdminPanel\VerifyUsersController@owners');
+    // Customers
+    Route::get('/admin-panel/verify-customers','AdminPanel\VerifyUsersController@customers');
+    // Verifying
+    Route::get('/admin-panel/verify/approve/{id}','AdminPanel\VerifyUsersController@approve');
+    Route::get('/admin-panel/verify/reject/{id}','AdminPanel\VerifyUsersController@reject');
+    
 });
 
 // Admin Panel - Superadmin Only
@@ -83,6 +93,8 @@ Route::group(['middleware' => ['auth','checkRole:2']], function(){
 Route::group(['middleware' => ['auth','checkRole:3']], function(){
 	// Owner Dashboard
 	Route::get('/owner-panel/dashboard','HomeController@ownerDashboard');
+	Route::get('/owner-panel/get-verify','AdminPanel\UserConfigurationController@getVerify');
+	Route::post('/owner-panel/send-verify','AdminPanel\UserConfigurationController@putVerify');
 });
 
 ?>

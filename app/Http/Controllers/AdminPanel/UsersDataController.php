@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\User;
 use App\History;
+use App\Identity;
 use Validator;
 use File;
 use DataTables;
@@ -71,8 +72,15 @@ class UsersDataController extends Controller
     }
 
     public function destroyAdmin($id){
+        // Hapus Avatar
         $avatar = User::where('id', $id)->value('avatar');
         File::delete('/assets/images/users/avatar/'. $avatar);
+        // Hapus Scan KTP
+        $ktp = Identity::where('user_id',$id)->value('ktp');
+        File::delete('/assets/images/users/identity/'.$ktp);
+        // Hapus Selfie dengan KTP
+        $ktp_user = Identity::where('user_id',$id)->value('ktp_user');
+        File::delete('/assets/images/users/identity/'.$ktp_user);
 
         $user = User::find($id);
         History::where('id',$user->id)->delete();
@@ -167,8 +175,15 @@ class UsersDataController extends Controller
     }
 
     public function destroyOwner($id){
+        // Hapus Avatar
         $avatar = User::where('id', $id)->value('avatar');
         File::delete('/assets/images/users/avatar/'. $avatar);
+        // Hapus Scan KTP
+        $ktp = Identity::where('user_id',$id)->value('ktp');
+        File::delete('/assets/images/users/identity/'. $ktp);
+        // Hapus Selfie dengan KTP
+        $ktp_user = Identity::where('user_id',$id)->value('ktp_user');
+        File::delete('/assets/images/users/identity/'. $ktp_user);
 
         $user = User::find($id);
         History::where('id',$user->id)->delete();
@@ -211,8 +226,15 @@ class UsersDataController extends Controller
     }
 
     public function destroyCustomer($id){
+        // Hapus Avatar
         $avatar = User::where('id', $id)->value('avatar');
         File::delete('/assets/images/users/avatar/'. $avatar);
+        // Hapus Scan KTP
+        $ktp = Identity::where('user_id',$id)->value('ktp');
+        File::delete('/assets/images/users/identity/'.$ktp);
+        // Hapus Selfie dengan KTP
+        $ktp_user = Identity::where('user_id',$id)->value('ktp_user');
+        File::delete('/assets/images/users/identity/'.$ktp_user);
 
         $user = User::find($id);
         History::where('id',$user->id)->delete();

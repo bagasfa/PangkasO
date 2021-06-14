@@ -96,7 +96,7 @@
             <h5 class="modal-title" id="RegisterLabel">Form Registrasi</h5>
           </div>
           <div class="modal-body">
-            <form action="/register" method="POST" enctype="multipart/form-data">
+            <form action="{{url('/register')}}" method="POST" enctype="multipart/form-data">
             {{csrf_field()}}
             <!-- Nama -->
             <div class="form-group">
@@ -110,9 +110,9 @@
             </div>
             <!-- Password -->
             <div class="form-group">
-              <label for="inputPassword">Password <i style="color: red;">*</i></label>
+              <label for="password">Password <i style="color: red;">*</i></label>
               <div class="input-group" id="show_hide_password">
-                <input name="password" type="password" minlength="8" class="form-control" id="inputPassword" placeholder="Password" required="">
+                <input name="password" type="password" minlength="8" class="form-control" id="password" placeholder="Password" required="">
               <a href=""><div class="input-group-addon eye">
                 <i class="fa fa-eye-slash" aria-hidden="true"></i>
               </div></a>
@@ -120,13 +120,19 @@
             <!-- Gender -->
             <div class="form-group">
               <label for="gender">Jenis Kelamin <i style="color: red;">*</i></label><br>
-              <input class="form-check-input" type="radio" name="gender" value="L" id="gender" checked="">Laki - Laki
-              <input class="form-check-input" type="radio" name="gender" value="P" id="gender">Perempuan
+              <div class="form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" value="L" id="male" checked="">
+                <label class="form-check-label">Laki - Laki</label>
+              </div>
+              <div class="form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" value="P" id="female">
+                <label class="form-check-label">Perempuan</label>
+              </div>
             </div>
             <!-- Phone -->
             <div class="form-group">
               <label for="phone">Nomor Telepon <i style="color: red;">*</i></label>
-              <input name="phone" type="tel" class="form-control" id="phone" placeholder="Nomor Telepon" required="">
+              <input name="phone_number" type="tel" class="form-control" id="phone" placeholder="Nomor Telepon" required="">
             </div>
             <!-- Address -->
             <div class="form-group">
@@ -146,8 +152,6 @@
             <!-- Uploaded image area-->
             <p class="font-italic text-center">Gambar preview akan ditampilkan dibawah</p>
             <div class="image-area mt-4"><img id="imageResult" src="#" alt="" width="300px" height="300px" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
-            <!-- Hidden Role -->
-            <input type="hidden" name="role" value="3">
             <br>
             <span style="font-size: 12px;"><i style="color: red;"> * </i> : Data harus terisi</span>
           </div>
@@ -173,7 +177,7 @@
   <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
   <script src="{{asset('assets/js/toastr.min.js')}}"></script>
   <script src="{{ asset('assets/js/scripts.js') }}"></script>
-  <script src="{{ asset('assets/js/upload_images.js') }}"></script>
+  <script src="{{ asset('assets/js/upload-images.js') }}"></script>
 
   <!-- Toaster -->
   <script>

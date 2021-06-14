@@ -27,11 +27,6 @@
               <div id="datatable-admin"></div>
           </div>
 
-          <div class="card-footer text-right">
-            <nav class="d-inline-block">
-              
-            </nav>
-          </div>
         </div>
     </div>  
   </div>
@@ -91,6 +86,6 @@
 
 @endsection
 @push('javascript')
-<script src="{{asset('assets/js/bootstrap-show-password.js')}}"></script>
-<script src="{{asset('assets/js/AdminPanel/UsersManagement/usersData.js')}}"></script>
+  <script src="{{asset('assets/js/bootstrap-show-password.js')}}"></script>
+  <script src="{{asset('assets/js/AdminPanel/UsersManagement/usersData.js')}}"></script>
 @endpush

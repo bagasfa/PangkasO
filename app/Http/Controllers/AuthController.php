@@ -11,7 +11,11 @@ class AuthController extends Controller
 {
     // Halaman Login
     public function login(){
-        return view('Auth.login');
+        if(Auth::check()){
+            return back();
+        }else{
+            return view('Auth.login');
+        }
     }
 
     // Proses Login
@@ -41,12 +45,13 @@ class AuthController extends Controller
         return redirect('/login')->with('bye', 'Email atau Password anda Salah!');
     }
 
-    // Registrasi User Baru Sebagai User
+    // Registrasi User Baru Sebagai Customer
     public function register(Request $request){
         $validateData = $request->validate([
+            'avatar' => 'required|image|mimes:jpeg,png,jpg|max:4096',
             'email' => 'required|unique:users,email',
             'password' => 'required|min:8',
-            'avatar' => 'required|image|mimes:jpeg,png,jpg|max:8192'
+            'phone_number' => 'required|unique:users,phone_number',
         ]);
         $upAvatar = 'user-'.date('dmYhis').'.'.$request->avatar->getClientOriginalExtension();
         $request->avatar->move('assets/images/users/avatar', $upAvatar);
@@ -55,13 +60,18 @@ class AuthController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->id_role = $request->role;
+        $user->id_role = 4;
         $user->avatar = $upAvatar;
         $user->gender = $request->gender;
         $user->address = $request->address;
-        $user->phone_number = $request->phone;
+        $user->phone_number = $request->phone_number;
         $user->save();
-        return redirect('/login')->with('message', 'Registrasi berhasil!');
+
+        // Login sebagai Customer
+        Auth::attempt($request->only('email','password'));
+        // Redirect Home
+        return Redirect::to($request->request->get('http_referrer'))->with('message', 'Welcome, '.auth()->user()->name);
+        
     }
 
     // Proses Logout

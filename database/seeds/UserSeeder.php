@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
                 'gender' => 'L',
                 'address' => 'Local Server',
                 'phone_number' => '089612625259',
-                'verify_status' => 'Y',
+                'verify_status' => 'Approved',
                 'id_role' => 1,
             ],
             [
@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
                 'gender' => 'L',
                 'address' => 'Local Server',
                 'phone_number' => '089612625255',
-                'verify_status' => 'Y',
+                'verify_status' => 'Approved',
                 'id_role' => 2,
             ],
             [
@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
                 'gender' => 'L',
                 'address' => 'Local Server',
                 'phone_number' => '089612625244',
-                'verify_status' => 'Y',
+                'verify_status' => '',
                 'id_role' => 3,
             ],
             [
@@ -50,7 +50,7 @@ class UserSeeder extends Seeder
                 'gender' => 'L',
                 'address' => 'Local Server',
                 'phone_number' => '089612625277',
-                'verify_status' => 'Y',
+                'verify_status' => '',
                 'id_role' => 4,
             ],
         ];

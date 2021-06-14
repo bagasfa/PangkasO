@@ -26,12 +26,7 @@
           <div class="card-body table-responsive">
               <div id="datatable-owner"></div>
           </div>
-
-          <div class="card-footer text-right">
-            <nav class="d-inline-block">
-              
-            </nav>
-          </div>
+          
         </div>
     </div>  
   </div>

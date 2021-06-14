@@ -40,6 +40,11 @@ class User extends Authenticatable
         return $this->hasMany(History::class);
     }
 
+    public function identity()
+    {
+        return $this->hasOne(Identity::class);
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *
