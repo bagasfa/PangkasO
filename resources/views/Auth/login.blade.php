@@ -106,13 +106,13 @@
             <!-- Email -->
             <div class="form-group">
               <label for="inputEmail">Email <i style="color: red;">*</i></label>
-              <input name="email" type="email" class="form-control" id="inputEmail" placeholder="E-Mail" required="">
+              <input name="email" type="email" class="form-control" id="inputEmail" placeholder="E-Mail">
             </div>
             <!-- Password -->
             <div class="form-group">
               <label for="password">Password <i style="color: red;">*</i></label>
               <div class="input-group" id="show_hide_password">
-                <input name="password" type="password" minlength="8" class="form-control" id="password" placeholder="Password" required="">
+                <input name="password" type="password" minlength="8" class="form-control" id="password" placeholder="Password">
               <a href=""><div class="input-group-addon eye">
                 <i class="fa fa-eye-slash" aria-hidden="true"></i>
               </div></a>
@@ -132,7 +132,7 @@
             <!-- Phone -->
             <div class="form-group">
               <label for="phone">Nomor Telepon <i style="color: red;">*</i></label>
-              <input name="phone_number" type="tel" class="form-control" id="phone" placeholder="Nomor Telepon" required="">
+              <input name="phone_number" type="tel" class="form-control" id="phone" placeholder="Nomor Telepon">
             </div>
             <!-- Address -->
             <div class="form-group">

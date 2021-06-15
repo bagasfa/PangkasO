@@ -26,13 +26,13 @@
                     <input type='file' id="imageUpload" name="avatar" accept=".png, .jpg, .jpeg" />
                     <label for="imageUpload"></label>
                 </div>
-                @if(auth()->user()->avatar == !NULL)
-                  <a href="{{ asset('assets/images/users/avatar/'.auth()->user()->avatar) }}" class="zoom">
+                @if(auth()->user()->avatar != NULL)
+                  <a href="{{ asset('assets/images/users/avatar/'.auth()->user()->avatar) }}" data-fancybox data-caption="Foto profil {{auth()->user()->name}}">
                 @else
-                  <a href="{{ asset('assets/img/dummy/avatar/no-avatar.jpg') }}" class="zoom">
+                  <a href="{{ asset('assets/img/dummy/avatar/no-avatar.jpg') }}" data-fancybox data-caption="Foto Profil dummy, kamu belum mengunggah foto profil">
                 @endif
                   <div class="avatar-preview">
-                    @if(auth()->user()->avatar == !NULL)
+                    @if(auth()->user()->avatar != NULL)
                       <div id="imagePreview" style="background-image: url('{{url('assets/images/users/avatar/'.auth()->user()->avatar)}}');"></div>
                     @else
                       <div id="imagePreview" style="background-image: url('{{url('assets/img/dummy/avatar/no-avatar.jpg')}}');"></div>

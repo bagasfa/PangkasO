@@ -3,6 +3,9 @@
 @section('title', 'Verify Customers Identity')
 
 @section('content')
+<script type="text/javascript">
+  document.getElementById('verify_identity').classList.add('active');
+</script>
 <section class="section">
   
   <div class="section-header">

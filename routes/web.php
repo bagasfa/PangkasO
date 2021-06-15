@@ -36,6 +36,11 @@ Route::group(['middleware' => ['auth','checkRole:1,2']], function(){
 	// Admin Dashboard
 	Route::get('/admin-panel/dashboard','HomeController@adminDashboard');
 
+	// Log History
+	Route::get('/admin-panel/history','AdminPanel\HistoryController@history');
+	Route::get('/admin-panel/history/load/table-history', 'AdminPanel\HistoryController@LoadTableHistory');
+    Route::get('/admin-panel/history/load/data-history', 'AdminPanel\HistoryController@LoadDataHistory');
+	    
 	// UsersManagement - Users Data
 	// Owner
 	Route::get('/admin-panel/owners','AdminPanel\UsersDataController@owners');
@@ -63,11 +68,7 @@ Route::group(['middleware' => ['auth','checkRole:1,2']], function(){
 // Admin Panel - Superadmin Only
 Route::group(['middleware' => ['auth','checkRole:1']], function(){
 
-	// Log History
-	Route::get('/admin-panel/activity-history','AdminPanel\HistoryController@history');
-	Route::get('/admin-panel/activity-history/load/table-history', 'AdminPanel\HistoryController@LoadTableHistory');
-    Route::get('/admin-panel/activity-history/load/data-history', 'AdminPanel\HistoryController@LoadDataHistory');
-    
+	
 	// Roles
 	Route::get('/admin-panel/roles','AdminPanel\RolesController@index');
 	Route::get('/admin-panel/roles/load/table-roles', 'AdminPanel\RolesController@LoadTableRoles');

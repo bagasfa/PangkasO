@@ -22,10 +22,18 @@ class UserConfigurationController extends Controller
     public function updateProfile(Request $request){
         $id = auth()->user()->id;
         $user = User::findOrFail($id);
+
+        $messages = array(
+            'email.required' => 'Kolom Email tidak boleh kosong!',
+            'email.unique' => 'Email sudah digunakan!',
+            'avatar.mimes' => 'Mohon gunakan format gambar : .jpeg | .jpg | .png',
+            'avatar.max' => 'Ukuran gambar anda melebihi 4MB!'
+        );
+
         $validateData = $request->validate([
             'email' => 'required|unique:users,email,'.$user->id,
             'avatar' => 'image|mimes:jpeg,png,jpg|max:4096'
-        ]);
+        ],$messages);
         if( $request->avatar){
             $upAvatar = 'user-'.date('dmYhis').'.'.$request->avatar->getClientOriginalExtension();
             $request->avatar->move('assets/images/users/avatar/', $upAvatar);
@@ -68,11 +76,19 @@ class UserConfigurationController extends Controller
     }
 
     public function updatePassword(Request $request){
+        $messages = array(
+            'oldPassword.required' => 'Password Lama tidak boleh kosong!',
+            'newPassword.required' => 'Password Baru tidak boleh kosong!',
+            'newPassword.min' => 'Password tidak boleh kurang dari 8 karakter!',
+            'confirmPassword.min' => 'Password tidak boleh kurang dari 8 karakter!',
+            'confirmPassword.same' => 'Konfirmasi password baru anda tidak cocok !'
+        );
+
         $request->validate([
             'oldPassword' => ['required', new MatchOldPassword],
-            'newPassword' => ['required'],
-            'confirmPassword' => ['same:newPassword'],
-        ]);
+            'newPassword' => ['required|min:8'],
+            'confirmPassword' => ['min:8|same:newPassword'],
+        ],$messages);
 
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->newPassword)]);
 
@@ -95,6 +111,23 @@ class UserConfigurationController extends Controller
 
     public function putVerify(Request $request){
 
+        $messages = array(
+            'nik.required' => 'Kolom NIK tidak boleh kosong!',
+            'nik.unique' => 'NIK telah digunakan!',
+            'ktp.required' => 'Mohon sertakan scan KTP anda!',
+            'ktp.mimes' => 'Mohon gunakan format gambar : .jpeg | .jpg | .png',
+            'ktp.max' => 'Ukuran gambar anda melebihi 4MB!',
+            'ktp_user.required' => 'Mohon sertakan foto Selfie anda dengan KTP!',
+            'ktp_user.mimes' => 'Mohon gunakan format gambar : .jpeg | .jpg | .png',
+            'ktp_user.max' => 'Ukuran gambar anda melebihi 4MB!',
+        );
+
+        $validateData = $request->validate([
+            'nik' => 'required|unique:identity,nik',
+            'ktp' => 'image|mimes:jpeg,png,jpg|max:4096',
+            'ktp_user' => 'image|mimes:jpeg,jpg,png|max:4096'
+        ],$messages);
+
         $upKtp = $request->nik.'identity -'.date('dmYhis').'.'.$request->ktp->getClientOriginalExtension();
         $request->ktp->move('assets/images/users/identity', $upKtp);
 
@@ -109,25 +142,16 @@ class UserConfigurationController extends Controller
         $verify->user_id = $uID;
         $verify->save();
 
-        if($user->verify_status == NULL){
-            $history = new History;
-            $history->user_id = auth()->user()->id;
-            $history->nama = auth()->user()->name;
-            $history->aksi = "Create";
-            $history->keterangan = "Akun '".auth()->user()->email."' mengajukan verifikasi identitas.";
-            $history->save();
-        }elseif($user->verify_status == 'Rejected'){
-            $history = new History;
-            $history->user_id = auth()->user()->id;
-            $history->nama = auth()->user()->name;
-            $history->aksi = "Create";
-            $history->keterangan = "Akun '".auth()->user()->email."' mengajukan ulang verifikasi identitas.";
-            $history->save();
-        }
-
         $user = User::findOrFail($uID);
         $user->verify_status = 'Processed';
         $user->save();
+
+        $history = new History;
+        $history->user_id = auth()->user()->id;
+        $history->nama = auth()->user()->name;
+        $history->aksi = "Create";
+        $history->keterangan = "Akun '".auth()->user()->email."' mengajukan verifikasi identitas.";
+        $history->save();
 
         return redirect('/owner-panel/get-verify')->with('info','Proses verifikasi telah diajukan!');
     }

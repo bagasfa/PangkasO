@@ -4,12 +4,12 @@ $(document).ready(function() {
 	LoadTableHistory();
 	function LoadTableHistory() {
         // AlertCount();
-		$('#datatable-history').load('/admin-panel/activity-history/load/table-history', function() {
+		$('#datatable-history').load('/admin-panel/history/load/table-history', function() {
 			$('#table-history').DataTable({
 				processing: true,
 				serverSide: true,
 				ajax: {
-					url: '/admin-panel/activity-history/load/data-history',
+					url: '/admin-panel/history/load/data-history',
 					type: 'get'
 				},
 				columns: [

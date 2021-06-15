@@ -70,12 +70,24 @@ class AuthController extends Controller
 
     // Registrasi User Baru Sebagai Customer
     public function register(Request $request){
+        $messages = array(
+            'email.required' => 'Kolom Email tidak boleh kosong!',
+            'email.unique' => 'Email sudah digunakan!',
+            'avatar.required' => 'Gambar tidak boleh kosong!',
+            'avatar.mimes' => 'Mohon gunakan format gambar : .jpeg | .jpg | .png',
+            'avatar.max' => 'Ukuran gambar anda melebihi 4MB!',
+            'password.required' => 'Kolom Password tidak boleh kosong!',
+            'password.min' => 'Password tidak boleh kurang dari 8 karakter!',
+            'phone_number.required' => 'Kolom Nomor Telepon tidak boleh kosong!',
+            'phone_number.unique' => 'Nomor Telpon sudah digunakan!'
+        );
+
         $validateData = $request->validate([
             'avatar' => 'required|image|mimes:jpeg,png,jpg|max:4096',
             'email' => 'required|unique:users,email',
             'password' => 'required|min:8',
-            'phone_number' => 'required|unique:users,phone_number',
-        ]);
+            'phone_number' => 'required|unique:users',
+        ],$messages);
         $upAvatar = 'user-'.date('dmYhis').'.'.$request->avatar->getClientOriginalExtension();
         $request->avatar->move('assets/images/users/avatar', $upAvatar);
         

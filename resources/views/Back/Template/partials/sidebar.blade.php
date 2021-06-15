@@ -13,23 +13,15 @@
         <i class="fas fa-home"></i><span>Dashboard</span>
       </a>
     </li>
+    <li id="history" class="">
+      <a href="{{ url('/admin-panel/history') }}">
+        <i class="fas fa-history"></i> <span>History</span>
+      </a>
+    </li>
     @elseif(auth()->user()->id_role == 3)
     <li id="dashboard" class="">
       <a class="nav-link" href="{{url('/owner-panel/dashboard')}}">
         <i class="fas fa-home"></i><span>Dashboard</span>
-      </a>
-    </li>
-    @endif
-    @if(auth()->user()->id_role == 1)
-    <li id="history" class="">
-      <a href="{{ url('/admin-panel/activity-history') }}">
-        <i class="fas fa-history"></i> <span>History</span>
-      </a>
-    </li>
-    @elseif(auth()->user()->id_role == 2)
-    <li id="history" class="">
-      <a href="{{ url('/admin-panel/history') }}">
-        <i class="fas fa-history"></i> <span>History Users</span>
       </a>
     </li>
     @endif
@@ -69,7 +61,7 @@
         </li>
       </ul>
     </li>
-    <li id="verify" class="nav-item dropdown">
+    <li id="verify_identity" class="nav-item dropdown">
       <a href="#" class="nav-link has-dropdown">
         <i class="fas fa-id-card"></i> <span>Verify Identity</span>
       </a>
@@ -89,7 +81,7 @@
     @endif
 
     <!-- Owner Menu Sidebar -->
-    @if(auth()->user()->id_role == 3)
+    @if(auth()->user()->id_role == 3 && auth()->user()->verify_status == 'Approved')
     <li>
       <a class="nav-link" href="{{url('/owner-panel/orders')}}">
         <i class="fas fa-receipt"></i> <span>Orders</span>
@@ -128,6 +120,14 @@
         <i class="fas fa-history"></i> <span>Transactions History</span>
       </a>
     </li>
+    @else
+      @if(auth()->user()->id_role == 3)
+      <li id="verify" class="">
+        <a class="nav-link" href="{{url('/owner-panel/get-verify')}}">
+          <i class="fas fa-id-card"></i> <span>Verify Identity</span>
+        </a>
+      </li>
+      @endif
     @endif
   </ul>
 </aside>

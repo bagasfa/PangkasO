@@ -44,5 +44,4 @@
       @endforeach
     @endif
   </script>
-@stack('javascript')
 @endpush

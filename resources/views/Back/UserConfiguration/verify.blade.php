@@ -3,6 +3,9 @@
 @section('title', 'Verify Identity')
 
 @section('content')
+<script type="text/javascript">
+  document.getElementById('verify').classList.add('active');
+</script>
 <section class="section">
   
   <div class="section-header">
@@ -76,7 +79,7 @@
                 <div class="form-group row mb-4">
                   <div class="d-flex justify-content-center">
                     <div class="col-8 col-md-8 col-lg-8">
-                      <input class="form-control" type="tel" name="nik" id="nik" placeholder="NOMOR INDUK KEPENDUDUKAN (NIK)" required="">
+                      <input class="form-control" type="tel" name="nik" id="nik" placeholder="NOMOR INDUK KEPENDUDUKAN (NIK)">
                     </div>
                   </div>
                 </div>
@@ -93,7 +96,7 @@
                       <div class="collapse show" id="ktp-input">
                         <div class="card-body">
                           <img id="ktp_output" src="{{asset('assets/img/dummy/avatar/no-avatar.jpg')}}" width="300px" height="300px" class="img-fluid rounded shadow-sm mb-3 mx-auto d-block" alt="KTP Preview" />
-                          <input id="ktp" type="file" name="ktp" class="form-control" accept="image/png, image/jpeg, image/jpg" required="">
+                          <input id="ktp" type="file" name="ktp" class="form-control" accept="image/png, image/jpeg, image/jpg">
                         </div>
                         <div class="card-footer">
                           (*) Max. File 4MB
@@ -113,7 +116,7 @@
                       <div class="collapse show" id="ktp-user-input">
                         <div class="card-body">
                           <img id="ktp_user_output" src="{{asset('assets/img/dummy/avatar/no-avatar.jpg')}}" width="300px" height="300px" class="img-fluid rounded shadow-sm mb-3 mx-auto d-block" alt="KTP + User Preview" />
-                          <input id="ktp_user" type="file" name="ktp_user" class="form-control mb-3" accept="image/png, image/jpeg, image/jpg" required="">
+                          <input id="ktp_user" type="file" name="ktp_user" class="form-control mb-3" accept="image/png, image/jpeg, image/jpg">
                         </div>
                         <div class="card-footer">
                           (*) Max. File 4MB
@@ -194,6 +197,25 @@
 </section>
 @endsection
 @push('javascript')
+  <script src="{{asset('assets/js/toastr.min.js')}}"></script>
+  <!-- Toaster -->
+  <script>
+    @if(Session::has('message'))
+      toastr.success("{{ Session::get('message') }}");
+    @elseif(Session::has('bye'))
+      toastr.error("{{ Session::get('bye') }}");
+    @endif
+  </script>
+
+  <!-- Toastr Validation -->
+  <script>
+    @if($errors->any())
+      @foreach($errors->all() as $error)
+        toastr.error("{{ $error }}");
+      @endforeach
+    @endif
+  </script>
+
   <script type="text/javascript">
     ktp.onchange = evt => {
     const [file] = ktp.files
