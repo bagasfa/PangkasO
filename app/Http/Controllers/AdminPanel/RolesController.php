@@ -83,7 +83,7 @@ class RolesController extends Controller
 
             return Datatables::of($roles)->addIndexColumn()
             ->editColumn('created_at', function($roles){
-                return date('h:i:s | d-m-Y', strtotime($roles->created_at));
+                return date('H:i:s | d-m-Y', strtotime($roles->created_at));
             })
             ->addColumn('aksi', function($row){
                 $btn = '<a href="javascript:void(0)" data-id="'.$row->id.'" data-role_name="'.$row->role_name.'" class="btn btn-outline-primary btn-aksi btn-edit-roles" class="mr-3">

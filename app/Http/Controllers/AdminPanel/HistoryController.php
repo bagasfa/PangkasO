@@ -20,11 +20,11 @@ class HistoryController extends Controller
     }
 
     public function LoadDataHistory(){
-        $history = History::all();
+        $history = History::orderBy('id','desc')->get();
 
-            return Datatables::of($history)->addIndexColumn()
-            ->editColumn('created_at', function($history){
-                return date('h:i:s | d-m-Y', strtotime($history->created_at));
-            })->make(true);
+        return Datatables::of($history)->addIndexColumn()
+        ->editColumn('created_at', function($history){
+            return date('H:i:s | d-m-Y', strtotime($history->created_at));
+        })->make(true);
     }
 }

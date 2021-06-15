@@ -103,11 +103,11 @@ class UsersDataController extends Controller
     }
 
     public function LoadDataAdmin(){
-        $admin = User::where('id_role','2')->get();
+        $admin = User::where('id_role','2')->orderBy('id','desc')->get();
 
             return Datatables::of($admin)->addIndexColumn()
             ->editColumn('created_at', function($admin){
-                return date('h:i:s | d-m-Y', strtotime($admin->created_at));
+                return date('H:i:s | d-m-Y', strtotime($admin->created_at));
             })
             ->addColumn('aksi', function($row){
                 $btn =  '<a href="javascript:void(0)" data-id="'.$row->id.'" data-name="'.$row->name.'" class="btn btn-outline-danger btn-delete-admin">
@@ -202,11 +202,11 @@ class UsersDataController extends Controller
     }
 
     public function LoadDataOwner(){
-        $owner = User::where('id_role','3')->get();
+        $owner = User::where('id_role','3')->orderBy('id','desc')->get();
 
             return Datatables::of($owner)->addIndexColumn()
             ->editColumn('created_at', function($owner){
-                return date('h:i:s | d-m-Y', strtotime($owner->created_at));
+                return date('H:i:s | d-m-Y', strtotime($owner->created_at));
             })
             ->addColumn('aksi', function($row){
                 $btn =  '<a href="javascript:void(0)" data-id="'.$row->id.'" data-name="'.$row->name.'" class="btn btn-outline-danger btn-delete-owner">
@@ -253,11 +253,11 @@ class UsersDataController extends Controller
     }
 
     public function LoadDataCustomer(){
-        $customer = User::where('id_role','4')->get();
+        $customer = User::where('id_role','4')->orderBy('id','desc')->get();
 
             return Datatables::of($customer)->addIndexColumn()
             ->editColumn('created_at', function($customer){
-                return date('h:i:s | d-m-Y', strtotime($customer->created_at));
+                return date('H:i:s | d-m-Y', strtotime($customer->created_at));
             })
             ->addColumn('aksi', function($row){
                 $btn =  '<a href="javascript:void(0)" data-id="'.$row->id.'" data-name="'.$row->name.'" class="btn btn-outline-danger btn-delete-customer">

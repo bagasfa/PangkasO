@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Identity;
 use App\User;
+use App\History;
+use Illuminate\Support\Facades\DB;
 
 class UserConfigurationController extends Controller
 {
@@ -22,19 +24,31 @@ class UserConfigurationController extends Controller
         $user = User::findOrFail($id);
         $validateData = $request->validate([
             'email' => 'required|unique:users,email,'.$user->id,
-            'avatar' => 'image|mimes:jpeg,png,jpg|max:8192'
+            'avatar' => 'image|mimes:jpeg,png,jpg|max:4096'
         ]);
         if( $request->avatar){
-                    $upAvatar = 'user-'.date('dmYhis').'.'.$request->avatar->getClientOriginalExtension();
-                    $request->avatar->move('assets/images/users/avatar/', $upAvatar);
-                    $user->avatar = $upAvatar;
-            }
+            $upAvatar = 'user-'.date('dmYhis').'.'.$request->avatar->getClientOriginalExtension();
+            $request->avatar->move('assets/images/users/avatar/', $upAvatar);
+            $user->avatar = $upAvatar;
+        }
+
+        $history = History::where('nama',$user->name)->get();
+        if($history){
+            DB::table('history')->where('nama','=',auth()->user()->name)->update(array('nama' => $request->name));
+        }
         $user->name = $request->name;
         $user->email = $request->email;
         $user->gender = $request->gender;
         $user->phone_number = $request->phone_number;
         $user->address = $request->address;
         $user->save();
+
+        $history = new History;
+        $history->user_id = auth()->user()->id;
+        $history->nama = $request->name;
+        $history->aksi = "Edit";
+        $history->keterangan = "Akun '".auth()->user()->email."' merubah profilenya.";
+        $history->save();
 
         $role = auth()->user()->id_role;
 
@@ -62,6 +76,13 @@ class UserConfigurationController extends Controller
 
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->newPassword)]);
 
+        $history = new History;
+        $history->user_id = auth()->user()->id;
+        $history->nama = auth()->user()->name;
+        $history->aksi = "Edit";
+        $history->keterangan = "Akun '".auth()->user()->email."' merubah passwordnya.";
+        $history->save();
+
         return redirect('/admin-panel/dashboard')->with('message','Password berhasil diperbarui !');
     }
 
@@ -87,6 +108,22 @@ class UserConfigurationController extends Controller
         $verify->ktp_user = $upSelfie;
         $verify->user_id = $uID;
         $verify->save();
+
+        if($user->verify_status == NULL){
+            $history = new History;
+            $history->user_id = auth()->user()->id;
+            $history->nama = auth()->user()->name;
+            $history->aksi = "Create";
+            $history->keterangan = "Akun '".auth()->user()->email."' mengajukan verifikasi identitas.";
+            $history->save();
+        }elseif($user->verify_status == 'Rejected'){
+            $history = new History;
+            $history->user_id = auth()->user()->id;
+            $history->nama = auth()->user()->name;
+            $history->aksi = "Create";
+            $history->keterangan = "Akun '".auth()->user()->email."' mengajukan ulang verifikasi identitas.";
+            $history->save();
+        }
 
         $user = User::findOrFail($uID);
         $user->verify_status = 'Processed';

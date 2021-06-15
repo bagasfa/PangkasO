@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Stevebauman\Location\Facades\Location;
 use App\User;
+use App\History;
 use Auth;
 
 class AuthController extends Controller
@@ -34,10 +36,31 @@ class AuthController extends Controller
                 elseif($role == 3){
                     $url = '/owner-panel/dashboard';
                 }
+
+                // Get User Location by IP Address
+                if ($position = Location::get()) {
+                    $history = new History;
+                    $history->user_id = auth()->user()->id;
+                    $history->nama = auth()->user()->name;
+                    $history->aksi = "Login";
+                    $history->keterangan = "Lokasi login '".$position->cityName.", ".$position->regionName.", ".$position->countryName."' dengan IP address :'".$position->ip."'";
+                    $history->save();
+                }
+
                 return redirect($url)->with('message', 'Welcome, '.auth()->user()->name);
             }
             // Customer Login
             elseif($role == 4){
+                // Get User Location by IP Address
+                if ($position = Location::get()) {
+                    $history = new History;
+                    $history->user_id = auth()->user()->id;
+                    $history->nama = auth()->user()->name;
+                    $history->aksi = "Login";
+                    $history->keterangan = "Lokasi login '".$position->cityName.", ".$position->regionName.", ".$position->countryName."' dengan IP address :'".$position->ip."'";
+                    $history->save();
+                }
+
                 return Redirect::to($request->request->get('http_referrer'))->with('message', 'Welcome, '.auth()->user()->name);
             }
         }
@@ -67,8 +90,24 @@ class AuthController extends Controller
         $user->phone_number = $request->phone_number;
         $user->save();
 
+        $history = new History;
+        $history->user_id = $user->id;
+        $history->nama = $user->name;
+        $history->aksi = "Create";
+        $history->keterangan = "Registrasi Akun baru dengan email '".$user->email."'";
+        $history->save();
+
         // Login sebagai Customer
         Auth::attempt($request->only('email','password'));
+        // Get User Location by IP Address
+        if ($position = Location::get()) {
+            $history = new History;
+            $history->user_id = auth()->user()->id;
+            $history->nama = auth()->user()->name;
+            $history->aksi = "Login";
+            $history->keterangan = "Lokasi login '".$position->cityName.", ".$position->regionName.", ".$position->countryName."' dengan IP address :'".$position->ip."'";
+            $history->save();
+        }
         // Redirect Home
         return Redirect::to($request->request->get('http_referrer'))->with('message', 'Welcome, '.auth()->user()->name);
         
