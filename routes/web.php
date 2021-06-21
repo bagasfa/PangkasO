@@ -96,6 +96,10 @@ Route::group(['middleware' => ['auth','checkRole:3']], function(){
 	Route::get('/owner-panel/dashboard','HomeController@ownerDashboard');
 	Route::get('/owner-panel/get-verify','AdminPanel\UserConfigurationController@getVerify');
 	Route::post('/owner-panel/send-verify','AdminPanel\UserConfigurationController@putVerify');
+
+	// Setup new Barbershop
+	Route::get('/owner-panel/setup-barbershop','AdminPanel\BarbershopController@setup');
+	Route::post('/owner-panel/update-barbershop','AdminPanel\BarbershopController@update');
 });
 
 ?>

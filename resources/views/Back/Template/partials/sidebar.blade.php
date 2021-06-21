@@ -82,6 +82,13 @@
 
     <!-- Owner Menu Sidebar -->
     @if(auth()->user()->id_role == 3 && auth()->user()->verify_status == 'Approved')
+    @if($barber->name == NULL)
+    <li>
+      <a class="nav-link" href="{{url('/owner-panel/setup-barbershop')}}">
+        <i class="fas fa-cogs"></i> <span>Setup Barbershop</span>
+      </a>
+    </li>
+    @else
     <li>
       <a class="nav-link" href="{{url('/owner-panel/orders')}}">
         <i class="fas fa-receipt"></i> <span>Orders</span>
@@ -120,6 +127,7 @@
         <i class="fas fa-history"></i> <span>Transactions History</span>
       </a>
     </li>
+    @endif
     @else
       @if(auth()->user()->id_role == 3)
       <li id="verify" class="">

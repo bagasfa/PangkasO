@@ -59,7 +59,7 @@
               <div class="form-group text-right">
                 <!-- Register Button -->
                 <div class="text-left">
-                  <p>Belum Punya Akun ? <a href="" data-toggle="modal" data-target="#formRegister">Daftar</a></p>
+                  <p>Ingin bergabung ? Mulai bisnis anda <a href="" data-toggle="modal" data-target="#formOwner">disini</a></p>
                 </div>
                 <!-- Login Button -->
                 <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
@@ -88,93 +88,97 @@
     </section>
   </div>
 
-  <!-- Modal -->
-    <div class="modal fade" id="formRegister" tabindex="-1" role="dialog" aria-labelledby="formRegister" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content"> 
-          <div class="modal-header">
-            <h5 class="modal-title" id="RegisterLabel">Form Registrasi</h5>
+  <!-- Modal Owner-->
+  <div class="modal fade" id="formOwner" tabindex="-1" role="dialog" aria-labelledby="formOwner" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content"> 
+        <div class="modal-header">
+          <h5 class="modal-title" id="RegisterLabel">Registrasi Owner</h5>
+        </div>
+        <div class="modal-body">
+          <form action="{{url('/register')}}" method="POST" enctype="multipart/form-data">
+          {{csrf_field()}}
+          <!-- Nama -->
+          <div class="form-group">
+            <label for="inputNama">Nama Lengkap <i style="color: red;">*</i></label>
+            <input name="name" type="text" class="form-control" id="inputNama" placeholder="Nama Lengkap" required="">
           </div>
-          <div class="modal-body">
-            <form action="{{url('/register')}}" method="POST" enctype="multipart/form-data">
-            {{csrf_field()}}
-            <!-- Nama -->
-            <div class="form-group">
-              <label for="inputNama">Nama Lengkap <i style="color: red;">*</i></label>
-              <input name="name" type="text" class="form-control" id="inputNama" placeholder="Nama Lengkap" required="">
+          <!-- Email -->
+          <div class="form-group">
+            <label for="inputEmail">Email <i style="color: red;">*</i></label>
+            <input name="email" type="email" class="form-control" id="inputEmail" placeholder="E-Mail">
+          </div>
+          <!-- Password -->
+          <div class="form-group">
+            <label for="inputPassword">Password <i style="color: red;">*</i></label>
+            <div class="input-group" id="show_hide_password">
+              <input name="password" type="password" minlength="8" class="form-control" id="inputPassword" placeholder="Password">
+              <a href="">
+                <div class="input-group-addon eye">
+                  <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                </div>
+              </a>
             </div>
-            <!-- Email -->
-            <div class="form-group">
-              <label for="inputEmail">Email <i style="color: red;">*</i></label>
-              <input name="email" type="email" class="form-control" id="inputEmail" placeholder="E-Mail">
+          </div>
+          <!-- Gender -->
+          <div class="form-group">
+            <label>Jenis Kelamin <i style="color: red;">*</i></label><br>
+            <div class="form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" value="L" id="radioMale" checked="">
+              <label class="form-check-label">Laki - Laki</label>
             </div>
-            <!-- Password -->
-            <div class="form-group">
-              <label for="password">Password <i style="color: red;">*</i></label>
-              <div class="input-group" id="show_hide_password">
-                <input name="password" type="password" minlength="8" class="form-control" id="password" placeholder="Password">
-              <a href=""><div class="input-group-addon eye">
-                <i class="fa fa-eye-slash" aria-hidden="true"></i>
-              </div></a>
+            <div class="form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" value="P" id="radioFemale">
+              <label class="form-check-label">Perempuan</label>
             </div>
-            <!-- Gender -->
-            <div class="form-group">
-              <label for="gender">Jenis Kelamin <i style="color: red;">*</i></label><br>
-              <div class="form-check-inline">
-                <input class="form-check-input" type="radio" name="gender" value="L" id="male" checked="">
-                <label class="form-check-label">Laki - Laki</label>
-              </div>
-              <div class="form-check-inline">
-                <input class="form-check-input" type="radio" name="gender" value="P" id="female">
-                <label class="form-check-label">Perempuan</label>
-              </div>
-            </div>
-            <!-- Phone -->
-            <div class="form-group">
-              <label for="phone">Nomor Telepon <i style="color: red;">*</i></label>
-              <input name="phone_number" type="tel" class="form-control" id="phone" placeholder="Nomor Telepon">
-            </div>
-            <!-- Address -->
-            <div class="form-group">
-              <label for="address">Alamat <i style="color: red;">*</i></label>
-              <textarea name="address" id="address" class="form-control" required=""></textarea>
-            </div>
+          </div>
+          <!-- Phone -->
+          <div class="form-group">
+            <label for="inputPhone">Nomor Telepon <i style="color: red;">*</i></label>
+            <input name="phone_number" type="tel" class="form-control" id="inputPhone" placeholder="Nomor Telepon">
+          </div>
+          <!-- Address -->
+          <div class="form-group">
+            <label for="inputAddress">Alamat <i style="color: red;">*</i></label>
+            <textarea name="address" id="inputAddress" class="form-control" required=""></textarea>
+          </div>
 
-            <!-- Upload image input-->
-            <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-              <input id="upload" type="file" name="avatar" onchange="readURL(this);" class="form-control">
-              <label id="upload-label" for="upload" class="font-weight-light text-muted">Upload Foto disini ...</label>
-              <div class="input-group-append">
-                <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2"></i><small style="font-size: 12px;" class="text-bold">Pilih Foto</small></label>
-              </div>
+          <!-- Upload image input-->
+          <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+            <input id="upload" type="file" name="avatar" onchange="readURL(this);" class="form-control">
+            <label id="upload-label" for="upload" class="font-weight-light text-muted">Upload Foto disini ...</label>
+            <div class="input-group-append">
+              <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fas fa-cloud-upload-alt mr-2 text-muted"></i> <small style="font-size: 12px;" class="text-bold">Pilih Foto</small></label>
             </div>
+          </div>
 
-            <!-- Uploaded image area-->
-            <p class="font-italic text-center">Gambar preview akan ditampilkan dibawah</p>
-            <div class="image-area mt-4"><img id="imageResult" src="#" alt="" width="300px" height="300px" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
-            <br>
-            <span style="font-size: 12px;"><i style="color: red;"> * </i> : Data harus terisi</span>
+          <!-- Uploaded image area-->
+          <p class="font-italic text-center">Gambar preview akan ditampilkan dibawah</p>
+          <div class="image-area mt-4">
+            <img id="imageResult" src="{{asset('assets/img/dummy/avatar/no-avatar.jpg')}}" alt="" width="300px" height="300px" class="img-fluid rounded shadow-sm mx-auto d-block">
           </div>
-          <div class="modal-footer">
-            <!-- Button -->
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Register</button>
-            </form>
-          </div>
+          <br>
+          <span style="font-size: 12px;"><i style="color: red;"> * </i> : Data harus terisi</span><br>
+        </div>
+        <div class="modal-footer">
+          <!-- Button -->
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Register</button>
+          </form>
         </div>
       </div>
-      <!-- Modal -->
+    </div>
+  </div>
+  <!-- End of Modal Owner -->
 
   <!-- Online JS Scripts -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js" ></script>
 
   <!-- Offline JS File -->
   <script type="text/javascript" src="{{asset('assets/js/bootstrap-show-password.js')}}"></script>
-  <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
   <script src="{{asset('assets/js/toastr.min.js')}}"></script>
   <script src="{{ asset('assets/js/scripts.js') }}"></script>
   <script src="{{ asset('assets/js/upload-images.js') }}"></script>

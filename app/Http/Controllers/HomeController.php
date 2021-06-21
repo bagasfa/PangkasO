@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 use Carbon\Carbon;
 use App\History;
 use App\User;
+use App\Barbershop;
 
 class HomeController extends Controller
 {
@@ -24,7 +26,12 @@ class HomeController extends Controller
 
     public function ownerDashboard(){
         $user = User::all();
+        $uID = auth()->user()->id;
+        $barber = Barbershop::select('name')->where('owner_id',$uID)->get()->first();
+        if(session('success')){
+            Alert::success(session('success'));
+        }
 
-        return view('Back.Dashboard.dashboard',compact('user'));
+        return view('Back.Dashboard.dashboard',compact('user','barber'));
     }
 }

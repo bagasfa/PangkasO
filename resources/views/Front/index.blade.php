@@ -10,10 +10,11 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
    <!-- Custom styles for this template -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <link href="assets/css/ui.css" rel="stylesheet">
-    <link href="assets/css/responsive.css" rel="stylesheet">
-    <link href="assets/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="assets/css/ui.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <!-- <link rel="stylesheet" href="{{ asset('assets/css/stisla.css') }}"> -->
     <link rel="stylesheet" href="{{ asset('assets/css/toastr.css') }}">
                 
     </head>
@@ -80,7 +81,8 @@
         <div class="text">
           <span class="text-muted">Good Morning!</span>
           <div>
-            <a href="{{url('/login')}}">Sign in</a>
+            <a href="{{url('/login')}}">Masuk</a> | 
+            <a href="" data-toggle="modal" data-target="#formCustomer">Daftar</a>
           </div>
         </div>
         @endif
@@ -594,11 +596,97 @@
     </section>
   </div><!-- //container -->
 </footer>
+
+<!-- Modal Customer -->
+<div class="modal fade" id="formCustomer" tabindex="-1" role="dialog" aria-labelledby="formCustomer" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"> 
+      <div class="modal-header">
+        <h5 class="modal-title" id="RegisterLabel">Registrasi Customer</h5>
+      </div>
+      <div class="modal-body">
+        <form action="{{url('/registerCustomer')}}" method="POST" enctype="multipart/form-data">
+        {{csrf_field()}}
+        <!-- Nama -->
+        <div class="form-group">
+          <label for="name">Nama Lengkap <i style="color: red;">*</i></label>
+          <input name="name" type="text" class="form-control" id="name" placeholder="Nama Lengkap" required="">
+        </div>
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email <i style="color: red;">*</i></label>
+          <input name="email" type="email" class="form-control" id="email" placeholder="E-Mail">
+        </div>
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password">Password <i style="color: red;">*</i></label>
+          <div class="input-group" id="show_hide_password">
+            <input name="password" type="password" minlength="8" class="form-control" id="password" placeholder="Password">
+            <a href="">
+              <div class="input-group-addon eye">
+                <i class="fa fa-eye-slash" aria-hidden="true"></i>
+              </div>
+            </a>
+          </div>
+        </div>
+        <!-- Gender -->
+        <div class="form-group">
+          <label for="gender">Jenis Kelamin <i style="color: red;">*</i></label><br>
+          <div class="form-check-inline">
+            <input class="form-check-input" type="radio" name="gender" value="L" id="male" checked="">
+            <label class="form-check-label">Laki - Laki</label>
+          </div>
+          <div class="form-check-inline">
+            <input class="form-check-input" type="radio" name="gender" value="P" id="female">
+            <label class="form-check-label">Perempuan</label>
+          </div>
+        </div>
+        <!-- Phone -->
+        <div class="form-group">
+          <label for="phone">Nomor Telepon <i style="color: red;">*</i></label>
+          <input name="phone_number" type="tel" class="form-control" id="phone" placeholder="Nomor Telepon">
+        </div>
+        <!-- Address -->
+        <div class="form-group">
+          <label for="address">Alamat <i style="color: red;">*</i></label>
+          <textarea name="address" id="address" class="form-control" required=""></textarea>
+        </div>
+
+        <!-- Upload image input-->
+        <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+          <input id="upload" type="file" name="avatar" onchange="readURL(this);" class="form-control">
+          <label id="upload-label" for="upload" class="font-weight-light text-muted">Upload Foto disini ...</label>
+          <div class="input-group-append">
+            <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2"></i><small style="font-size: 12px;" class="text-bold">Pilih Foto</small></label>
+          </div>
+        </div>
+
+        <!-- Uploaded image area-->
+        <p class="font-italic text-center">Gambar preview akan ditampilkan dibawah</p>
+        <div class="image-area mt-4">
+          <img id="imageResult" src="{{asset('assets/img/dummy/avatar/no-avatar.jpg')}}" alt="" width="300px" height="300px" class="img-fluid rounded shadow-sm mx-auto d-block">
+        </div>
+        <br>
+        <span style="font-size: 12px;"><i style="color: red;"> * </i> : Data harus terisi</span><br>
+      </div>
+      <div class="modal-footer">
+        <!-- Button -->
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End of Modal Customer -->
+
 <!-- ========================= FOOTER END // ========================= -->
 <!-- Javascript Family         -->
     <script src="{{asset('assets/js/jquery.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}" type="text/javascript"></script>
+    <script type="text/javascript" src="{{asset('assets/js/bootstrap-show-password.js')}}"></script>
     <script src="{{asset('assets/js/toastr.min.js')}}"></script>
+    <script src="{{ asset('assets/js/upload-images.js') }}"></script>
 
     <!-- Toaster -->
     <script>

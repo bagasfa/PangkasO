@@ -15,10 +15,10 @@ class CreateBarbershopTable extends Migration
     {
         Schema::create('barbershop', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('service_preferences');
-            $table->string('address');
-            $table->string('phone_number')->unique();
+            $table->string('name')->unique()->nullable();
+            $table->string('service_preferences')->nullable();
+            $table->string('address')->nullable();
+            $table->string('phone_number')->unique()->nullable();
             $table->bigInteger('owner_id')->unsigned();
             $table->foreign('owner_id')
                 ->references('id')

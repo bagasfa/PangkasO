@@ -116,101 +116,7 @@ body::-webkit-scrollbar-thumb
 }
 
 .nounderline{
-  text-decoration: none;
-}
-
-#upload {
-    opacity: 0;
-}
-
-#upload-label {
-    position: absolute;
-    top: 50%;
-    left: 1rem;
-    transform: translateY(-50%);
-}
-
-.image-area {
-    border: 2px dashed rgba(255, 255, 255, 0.7);
-    padding: 1rem;
-    position: relative;
-}
-
-.image-area::before {
-    content: 'Uploaded image result';
-    color: #fff;
-    font-weight: bold;
-    text-transform: uppercase;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 0.8rem;
-    z-index: 1;
-}
-
-.image-area img {
-    z-index: 2;
-    position: relative;
-}
-
-.avatar-upload {
-  position: relative;
-  max-width: 230px;
-  margin: 50px auto;
-}
-.avatar-upload .avatar-edit {
-  position: absolute;
-  right: 12px;
-  z-index: 1;
-  top: 10px;
-}
-.avatar-upload .avatar-edit input {
-  display: none;
-}
-.avatar-upload .avatar-edit input + label {
-  display: inline-block;
-  width: 34px;
-  height: 34px;
-  margin-bottom: 0;
-  border-radius: 100%;
-  background: #ffffff;
-  border: 1px solid transparent;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
-  cursor: pointer;
-  font-weight: normal;
-  transition: all 0.2s ease-in-out;
-}
-.avatar-upload .avatar-edit input + label:hover {
-  background: #f1f1f1;
-  border-color: #d6d6d6;
-}
-.avatar-upload .avatar-edit input + label:after {
-  content: "\f040";
-  font-family: "FontAwesome";
-  color: #757575;
-  position: absolute;
-  top: 10px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  margin: auto;
-}
-.avatar-upload .avatar-preview {
-  width: 250px;
-  height: 250px;
-  position: relative;
-  border-radius: 100%;
-  border: 6px solid #f8f8f8;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
-}
-.avatar-upload .avatar-preview > div {
-  width: 100%;
-  height: 100%;
-  border-radius: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  text-decoration: none !important;
 }
 
 .profile-input{
@@ -306,12 +212,8 @@ a:not(.btn-social-icon):not(.btn-social):not(.page-link) .fab {
   box-shadow:300px 0 10px 2px rgba(0,0,0,0.4);
   opacity: 1;
 }
-.nounderline {
-  text-decoration: none !important;
-}
-.nounderline:hover {
-  color: black;
-}
+
+/*Form Input Image*/
 #upload {
     opacity: 0;
 }
@@ -346,7 +248,9 @@ a:not(.btn-social-icon):not(.btn-social):not(.page-link) .fab {
     z-index: 2;
     position: relative;
 }
+/*End of Form Input Image*/
 
+/*Profile Picture*/
 .avatar-upload {
   position: relative;
   max-width: 230px;
@@ -405,19 +309,132 @@ a:not(.btn-social-icon):not(.btn-social):not(.page-link) .fab {
   background-repeat: no-repeat;
   background-position: center;
 }
+/*End of Profile Picture*/
+
+/*Radio Button Custom*/
+.radio-label {
+  display: flex;
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0.375em;
+}
+.radio-label .radio-input {
+  position: absolute;
+  left: -9999px;
+}
+.radio-label .radio-input:checked + span {
+  background-color: #32364a;
+  color: #fff;
+}
+.radio-label .radio-input:checked + span:before {
+  box-shadow: inset 0 0 0 0.4375em #fff;
+}
+.radio-label span {
+  display: flex;
+  align-items: center;
+  padding: 0.375em 0.75em 0.375em 0.375em;
+  border-radius: 99em;
+  transition: 0.25s ease;
+}
+.radio-label span:hover {
+  background-color: #d6d6e5;
+}
+.radio-label span:before {
+  display: flex;
+  flex-shrink: 0;
+  content: "";
+  background-color: #fff;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  margin-right: 0.375em;
+  transition: 0.25s ease;
+  box-shadow: inset 0 0 0 0.125em #00005c;
+}
+/*End of Radio Button Custom*/
+
+/*Banner Picture*/
+.banner-upload {
+  position: relative;
+  max-width: 100%;
+  margin: 50px auto;
+}
+.banner-upload .banner-edit {
+  position: absolute;
+  right: 10px;
+  z-index: 1;
+  top: 49px;
+}
+.banner-upload .banner-edit input {
+  display: none;
+}
+.banner-upload .banner-edit input + label {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 0;
+  border-radius: 100%;
+  background: #ffffff;
+  border: 1px solid transparent;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  font-weight: normal;
+  transition: all 0.2s ease-in-out;
+}
+.banner-upload .banner-edit input + label:hover {
+  background: #f1f1f1;
+  border-color: #d6d6d6;
+}
+.banner-upload .banner-edit input + label:after {
+  content: "\f040";
+  font-family: "FontAwesome";
+  color: #757575;
+  position: absolute;
+  top: 8px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin: auto;
+}
+.banner-upload .banner-preview {
+  width: 100%;
+  height: 350px;
+  position: relative;
+  border-radius: 1%;
+  border: 6px solid #f8f8f8;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+}
+.banner-upload .banner-preview > div {
+  width: 100%;
+  height: 100%;
+  border-radius: 1%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+/*End of Banner Picture*/
+
+.label-custom{
+  font-size: 15pt !important;
+  font-weight: 510;
+  color: black;
+}
 
 .profile-input{
-  margin-left: 25%; 
-  margin-right: 25%;
+  margin-left: 10%; 
+  margin-right: 10%;
   text-align:center;
 }
 
 .profile-input label{
   font-size: 15pt !important;
+  font-weight: 510;
+  color: black;
 }
 
 .profile-input input{
-  border-radius: 25px;
   font-size: 13pt !important;
   text-align: center; 
 }

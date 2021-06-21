@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Redirect;
 use Stevebauman\Location\Facades\Location;
 use App\User;
 use App\History;
+use App\Barbershop;
+use App\Banner;
 use Auth;
 
 class AuthController extends Controller
@@ -68,7 +70,7 @@ class AuthController extends Controller
         return redirect('/login')->with('bye', 'Email atau Password anda Salah!');
     }
 
-    // Registrasi User Baru Sebagai Customer
+    // Registrasi User Baru Sebagai Owner
     public function register(Request $request){
         $messages = array(
             'email.required' => 'Kolom Email tidak boleh kosong!',
@@ -95,7 +97,7 @@ class AuthController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->id_role = 4;
+        $user->id_role = 3;
         $user->avatar = $upAvatar;
         $user->gender = $request->gender;
         $user->address = $request->address;
@@ -109,9 +111,19 @@ class AuthController extends Controller
         $history->keterangan = "Registrasi Akun baru dengan email '".$user->email."'";
         $history->save();
 
-        // Login sebagai Customer
+        // Login sebagai Owner
         Auth::attempt($request->only('email','password'));
-        // Get User Location by IP Address
+
+        // Create Barbershop menu for owner
+        $barbershop = new Barbershop;
+        $barbershop->owner_id = auth()->user()->id;
+        $barbershop->save();
+
+        $banner = new Banner;
+        $banner->barbershop_id = $barbershop->id;
+        $banner->save();
+
+        // Get User Location by IP Address for Login History
         if ($position = Location::get()) {
             $history = new History;
             $history->user_id = auth()->user()->id;
@@ -120,8 +132,10 @@ class AuthController extends Controller
             $history->keterangan = "Lokasi login '".$position->cityName.", ".$position->regionName.", ".$position->countryName."' dengan IP address :'".$position->ip."'";
             $history->save();
         }
-        // Redirect Home
-        return Redirect::to($request->request->get('http_referrer'))->with('message', 'Welcome, '.auth()->user()->name);
+        // Redirect Dashboard
+        return redirect('/owner-panel/dashboard')->with('message', 'Welcome, '.auth()->user()->name);
+
+
         
     }
 

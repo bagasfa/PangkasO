@@ -89,9 +89,11 @@
         <i class="fas fa-key"></i> Password
       </a>
       @if(auth()->user()->id_role == 3 && auth()->user()->verify_status == 'Approved')
-      <a href="{{url('/owner-panel/barber-setting')}}" class="dropdown-item has-icon">
-        <i class="fas fa-cogs"></i> Barbershop Setting
-      </a>
+        @if($barber->name == !NULL)
+        <a href="{{url('/owner-panel/barber-setting')}}" class="dropdown-item has-icon">
+          <i class="fas fa-cogs"></i> Barbershop Setting
+        </a>
+        @endif
       @endif
       <div class="dropdown-divider"></div>
       <a href="{{url('/logout')}}" class="dropdown-item has-icon text-danger">

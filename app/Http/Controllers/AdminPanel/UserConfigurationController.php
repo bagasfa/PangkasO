@@ -10,13 +10,17 @@ use RealRashid\SweetAlert\Facades\Alert;
 use App\Identity;
 use App\User;
 use App\History;
+use App\Barbershop;
 use Illuminate\Support\Facades\DB;
 
 class UserConfigurationController extends Controller
 {
     // Profile Things
     public function profile(){
-        return view('Back.UserConfiguration.profile');
+        $uID = auth()->user()->id;
+        $barber = Barbershop::select('name')->where('owner_id',$uID)->get()->first();
+
+        return view('Back.UserConfiguration.profile',compact('barber'));
     }
 
     public function updateProfile(Request $request){
@@ -72,7 +76,10 @@ class UserConfigurationController extends Controller
 
     // Password Things
     public function password(){
-        return view('Back.UserConfiguration.password');
+        $uID = auth()->user()->id;
+        $barber = Barbershop::select('name')->where('owner_id',$uID)->get()->first();
+
+        return view('Back.UserConfiguration.password', compact('barber'));
     }
 
     public function updatePassword(Request $request){
@@ -106,7 +113,10 @@ class UserConfigurationController extends Controller
         if (session('info')) {
                 Alert::info(session('info'));
         }
-        return view('Back.UserConfiguration.verify');
+        $uID = auth()->user()->id;
+        $barber = Barbershop::select('name')->where('owner_id',$uID)->get()->first();
+
+        return view('Back.UserConfiguration.verify',compact('barber'));
     }
 
     public function putVerify(Request $request){

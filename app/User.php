@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\History;
 use App\Roles;
+use App\Identity;
+use App\Barbershop;
 
 class User extends Authenticatable
 {
@@ -43,6 +45,11 @@ class User extends Authenticatable
     public function identity()
     {
         return $this->hasOne(Identity::class);
+    }
+
+    public function barbershop()
+    {
+        return $this->hasOne(Barbershop::class);
     }
 
     /**
