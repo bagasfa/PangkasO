@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Redirect;
 use App\User;
 use App\History;
 use App\Identity;
+use App\Barbershop;
+use App\Banner;
 use Validator;
 use File;
 use DataTables;
@@ -35,10 +37,10 @@ class UsersDataController extends Controller
         );
 
         $validator = Validator::make($request->all(),[
-                'name' => 'required|string',
-                'email' => 'required|unique:users,email',
-                'password' => 'required|min:8',
-                'phone_number' => 'required|unique:users,phone_number'
+            'name' => 'required|string',
+            'email' => 'required|unique:users,email',
+            'password' => 'required|min:8',
+            'phone_number' => 'required|unique:users,phone_number'
         ],$messages);
 
         if($validator->fails()){
@@ -57,6 +59,7 @@ class UsersDataController extends Controller
         $user->remember_token = '';
         $user->save();
 
+        // Writing History
         $history = new History;
         $history->user_id = auth()->user()->id;
         $history->nama = auth()->user()->name;
@@ -73,19 +76,20 @@ class UsersDataController extends Controller
 
     public function destroyAdmin($id){
         // Hapus Avatar
-        $avatar = User::where('id', $id)->value('avatar');
-        File::delete('/assets/images/users/avatar/'. $avatar);
+        $owner = User::select('avatar')->where('id', $id)->get()->first();
+        File::delete('assets/images/users/avatar/'.$owner);
         // Hapus Scan KTP
-        $ktp = Identity::where('user_id',$id)->value('ktp');
-        File::delete('/assets/images/users/identity/'.$ktp);
+        $ktp = Identity::select('ktp')->where('user_id',$id)->get()->first();
+        File::delete('assets/images/users/identity/'.$ktp);
         // Hapus Selfie dengan KTP
-        $ktp_user = Identity::where('user_id',$id)->value('ktp_user');
-        File::delete('/assets/images/users/identity/'.$ktp_user);
+        $ktp_user = Identity::select('ktp_user')->where('user_id',$id)->get()->first();
+        File::delete('assets/images/users/identity/'.$ktp_user);
 
         $user = User::find($id);
         History::where('id',$user->id)->delete();
         $user->delete();
 
+        // Writing History
         $history = new History;
         $history->user_id = auth()->user()->id;
         $history->nama = auth()->user()->name;
@@ -138,10 +142,10 @@ class UsersDataController extends Controller
         );
 
         $validator = Validator::make($request->all(),[
-                'name' => 'required|string',
-                'email' => 'required|unique:users,email',
-                'password' => 'required',
-                'phone_number' => 'required|unique:users,phone_number'
+            'name' => 'required|string',
+            'email' => 'required|unique:users,email',
+            'password' => 'required',
+            'phone_number' => 'required|unique:users,phone_number'
         ],$messages);
 
         if($validator->fails()){
@@ -160,6 +164,17 @@ class UsersDataController extends Controller
         $user->remember_token = '';
         $user->save();
 
+        // Create Barbershop for owner
+        $barbershop = new Barbershop;
+        $barbershop->owner_id = $user->id;
+        $barbershop->save();
+
+        // Create Banner Barbershop
+        $banner = new Banner;
+        $banner->barbershop_id = $barbershop->id;
+        $banner->save();
+
+        // Writing History
         $history = new History;
         $history->user_id = auth()->user()->id;
         $history->nama = auth()->user()->name;
@@ -176,19 +191,24 @@ class UsersDataController extends Controller
 
     public function destroyOwner($id){
         // Hapus Avatar
-        $avatar = User::where('id', $id)->value('avatar');
-        File::delete('/assets/images/users/avatar/'. $avatar);
+        $owner = User::select('avatar')->where('id', $id)->get()->first();
+        File::delete('assets/images/users/avatar/'.$owner);
         // Hapus Scan KTP
-        $ktp = Identity::where('user_id',$id)->value('ktp');
-        File::delete('/assets/images/users/identity/'. $ktp);
+        $ktp = Identity::select('ktp')->where('user_id',$id)->get()->first();
+        File::delete('assets/images/users/identity/'.$ktp);
         // Hapus Selfie dengan KTP
-        $ktp_user = Identity::where('user_id',$id)->value('ktp_user');
-        File::delete('/assets/images/users/identity/'. $ktp_user);
+        $ktp_user = Identity::select('ktp_user')->where('user_id',$id)->get()->first();
+        File::delete('assets/images/users/identity/'.$ktp_user);
+        // Hapus Banner Barbershop
+        $barber = Barbershop::where('owner_id',$id)->get()->first();
+        $banner = Banner::select('picture')->where('barbershop_id',$barber->id)->get()->first();
+        File::delete('assets/images/barbershop/banner/'.$banner);
 
         $user = User::find($id);
         History::where('id',$user->id)->delete();
         $user->delete();
 
+        // Writing History
         $history = new History;
         $history->user_id = auth()->user()->id;
         $history->nama = auth()->user()->name;
@@ -227,19 +247,20 @@ class UsersDataController extends Controller
 
     public function destroyCustomer($id){
         // Hapus Avatar
-        $avatar = User::where('id', $id)->value('avatar');
-        File::delete('/assets/images/users/avatar/'. $avatar);
+        $owner = User::select('avatar')->where('id', $id)->get()->first();
+        File::delete('assets/images/users/avatar/'.$owner);
         // Hapus Scan KTP
-        $ktp = Identity::where('user_id',$id)->value('ktp');
-        File::delete('/assets/images/users/identity/'.$ktp);
+        $ktp = Identity::select('ktp')->where('user_id',$id)->get()->first();
+        File::delete('assets/images/users/identity/'.$ktp);
         // Hapus Selfie dengan KTP
-        $ktp_user = Identity::where('user_id',$id)->value('ktp_user');
-        File::delete('/assets/images/users/identity/'.$ktp_user);
+        $ktp_user = Identity::select('ktp_user')->where('user_id',$id)->get()->first();
+        File::delete('assets/images/users/identity/'.$ktp_user);
 
         $user = User::find($id);
         History::where('id',$user->id)->delete();
         $user->delete();
 
+        // Writing History
         $history = new History;
         $history->user_id = auth()->user()->id;
         $history->nama = auth()->user()->name;

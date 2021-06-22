@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Stevebauman\Location\Facades\Location;
 use App\User;
+use App\Identity;
 use App\History;
 use App\Barbershop;
 use App\Banner;
+use File;
 use Auth;
 
 class AuthController extends Controller
@@ -41,6 +43,7 @@ class AuthController extends Controller
 
                 // Get User Location by IP Address
                 if ($position = Location::get()) {
+                    // Writing History
                     $history = new History;
                     $history->user_id = auth()->user()->id;
                     $history->nama = auth()->user()->name;
@@ -55,6 +58,7 @@ class AuthController extends Controller
             elseif($role == 4){
                 // Get User Location by IP Address
                 if ($position = Location::get()) {
+                    // Writing History
                     $history = new History;
                     $history->user_id = auth()->user()->id;
                     $history->nama = auth()->user()->name;
@@ -104,6 +108,7 @@ class AuthController extends Controller
         $user->phone_number = $request->phone_number;
         $user->save();
 
+        // Writing History
         $history = new History;
         $history->user_id = $user->id;
         $history->nama = $user->name;
@@ -119,12 +124,14 @@ class AuthController extends Controller
         $barbershop->owner_id = auth()->user()->id;
         $barbershop->save();
 
+        // Create Banner
         $banner = new Banner;
         $banner->barbershop_id = $barbershop->id;
         $banner->save();
 
         // Get User Location by IP Address for Login History
         if ($position = Location::get()) {
+            // Writing History
             $history = new History;
             $history->user_id = auth()->user()->id;
             $history->nama = auth()->user()->name;
@@ -134,9 +141,39 @@ class AuthController extends Controller
         }
         // Redirect Dashboard
         return redirect('/owner-panel/dashboard')->with('message', 'Welcome, '.auth()->user()->name);
+    }
 
+    // Delete Account
+    public function deleteAccount(){
+        $uID = auth()->user()->id;
+        $barber = Barbershop::where('owner_id',$uID)->get()->first();
+        $banner = Banner::where('barbershop_id',$barber->id)->get()->first();
+        $identity = Identity::where('user_id',$uID)->get()->first();
+
+        // Delete Avatar
+        File::delete('assets/images/users/avatar/'.auth()->user()->avatar);
+        // Delete KTP
+        File::delete('assets/images/users/identity/'.$identity->ktp);
+        // Delete Selfie KTP
+        File::delete('assets/images/users/identity/'.$identity->ktp_user);
+        // Delete Banner
+        File::delete('assets/images/barbershop/banner/'.$banner->picture);
+
+        // Writing History
+        $history = new History;
+        $history->user_id = 1;
+        $history->nama = auth()->user()->name;
+        $history->aksi = "Hapus";
+        $history->keterangan = "User '".auth()->user()->name."' menghapus akunnya sendiri.";
+        $history->save();
+
+        $user = User::find($uID);
+        History::where('id',$user->id)->delete();
+        $user->delete();
 
         
+
+        return redirect('/')->with('bye', 'Kami bersedih kehilangan kamu 😔');
     }
 
     // Proses Logout

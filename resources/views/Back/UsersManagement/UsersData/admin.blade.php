@@ -38,7 +38,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="AddAdminModal">Tambah Admin</h5>
-            <button class="close btn-close" type="button" data-dismiss="modal" aria-label="Close">
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
             </button>
         </div>
@@ -72,7 +72,7 @@
             <span style="font-size: 12px;"><i style="color: red;"> * </i> : Data harus terisi</span>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-danger btn-close" type="button" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>
             <button type="submit" class="btn btn-primary btn-submit-admin">Submit</button>
             <button class="btn btn-primary btn-loading" type="button" style="display: none;" disabled>
               <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>

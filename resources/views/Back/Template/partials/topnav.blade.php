@@ -90,10 +90,16 @@
       </a>
       @if(auth()->user()->id_role == 3 && auth()->user()->verify_status == 'Approved')
         @if($barber->name == !NULL)
-        <a href="{{url('/owner-panel/barber-setting')}}" class="dropdown-item has-icon">
+        <a href="{{url('/owner-panel/setting-barbershop')}}" class="dropdown-item has-icon">
           <i class="fas fa-cogs"></i> Barbershop Setting
         </a>
         @endif
+      @endif
+      @if(auth()->user()->id_role != 1 && auth()->user()->verify_status == 'Approved')
+      <div class="dropdown-divider"></div>
+      <a href="" data-toggle="modal" data-target="#deleteAccount" class="dropdown-item has-icon text-danger">
+        <i class="fas fa-times"></i> Delete Account
+      </a>
       @endif
       <div class="dropdown-divider"></div>
       <a href="{{url('/logout')}}" class="dropdown-item has-icon text-danger">
@@ -102,3 +108,23 @@
     </div>
   </li>
 </ul>
+@push('modal')
+<!-- Delete Account Modal-->
+<div class="modal fade" id="deleteAccount" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Account</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">Apakah anda benar benar ingin menghapus akun ini ?</div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+        <a class="btn btn-primary" href="{{ url('/delete-account') }}">Konfirmasi</a>
+      </div>
+    </div>
+  </div>
+</div>
+@endpush

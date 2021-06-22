@@ -51,11 +51,12 @@ class VerifyUsersController extends Controller
         $users->verify_status = 'Approved';
         $users->save();
 
+        // Writing History
         $history = new History;
         $history->user_id = auth()->user()->id;
         $history->nama = auth()->user()->name;
         $history->aksi = "Approve";
-        $history->keterangan = "Approve Verifikasi Identitas milik Akun '".$name;
+        $history->keterangan = "Approve Verifikasi Identitas milik Akun '".$name."'";
         $history->save();
 
         if($role == 3){
@@ -84,11 +85,12 @@ class VerifyUsersController extends Controller
         $users->verify_status = 'Rejected';
         $users->save();
 
+        // Writing History
         $history = new History;
         $history->user_id = auth()->user()->id;
         $history->nama = auth()->user()->name;
         $history->aksi = "Reject";
-        $history->keterangan = "Reject Verifikasi Identitas milik Akun '".$name;
+        $history->keterangan = "Reject Verifikasi Identitas milik Akun '".$name."'";
         $history->save();
 
         if($role == 3){

@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('superadmin'),
                 'gender' => 'L',
                 'address' => 'Local Server',
-                'phone_number' => '089612625259',
+                'phone_number' => '089612625266',
                 'verify_status' => 'Approved',
                 'id_role' => 1,
             ],

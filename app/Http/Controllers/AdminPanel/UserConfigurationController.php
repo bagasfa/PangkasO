@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
+use File;
 use App\Identity;
 use App\User;
 use App\History;
@@ -40,7 +41,9 @@ class UserConfigurationController extends Controller
         ],$messages);
         if( $request->avatar){
             $upAvatar = 'user-'.date('dmYhis').'.'.$request->avatar->getClientOriginalExtension();
-            $request->avatar->move('assets/images/users/avatar/', $upAvatar);
+            $request->avatar->move('assets/images/users/avatar/',$upAvatar);
+            File::delete('assets/images/users/avatar/'.auth()->user()->avatar);
+
             $user->avatar = $upAvatar;
         }
 
@@ -55,6 +58,7 @@ class UserConfigurationController extends Controller
         $user->address = $request->address;
         $user->save();
 
+        // Writing History
         $history = new History;
         $history->user_id = auth()->user()->id;
         $history->nama = $request->name;
@@ -99,6 +103,7 @@ class UserConfigurationController extends Controller
 
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->newPassword)]);
 
+        // Writing History
         $history = new History;
         $history->user_id = auth()->user()->id;
         $history->nama = auth()->user()->name;
@@ -156,6 +161,7 @@ class UserConfigurationController extends Controller
         $user->verify_status = 'Processed';
         $user->save();
 
+        // Writing History
         $history = new History;
         $history->user_id = auth()->user()->id;
         $history->nama = auth()->user()->name;

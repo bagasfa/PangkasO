@@ -43,7 +43,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="AddRolesModal">Add Roles</h5>
-            <button class="close btn-close" type="button" data-dismiss="modal" aria-label="Close">
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
             </button>
         </div>
@@ -54,7 +54,7 @@
             <input type="text" class="form-control" id="role_name" name="role_name">
         </div>
         <div class="modal-footer">
-            <button class="btn btn-danger btn-close" type="button" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>
             <button type="submit" class="btn btn-primary btn-submit-roles">Submit</button>
             <button class="btn btn-primary btn-loading" type="button" style="display: none;" disabled>
               <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -72,7 +72,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="EditRolesModal">Edit Roles</h5>
-        <button class="close btn-close" type="button" data-dismiss="modal" aria-label="Close">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
       </div>
@@ -84,7 +84,7 @@
           <input type="text" class="form-control" id="edit_role_name" name="role_name">
       </div>
       <div class="modal-footer">
-          <button class="btn btn-danger btn-close" type="button" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>
           <button type="submit" class="btn btn-primary btn-save-roles">Save</button>
           <button class="btn btn-primary btn-loading" type="button" style="display: none;" disabled>
               <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>

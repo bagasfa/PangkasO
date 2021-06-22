@@ -18,6 +18,7 @@ Route::get('/login', 'AuthController@login')->name('login');
 Route::post('/postLogin','AuthController@postLogin');
 Route::post('/register','AuthController@register');
 Route::get('/logout','AuthController@logout');
+Route::get('/delete-account','AuthController@deleteAccount');
 
 // Admin Panel - Universal Things
 Route::group(['middleware' => ['auth','checkRole:1,2,3']], function(){
@@ -100,6 +101,11 @@ Route::group(['middleware' => ['auth','checkRole:3']], function(){
 	// Setup new Barbershop
 	Route::get('/owner-panel/setup-barbershop','AdminPanel\BarbershopController@setup');
 	Route::post('/owner-panel/update-barbershop','AdminPanel\BarbershopController@update');
+	Route::get('/owner-panel/setting-barbershop','AdminPanel\BarbershopController@setting');
+
+	// Banner Management
+	Route::get('/owner-panel/banner','AdminPanel\BarbershopController@banner');
+	Route::post('/owner-panel/banner/update','AdminPanel\BarbershopController@bannerUpdate');
 });
 
 ?>

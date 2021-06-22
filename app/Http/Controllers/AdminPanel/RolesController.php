@@ -20,6 +20,7 @@ class RolesController extends Controller
 
     // Add Roles Data
     public function store(Request $request){
+        // Writing History
         $history = new History;
         $history->user_id = auth()->user()->id;
         $history->nama = auth()->user()->name;
@@ -39,6 +40,7 @@ class RolesController extends Controller
 
         $roles = Roles::find($id);
         if($roles->role_name != $request->role_name){
+            // Writing History
             $history = new History;
             $history->user_id = auth()->user()->id;
             $history->nama = auth()->user()->name;
@@ -58,6 +60,8 @@ class RolesController extends Controller
     // Delete Roles Data
     public function destroy($id){
         $roles = Roles::find($id);
+        
+        // Writing History
         $history = new History;
         $history->user_id = auth()->user()->id;
         $history->nama = auth()->user()->name;

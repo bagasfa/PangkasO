@@ -93,7 +93,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content"> 
         <div class="modal-header">
-          <h5 class="modal-title" id="RegisterLabel">Registrasi Owner</h5>
+          <h5 class="modal-title" id="RegisterLabel">Registrasi Owner Barbershop</h5>
         </div>
         <div class="modal-body">
           <form action="{{url('/register')}}" method="POST" enctype="multipart/form-data">
