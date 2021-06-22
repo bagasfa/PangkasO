@@ -78,24 +78,29 @@
         </li>
       </ul>
     </li>
+    <li>
+      <a class="nav-link" href="{{url('/admin-panel/trasactions-history')}}">
+        <i class="fas fa-receipt"></i> <span>Transactions History</span>
+      </a>
+    </li>
     @endif
 
     <!-- Owner Menu Sidebar -->
     @if(auth()->user()->id_role == 3 && auth()->user()->verify_status == 'Approved')
     @if($barber->name == NULL)
-    <li>
+    <li id="setup">
       <a class="nav-link" href="{{url('/owner-panel/setup-barbershop')}}">
         <i class="fas fa-cogs"></i> <span>Setup Barbershop</span>
       </a>
     </li>
     @else
-    <li>
+    <li id="orders">
       <a class="nav-link" href="{{url('/owner-panel/orders')}}">
         <i class="fas fa-receipt"></i> <span>Orders</span>
       </a>
     </li>
     <li class="menu-header">Barbershop Management</li>
-    <li>
+    <li id="banner">
       <a class="nav-link" href="{{url('/owner-panel/banner')}}">
         <i class="fas fa-image"></i> <span>Barbershop Banner</span>
       </a>
@@ -117,12 +122,12 @@
         </li>
       </ul>
     </li>
-    <li>
+    <li id="services">
       <a class="nav-link" href="{{url('/owner-panel/service-pref')}}">
         <i class="fas fa-hand-holding-heart"></i> <span>Service Preferences</span>
       </a>
     </li>
-    <li>
+    <li id="transactions">
       <a class="nav-link" href="{{url('/owner-panel/trasactions-history')}}">
         <i class="fas fa-history"></i> <span>Transactions History</span>
       </a>

@@ -106,6 +106,10 @@ Route::group(['middleware' => ['auth','checkRole:3']], function(){
 	// Banner Management
 	Route::get('/owner-panel/banner','AdminPanel\BarbershopController@banner');
 	Route::post('/owner-panel/banner/update','AdminPanel\BarbershopController@bannerUpdate');
+
+	// Service Preferences
+	Route::get('/owner-panel/service-pref','AdminPanel\BarbershopController@servicePref');
+	Route::post('/owner-panel/service-pref/update','AdminPanel\BarbershopController@servicePrefUpdate');
 });
 
 ?>

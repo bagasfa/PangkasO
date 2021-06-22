@@ -87,6 +87,7 @@ class BarbershopController extends Controller
         return redirect('owner-panel/dashboard')->with('success','Berhasil melengkapi data Barbershop');
     }
 
+    // Banner Things
     public function banner(){
         $uID = auth()->user()->id;
         $barber = Barbershop::where('owner_id',$uID)->get()->first();
@@ -97,7 +98,7 @@ class BarbershopController extends Controller
             Alert::error(session('error'));
         }
 
-        return view('Back.BannerManagement.banner',compact('barber','banner'));
+        return view('Back.BarbershopManagement.banner',compact('barber','banner'));
     }
 
     public function bannerUpdate(Request $request){
@@ -121,5 +122,30 @@ class BarbershopController extends Controller
         $history->save();
 
         return redirect('owner-panel/banner')->with('success','Berhasil memperbarui Banner');
+    }
+
+    // Service Preference Things
+    public function servicePref(){
+        $uID = auth()->user()->id;
+        $barber = Barbershop::where('owner_id',$uID)->get()->first();
+        $banner = Banner::where('barbershop_id',$barber->id)->get()->first();
+
+        if(session('success')){
+            Alert::success(session('success'));
+        }elseif(session('error')){
+            Alert::error(session('error'));
+        }
+
+        return view('Back.BarbershopManagement.servicePref',compact('barber','banner'));
+    }
+
+    public function servicePrefUpdate(Request $request){
+        $uID = auth()->user()->id;
+        $barber = Barbershop::where('owner_id',$uID)->get()->first();
+
+        $barber->service_preferences = $request->service_preferences;
+        $barber->save();
+
+        return redirect('/owner-panel/service-pref')->with('success','Berhasil Mengganti Jenis Pelayanan');
     }
 }

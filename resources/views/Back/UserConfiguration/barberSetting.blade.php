@@ -1,6 +1,6 @@
 @extends('Back.Template.layouts.app')
 
-@section('title', 'Profile')
+@section('title', 'Barbershop Setting')
 
 @section('content')
 <section class="section">

@@ -1,8 +1,11 @@
 @extends('Back.Template.layouts.app')
 
-@section('title', 'Profile')
+@section('title', 'Banner Management')
 
 @section('content')
+<script type="text/javascript">
+  document.getElementById('banner').classList.add('active');
+</script>
 <section class="section">
   
   <div class="section-header">
