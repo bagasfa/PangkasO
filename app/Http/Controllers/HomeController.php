@@ -20,6 +20,11 @@ class HomeController extends Controller
 
     public function adminDashboard(){
         $user = User::all();
+        if(session('success')){
+            Alert::success(session('success'));
+        }elseif(session('error')){
+            Alert::error(session('error'));
+        }
 
         return view('Back.Dashboard.dashboard',compact('user'));
     }
@@ -30,6 +35,8 @@ class HomeController extends Controller
         $barber = Barbershop::select('name')->where('owner_id',$uID)->get()->first();
         if(session('success')){
             Alert::success(session('success'));
+        }elseif(session('error')){
+            Alert::error(session('error'));
         }
 
         return view('Back.Dashboard.dashboard',compact('user','barber'));

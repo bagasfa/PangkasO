@@ -29,9 +29,6 @@
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="{{ asset('assets/js/stisla.js')}}"></script>
   <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-  <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDVdq9z2G2lIc0pn2FK7lHeCIWvNEXQMmQ&sensor=true"></script>
-  <script src="{{ asset('assets/js/gmaps.min.js') }}"></script>
-  <script src="{{ asset('assets/js/gmaps-draggable-marker.js') }}"></script>
   <script src="{{ asset('assets/js/select2.full.min.js') }}" async defer></script>
   <script src="{{ mix('js/manifest.js') }}"></script>
   <script src="{{ mix('js/vendor.js') }}"></script>

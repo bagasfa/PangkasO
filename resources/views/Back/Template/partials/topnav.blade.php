@@ -119,11 +119,23 @@
           <span aria-hidden="true">×</span>
         </button>
       </div>
-      <div class="modal-body">Apakah anda benar benar ingin menghapus akun ini ?</div>
+      <form action="{{url('/delete-account')}}" method="POST">
+      <div class="modal-body">
+        {{csrf_field()}}
+        <p>Konfirmasi password jika anda ingin menghapus akun ini.</p>
+        <div class="input-group" id="show_hide_password">
+          <input name="password" type="password" class="form-control" placeholder="Password">
+          <!-- Show Hide Password Component -->
+          <a href=""><div class="input-group-addon eye">
+            <i class="fa fa-eye-slash" aria-hidden="true"></i>
+          </div></a>
+        </div>
+      </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-        <a class="btn btn-primary" href="{{ url('/delete-account') }}">Konfirmasi</a>
+        <button type="submit" class="btn btn-primary">Konfirmasi</button>
       </div>
+      </form>
     </div>
   </div>
 </div>

@@ -21,7 +21,7 @@
             <div class="form-group">
                 Bergabung sejak {{ auth()->user()->created_at->diffForHumans() }}
               </div>
-            <form action="{{ url('/owner-panel/update-barbershop') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('/owner-panel/update-barbershop') }}" autocomplete="off" method="POST" enctype="multipart/form-data">
               {{csrf_field()}}
 
               <!-- Banner -->
@@ -40,8 +40,8 @@
               
               <!-- Nama -->
               <div class="form-group profile-input">
-                <label for="inputNama">Nama Barbershop</label>
-                <input name="name" type="text" class="form-control" id="inputNama" placeholder="Nama Barbershop">
+                <label for="name">Nama Barbershop</label>
+                <input name="name" type="text" class="form-control" autocomplete="new-password" id="name" placeholder="Nama Barbershop">
               </div>
               <!-- Jenis Pelayanan -->
               <div class="form-group">
@@ -77,6 +77,31 @@
                 <label for="address">Alamat</label>
                 <textarea name="address" id="address" class="form-control"></textarea>
               </div>
+              <!-- Maps -->
+              <div class="row">
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <h4>Pilih Lokasi pada Peta</h4>
+                    </div>
+                    <!-- Dissmissable Alert -->
+                    <div class="alert alert-info alert-dismissible show fade">
+                      <button class="close" data-dismiss="alert">
+                        <span>&times;</span>
+                      </button>
+                      <div class="alert-body"> 
+                        Anda bisa menggeser tanda lokasi ke lokasi Barbershop anda, untuk membantu pelanggan menemukan lokasi anda.
+                      </div>
+                    </div>
+                    <!-- Latitude Longitude -->
+                    <div class="input-group" id="input-group">
+                      <input type="text" name="lat" class="form-control" id="input-lat" placeholder="Latitude" hidden>
+                      <input type="text" name="long" class="form-control" id="input-lng" placeholder="Longitude" hidden>   
+                    </div>
+                    <div id="map" data-height="400"></div>
+                  </div>
+                </div>
+              </div>
               
               <br>
               <div class="form-group text-center">
@@ -94,6 +119,11 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 @endpush
 @push('javascript')
+  <!-- Gmaps Things -->
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDVdq9z2G2lIc0pn2FK7lHeCIWvNEXQMmQ&sensor=true"></script>
+  <script src="{{ asset('assets/js/gmaps.min.js') }}"></script>
+  <script src="{{ asset('assets/js/gmaps-draggable-marker.js') }}"></script>
+  <!-- Input Image -->
   <script type="text/javascript">
     function readURL(input) {
       if (input.files && input.files[0]) {
@@ -109,5 +139,23 @@
   $("#imageUpload").change(function() {
       readURL(this);
   });
+  </script>
+  <!-- Disable Special Character -->
+  <script type="text/javascript">
+    $('#name').on('keypress', function (event) {
+      var regex = new RegExp("^[a-zA-Z0-9]+$");
+      var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+      if (!regex.test(key)) {
+         event.preventDefault();
+         return false;
+      }
+    });
+  </script>
+  <!-- Disable Paste -->
+  <script type="text/javascript">
+    window.onload = () => {
+     const name = document.getElementById('name');
+     name.onpaste = e => e.preventDefault();
+    }
   </script>
 @endpush

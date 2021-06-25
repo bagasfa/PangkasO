@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Stevebauman\Location\Facades\Location;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Identity;
 use App\History;
 use App\Barbershop;
 use App\Banner;
+use App\Hairstyle;
 use File;
 use Auth;
 
@@ -79,7 +81,6 @@ class AuthController extends Controller
         $messages = array(
             'email.required' => 'Kolom Email tidak boleh kosong!',
             'email.unique' => 'Email sudah digunakan!',
-            'avatar.required' => 'Gambar tidak boleh kosong!',
             'avatar.mimes' => 'Mohon gunakan format gambar : .jpeg | .jpg | .png',
             'avatar.max' => 'Ukuran gambar anda melebihi 4MB!',
             'password.required' => 'Kolom Password tidak boleh kosong!',
@@ -89,30 +90,43 @@ class AuthController extends Controller
         );
 
         $validateData = $request->validate([
-            'avatar' => 'required|image|mimes:jpeg,png,jpg|max:4096',
+            'avatar' => 'image|mimes:jpeg,png,jpg|max:4096',
             'email' => 'required|unique:users,email',
             'password' => 'required|min:8',
             'phone_number' => 'required|unique:users',
         ],$messages);
-        $upAvatar = 'user-'.date('dmYhis').'.'.$request->avatar->getClientOriginalExtension();
-        $request->avatar->move('assets/images/users/avatar', $upAvatar);
-        
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->id_role = 3;
-        $user->avatar = $upAvatar;
-        $user->gender = $request->gender;
-        $user->address = $request->address;
-        $user->phone_number = $request->phone_number;
-        $user->save();
 
+        if($request->avatar){
+            $upAvatar = 'user-'.date('dmYhis').'.'.$request->avatar->getClientOriginalExtension();
+            $request->avatar->move('assets/images/users/avatar', $upAvatar);
+
+            $user = new User;
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->id_role = 3;
+            $user->avatar = $upAvatar;
+            $user->gender = $request->gender;
+            $user->address = $request->address;
+            $user->phone_number = $request->phone_number;
+            $user->save();
+        }else{
+            $user = new User;
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->id_role = 3;
+            $user->gender = $request->gender;
+            $user->address = $request->address;
+            $user->phone_number = $request->phone_number;
+            $user->save();
+        }
+    
         // Writing History
         $history = new History;
         $history->user_id = $user->id;
         $history->nama = $user->name;
-        $history->aksi = "Create";
+        $history->aksi = "Register";
         $history->keterangan = "Registrasi Akun baru dengan email '".$user->email."'";
         $history->save();
 
@@ -144,36 +158,61 @@ class AuthController extends Controller
     }
 
     // Delete Account
-    public function deleteAccount(){
-        $uID = auth()->user()->id;
-        $barber = Barbershop::where('owner_id',$uID)->get()->first();
-        $banner = Banner::where('barbershop_id',$barber->id)->get()->first();
-        $identity = Identity::where('user_id',$uID)->get()->first();
+    public function deleteAccount(Request $request){
+        $messages = array(
+            'password.required' => 'Password tidak boleh kosong!'
+        );
+        $request->validate([
+            'password' => 'required'
+        ],$messages);
 
-        // Delete Avatar
-        File::delete('assets/images/users/avatar/'.auth()->user()->avatar);
-        // Delete KTP
-        File::delete('assets/images/users/identity/'.$identity->ktp);
-        // Delete Selfie KTP
-        File::delete('assets/images/users/identity/'.$identity->ktp_user);
-        // Delete Banner
-        File::delete('assets/images/barbershop/banner/'.$banner->picture);
+        // Konfirmasi Password sebelum menghapus akun
+        $checkPassword = Hash::check($request->password,auth()->user()->password);
 
-        // Writing History
-        $history = new History;
-        $history->user_id = 1;
-        $history->nama = auth()->user()->name;
-        $history->aksi = "Hapus";
-        $history->keterangan = "User '".auth()->user()->name."' menghapus akunnya sendiri.";
-        $history->save();
+        if($checkPassword == 'true'){
+            $uID = auth()->user()->id;
+            $barber = Barbershop::where('owner_id',$uID)->get()->first();
+            $banner = Banner::where('barbershop_id',$barber->id)->get()->first();
+            $identity = Identity::where('user_id',$uID)->get()->first();
+            $hairstyle = Hairstyle::where('barbershop_id',$barber->id)->get();
 
-        $user = User::find($uID);
-        History::where('id',$user->id)->delete();
-        $user->delete();
+            // Delete Avatar
+            File::delete('assets/images/users/avatar/'.auth()->user()->avatar);
+            // Delete KTP
+            File::delete('assets/images/users/identity/'.$identity->ktp);
+            // Delete Selfie KTP
+            File::delete('assets/images/users/identity/'.$identity->ktp_user);
+            // Delete Banner
+            File::delete('assets/images/barbershop/banner/'.$banner->picture);
+            foreach($hairstyle as $h){
+                File::delete('assets/images/barbershop/hairstyle/'.$h->images);
+            }
 
-        
+            // Writing History
+            $history = new History;
+            $history->user_id = 1;
+            $history->nama = auth()->user()->name;
+            $history->aksi = "Hapus";
+            $history->keterangan = "User '".auth()->user()->name."' menghapus akunnya sendiri.";
+            $history->save();
 
-        return redirect('/')->with('bye', 'Kami bersedih kehilangan kamu 😔');
+            $user = User::find($uID);
+            History::where('id',$user->id)->delete();
+            $user->delete();
+
+            return redirect('/')->with('bye', 'Kami bersedih kehilangan kamu 😔');
+        }else{
+
+            // Writing History
+            $history = new History;
+            $history->user_id = 1;
+            $history->nama = auth()->user()->name;
+            $history->aksi = "Hapus";
+            $history->keterangan = "Percobaan penghapusan akun oleh user '".auth()->user()->name."'.";
+            $history->save();
+
+            return back()->with('error','Password konfirmasi salah!');
+        }    
     }
 
     // Proses Logout

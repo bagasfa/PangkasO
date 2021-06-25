@@ -32,6 +32,11 @@ class BarbershopController extends Controller
         $uID = auth()->user()->id;
         $barber = Barbershop::where('owner_id',$uID)->get()->first();
         $banner = Banner::where('barbershop_id',$barber->id)->get()->first();
+        if(session('success')){
+            Alert::success(session('success'));
+        }elseif(session('error')){
+            Alert::error(session('error'));
+        }
 
         return view('Back.UserConfiguration.setup',compact('barber','banner'));
     }
@@ -66,6 +71,9 @@ class BarbershopController extends Controller
         $barber->name = $request->name;
         $barber->phone_number = $request->phone_number;
         $barber->address = $request->address;
+        $barber->url = strtolower($request->name);
+        $barber->latitude = $request->lat;
+        $barber->longitude = $request->long;
         $barber->save();
 
         if($request->banner != NULL){
@@ -84,7 +92,7 @@ class BarbershopController extends Controller
         $history->keterangan = "Akun '".auth()->user()->name."' mengubah data Barbershopnya.";
         $history->save();
 
-        return redirect('owner-panel/dashboard')->with('success','Berhasil melengkapi data Barbershop');
+        return redirect('owner-panel/dashboard')->with('success','Berhasil memperbarui data Barbershop');
     }
 
     // Banner Things
@@ -145,6 +153,14 @@ class BarbershopController extends Controller
 
         $barber->service_preferences = $request->service_preferences;
         $barber->save();
+
+        // Writing History
+        $history = new History;
+        $history->user_id = auth()->user()->id;
+        $history->nama = auth()->user()->name;
+        $history->aksi = "Edit";
+        $history->keterangan = "Akun '".auth()->user()->name."' mengubah Jenis Pelayanannya.";
+        $history->save();
 
         return redirect('/owner-panel/service-pref')->with('success','Berhasil Mengganti Jenis Pelayanan');
     }

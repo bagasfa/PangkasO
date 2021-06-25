@@ -22,12 +22,9 @@ class CreateUsersTable extends Migration
           $table->string('phone_number')->unique();
           $table->string('avatar')->nullable();
           $table->string('verify_status')->nullable();
-          $table->bigInteger('address_id')->unsigned();
-          $table->foreign('address_id')
-                ->references('id')
-                ->on('address')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+          $table->string('address')->nullable();
+          $table->string('latitude')->nullable();
+          $table->string('longitude')->nullable();
           $table->bigInteger('id_role')->unsigned();
           $table->foreign('id_role')
                 ->references('id')

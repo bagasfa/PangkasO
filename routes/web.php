@@ -18,7 +18,7 @@ Route::get('/login', 'AuthController@login')->name('login');
 Route::post('/postLogin','AuthController@postLogin');
 Route::post('/register','AuthController@register');
 Route::get('/logout','AuthController@logout');
-Route::get('/delete-account','AuthController@deleteAccount');
+Route::post('/delete-account','AuthController@deleteAccount');
 
 // Admin Panel - Universal Things
 Route::group(['middleware' => ['auth','checkRole:1,2,3']], function(){
@@ -91,7 +91,7 @@ Route::group(['middleware' => ['auth','checkRole:2']], function(){
 
 });
 
-// Admin Panel - Owner Only
+// Owner Panel - Owner Only
 Route::group(['middleware' => ['auth','checkRole:3']], function(){
 	// Owner Dashboard
 	Route::get('/owner-panel/dashboard','HomeController@ownerDashboard');
@@ -106,6 +106,14 @@ Route::group(['middleware' => ['auth','checkRole:3']], function(){
 	// Banner Management
 	Route::get('/owner-panel/banner','AdminPanel\BarbershopController@banner');
 	Route::post('/owner-panel/banner/update','AdminPanel\BarbershopController@bannerUpdate');
+
+	// Hairstyle Management
+	Route::get('/owner-panel/hairstyle/male','AdminPanel\HairstyleController@male');
+	Route::get('/owner-panel/hairstyle/female','AdminPanel\HairstyleController@female');
+	Route::post('/owner-panel/hairstyle/add','AdminPanel\HairstyleController@add');
+	Route::get('/owner-panel/hairstyle/edit/{id}','AdminPanel\HairstyleController@edit');
+	Route::post('/owner-panel/hairstyle/update/{id}','AdminPanel\HairstyleController@update');
+	Route::get('/owner-panel/hairstyle/delete/{id}','AdminPanel\HairstyleController@destroy');
 
 	// Service Preferences
 	Route::get('/owner-panel/service-pref','AdminPanel\BarbershopController@servicePref');

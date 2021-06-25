@@ -111,12 +111,12 @@
       </a>
       <ul class="dropdown-menu">
         <li>
-          <a class="nav-link" href="{{url('/owner-panel/male-hairstyle')}}">
+          <a class="nav-link" href="{{url('/owner-panel/hairstyle/male')}}">
             <i class="fas fa-mars"></i> <span>Male</span>
           </a>
         </li>
         <li>
-          <a class="nav-link" href="{{url('/owner-panel/female-hairstyle')}}">
+          <a class="nav-link" href="{{url('/owner-panel/hairstyle/female')}}">
             <i class="fas fa-venus"></i> <span>Female</span>
           </a>
         </li>

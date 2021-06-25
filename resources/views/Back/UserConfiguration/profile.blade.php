@@ -89,42 +89,14 @@
               <input name="phone_number" type="tel" class="form-control" id="phone_number" placeholder="Nomor Telepon" value="{{auth()->user()->phone_number}}" required="">
             </div>
             <!-- Address -->
-            <div class="row">
-              <div class="form-group">
-                <label>Kota</label>
-                <select class="form-control select2">
-                  <option>Option 1</option>
-                  <option>Option 2</option>
-                  <option>Option 3</option>
-                </select>
-              </div>
-            </div>
-          
-            <!-- Maps -->
-            <div class="row">
-              <div class="col-12">
-                <div class="card">
-                  <div class="card-header">
-                    <h4>Pilih Lokasi pada Peta</h4>
-                  </div>
-                  <input type="text" name="latitude" class="form-control" id="input-lat" placeholder="Latitude" hidden>
-                  <input type="text" name="longitude" class="form-control" id="input-lng" placeholder="Longitude" hidden>   
-                  <div class="alert alert-info alert-dismissible show fade">
-                    <button class="close" data-dismiss="alert">
-                      <span>&times;</span>
-                    </button>
-                    <div class="alert-body"> 
-                      Anda bisa menggeser tanda lokasi ke lokasi anda, untuk membantu tim Barbershop menemukan lokasi anda.
-                    </div>
-                  </div>
-                  <div id="map" data-height="400"></div>
-                </div>
-              </div>
+            <div class="form-group">
+              <label for="inputAddress">Alamat</label>
+              <textarea name="address" id="inputAddress" class="form-control">{{auth()->user()->address}}</textarea>
             </div>
             
             <br>
             <div class="form-group text-center">
-              <a href="{{ redirect()->back()->getTargetUrl() }}">
+              <a class="nounderline" href="{{ redirect()->back()->getTargetUrl() }}">
                 <button type="button" class="btn btn-danger col-md-3 col-lg-3">BATAL</button>
               </a>
               <button type="submit" class="btn btn-primary col-md-3 col-lg-3">SIMPAN</button>
@@ -141,7 +113,7 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 @endpush
 @push('javascript')
-<script type="text/javascript">
+  <script type="text/javascript">
   function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();

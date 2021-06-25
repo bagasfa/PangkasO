@@ -5,6 +5,7 @@ namespace App\Http\Controllers\AdminPanel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\User;
 use App\History;
 use App\Identity;
@@ -20,6 +21,12 @@ class UsersDataController extends Controller
     // Admin Things
     public function admins(Request $request){
         $counter = User::where('id_role',2)->count();
+
+        if(session('success')){
+            Alert::success(session('success'));
+        }elseif(session('error')){
+            Alert::error(session('error'));
+        }
 
         return view('Back.UsersManagement.UsersData.admin', compact('counter'));
     }
@@ -126,6 +133,12 @@ class UsersDataController extends Controller
     // Owner Things
     public function owners(Request $request){
         $counter = User::where('id_role',3)->count();
+
+        if(session('success')){
+            Alert::success(session('success'));
+        }elseif(session('error')){
+            Alert::error(session('error'));
+        }
 
         return view('Back.UsersManagement.UsersData.owner', compact('counter'));
     }
@@ -241,6 +254,12 @@ class UsersDataController extends Controller
     // Customer Things
     public function customers(Request $request){
         $counter = User::where('id_role',4)->count();
+
+        if(session('success')){
+            Alert::success(session('success'));
+        }elseif(session('error')){
+            Alert::error(session('error'));
+        }
 
         return view('Back.UsersManagement.UsersData.customer', compact('counter'));
     }

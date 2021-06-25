@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\Banner;
+use App\Hairstyle;
 
 class Barbershop extends Model
 {
@@ -19,5 +20,9 @@ class Barbershop extends Model
     public function banner()
     {
       return $this->hasOne(Banner::class);
+    }
+
+    public function hairstyle(){
+      return $this->hasMany(Hairstyle::class);
     }
 }

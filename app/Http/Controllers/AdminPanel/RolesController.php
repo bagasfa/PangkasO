@@ -4,6 +4,7 @@ namespace App\Http\Controllers\AdminPanel;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Redirect;
 use App\Roles;
 use App\History;
@@ -12,8 +13,13 @@ use DataTables;
 class RolesController extends Controller
 {
     public function index(Request $request){
-
         $counter = Roles::count();
+
+        if(session('success')){
+            Alert::success(session('success'));
+        }elseif(session('error')){
+            Alert::error(session('error'));
+        }
 
         return view('Back.UsersManagement.roles',compact('counter'));
     }

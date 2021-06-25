@@ -20,6 +20,12 @@ class UserConfigurationController extends Controller
     public function profile(){
         $uID = auth()->user()->id;
         $barber = Barbershop::select('name')->where('owner_id',$uID)->get()->first();
+        
+        if(session('success')){
+            Alert::success(session('success'));
+        }elseif(session('error')){
+            Alert::error(session('error'));
+        }
 
         return view('Back.UserConfiguration.profile',compact('barber'));
     }
@@ -28,17 +34,19 @@ class UserConfigurationController extends Controller
         $id = auth()->user()->id;
         $user = User::findOrFail($id);
 
-        $messages = array(
+        $error = array(
             'email.required' => 'Kolom Email tidak boleh kosong!',
             'email.unique' => 'Email sudah digunakan!',
             'avatar.mimes' => 'Mohon gunakan format gambar : .jpeg | .jpg | .png',
-            'avatar.max' => 'Ukuran gambar anda melebihi 4MB!'
+            'avatar.max' => 'Ukuran gambar anda melebihi 4MB!',
+            'address.required' => 'Kolom Alamat tidak boleh kosong!'
         );
 
         $validateData = $request->validate([
             'email' => 'required|unique:users,email,'.$user->id,
-            'avatar' => 'image|mimes:jpeg,png,jpg|max:4096'
-        ],$messages);
+            'avatar' => 'image|mimes:jpeg,png,jpg|max:4096',
+            'address' => 'required'
+        ],$error);
         if( $request->avatar){
             $upAvatar = 'user-'.date('dmYhis').'.'.$request->avatar->getClientOriginalExtension();
             $request->avatar->move('assets/images/users/avatar/',$upAvatar);
@@ -87,7 +95,7 @@ class UserConfigurationController extends Controller
     }
 
     public function updatePassword(Request $request){
-        $messages = array(
+        $error = array(
             'oldPassword.required' => 'Password Lama tidak boleh kosong!',
             'newPassword.required' => 'Password Baru tidak boleh kosong!',
             'newPassword.min' => 'Password tidak boleh kurang dari 8 karakter!',
@@ -99,7 +107,7 @@ class UserConfigurationController extends Controller
             'oldPassword' => ['required', new MatchOldPassword],
             'newPassword' => ['required|min:8'],
             'confirmPassword' => ['min:8|same:newPassword'],
-        ],$messages);
+        ],$error);
 
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->newPassword)]);
 
@@ -115,9 +123,14 @@ class UserConfigurationController extends Controller
     }
 
     public function getVerify(){
-        if (session('info')) {
-                Alert::info(session('info'));
+        if(session('success')){
+            Alert::success(session('success'));
+        }elseif(session('error')){
+            Alert::error(session('error'));
+        }elseif (session('info')) {
+            Alert::info(session('info'));
         }
+
         $uID = auth()->user()->id;
         $barber = Barbershop::select('name')->where('owner_id',$uID)->get()->first();
 
@@ -126,7 +139,7 @@ class UserConfigurationController extends Controller
 
     public function putVerify(Request $request){
 
-        $messages = array(
+        $error = array(
             'nik.required' => 'Kolom NIK tidak boleh kosong!',
             'nik.unique' => 'NIK telah digunakan!',
             'ktp.required' => 'Mohon sertakan scan KTP anda!',
@@ -141,7 +154,7 @@ class UserConfigurationController extends Controller
             'nik' => 'required|unique:identity,nik',
             'ktp' => 'image|mimes:jpeg,png,jpg|max:4096',
             'ktp_user' => 'image|mimes:jpeg,jpg,png|max:4096'
-        ],$messages);
+        ],$error);
 
         $upKtp = $request->nik.'identity -'.date('dmYhis').'.'.$request->ktp->getClientOriginalExtension();
         $request->ktp->move('assets/images/users/identity', $upKtp);
@@ -165,7 +178,7 @@ class UserConfigurationController extends Controller
         $history = new History;
         $history->user_id = auth()->user()->id;
         $history->nama = auth()->user()->name;
-        $history->aksi = "Create";
+        $history->aksi = "Tambah";
         $history->keterangan = "Akun '".auth()->user()->email."' mengajukan verifikasi identitas.";
         $history->save();
 

@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
   <!-- Template CSS -->
+  <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/toastr.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/stisla.css') }}">
@@ -46,7 +47,7 @@
                   <label for="password" class="control-label">Password</label>
                 </div>
                 <div class="input-group" id="show_hide_password">
-                  <input name="password" type="password" minlength="8" class="form-control" tabindex="2" id="inputPassword" placeholder="Password" required="">
+                  <input name="password" type="password" minlength="8" class="form-control" tabindex="2" id="password" placeholder="Password" required="">
                   <!-- Show Hide Password Component -->
                   <a href=""><div class="input-group-addon eye">
                     <i class="fa fa-eye-slash" aria-hidden="true"></i>
@@ -112,7 +113,12 @@
           <div class="form-group">
             <label for="inputPassword">Password <i style="color: red;">*</i></label>
             <div class="input-group" id="show_hide_password">
-              <input name="password" type="password" minlength="8" class="form-control" id="inputPassword" placeholder="Password">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="fas fa-lock"></i>
+                </div>
+              </div>
+              <input name="password" type="password" class="form-control pwstrength" data-indicator="pwindicator" id="inputPassword" placeholder="Password">
               <a href="">
                 <div class="input-group-addon eye">
                   <i class="fa fa-eye-slash" aria-hidden="true"></i>
@@ -139,8 +145,8 @@
           </div>
           <!-- Address -->
           <div class="form-group">
-            <label for="inputAddress">Alamat <i style="color: red;">*</i></label>
-            <textarea name="address" id="inputAddress" class="form-control" required=""></textarea>
+            <label for="inputAddress">Alamat</label>
+            <textarea name="address" id="inputAddress" class="form-control"></textarea>
           </div>
 
           <!-- Upload image input-->
