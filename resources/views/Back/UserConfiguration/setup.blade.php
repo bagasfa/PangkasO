@@ -61,7 +61,7 @@
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="radio-label">
-                      <input class="radio-input" type="radio" name="service_preferences" value="CODA">
+                      <input class="radio-input" type="radio" name="service_preferences" value="COA">
                       <span>COD & Antrian Online</span>
                     </label>
                   </div>

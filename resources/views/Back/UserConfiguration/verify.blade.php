@@ -156,7 +156,7 @@
               </div>
             </div>
             <div class="d-flex justify-content-center">
-              <img src="{{asset('assets/img/error-handling/process.jpg')}}" width="50%">
+              <img src="{{asset('assets/img/error-pages/process.jpg')}}" width="50%">
             </div>
               @elseif(auth()->user()->verify_status == 'Approved')
                 <div class="wizard-step">
@@ -186,7 +186,7 @@
               </div>
             </div>
             <div class="d-flex justify-content-center">
-              <img src="{{asset('assets/img/error-handling/success.jpg')}}" width="40%">
+              <img src="{{asset('assets/img/error-pages/success.jpg')}}" width="40%">
             </div>
               @endif
           </div>

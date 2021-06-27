@@ -10,7 +10,6 @@ use App\User;
 use App\Identity;
 use App\History;
 use App\Barbershop;
-use App\Banner;
 use App\Hairstyle;
 use File;
 use Auth;
@@ -138,11 +137,6 @@ class AuthController extends Controller
         $barbershop->owner_id = auth()->user()->id;
         $barbershop->save();
 
-        // Create Banner
-        $banner = new Banner;
-        $banner->barbershop_id = $barbershop->id;
-        $banner->save();
-
         // Get User Location by IP Address for Login History
         if ($position = Location::get()) {
             // Writing History
@@ -172,7 +166,6 @@ class AuthController extends Controller
         if($checkPassword == 'true'){
             $uID = auth()->user()->id;
             $barber = Barbershop::where('owner_id',$uID)->get()->first();
-            $banner = Banner::where('barbershop_id',$barber->id)->get()->first();
             $identity = Identity::where('user_id',$uID)->get()->first();
             $hairstyle = Hairstyle::where('barbershop_id',$barber->id)->get();
 
@@ -183,7 +176,7 @@ class AuthController extends Controller
             // Delete Selfie KTP
             File::delete('assets/images/users/identity/'.$identity->ktp_user);
             // Delete Banner
-            File::delete('assets/images/barbershop/banner/'.$banner->picture);
+            File::delete('assets/images/barbershop/banner/'.$barber->banner);
             foreach($hairstyle as $h){
                 File::delete('assets/images/barbershop/hairstyle/'.$h->images);
             }

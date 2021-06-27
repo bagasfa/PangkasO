@@ -11,10 +11,10 @@
 
    <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
-    <link rel="stylesheet" href="assets/css/ui.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <link rel="stylesheet" href="assets/css/all.min.css">
-    <!-- <link rel="stylesheet" href="{{ asset('assets/css/stisla.css') }}"> -->
+    <link rel="stylesheet" href="{{ asset('assets/css/ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
     <link rel="stylesheet" href="{{ asset('assets/css/toastr.css') }}">
                 
     </head>
@@ -46,8 +46,8 @@
   <div class="container">
 <div class="row align-items-center">
   <div class="col-lg-2 col-6">
-    <a href="#" class="brand-wrap">
-      <img src="assets/img/logo.jpg">
+    <a href="#" class="brand-wrap nounderline">
+      <h1 class="mb-2 mr-2 display-4 font-weight-bold brand-logo">PangkasO</h1>
     </a> <!-- brand-wrap.// -->
   </div>
   <div class="col-lg-6 col-12 col-sm-12">
@@ -146,13 +146,36 @@
 
 <!-- ========================= SECTION INTRO ========================= -->
 <section class="section-intro padding-y-sm">
-<div class="container">
+  <div class="container">
 
-<div class="intro-banner-wrap">
-  <img src="assets/images/1.jpg" class="img-fluid rounded">
-</div>
+    <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="{{asset('assets/images/1.jpg')}}" alt="First slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="{{asset('assets/images/2.jpg')}}" alt="Second slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="{{asset('assets/images/1.jpg')}}" alt="Third slide">
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
 
-</div> <!-- container //  -->
+  </div> <!-- container //  -->
 </section>
 <!-- ========================= SECTION INTRO END// ========================= -->
 
@@ -202,215 +225,233 @@
 <!-- ========================= SECTION FEATURE END// ========================= -->
 
 
-<!-- ========================= SECTION CONTENT ========================= -->
+<!-- ========================= SECTION BARBERSHOP ========================= -->
 <section class="section-content">
-<div class="container">
+  <div class="container">
 
-<header class="section-heading">
-  <h3 class="section-title">Popular products</h3>
-</header><!-- sect-heading -->
+    <header class="section-heading">
+      <h3 class="section-title">Barbershop Terpopuler</h3>
+    </header><!-- sect-heading -->
 
-  
-<div class="row">
-  <div class="col-md-3">
-    <div href="#" class="card card-product-grid">
-      <a href="#" class="img-wrap"> <img src="assets/images/items/1.jpg"> </a>
-      <figcaption class="info-wrap">
-        <a href="#" class="title">Just another product name</a>
-        
-        <div class="rating-wrap">
-          <ul class="rating-stars">
-            <li style="width:80%" class="stars-active"> 
-              <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 
-            </li>
-          </ul>
-          <span class="label-rating text-muted"> 34 reviws</span>
-        </div>
-        <div class="price mt-1">$179.00</div> <!-- price-wrap.// -->
-      </figcaption>
-    </div>
-  </div> <!-- col.// -->
-  <div class="col-md-3">
-    <div href="#" class="card card-product-grid">
-      <a href="#" class="img-wrap"> <img src="assets/images/items/2.jpg"> </a>
-      <figcaption class="info-wrap">
-        <a href="#" class="title">Some item name here</a>
-        
-        <div class="rating-wrap">
-          <ul class="rating-stars">
-            <li style="width:80%" class="stars-active"> 
-              <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 
-            </li>
-          </ul>
-          <span class="label-rating text-muted"> 34 reviws</span>
-        </div>
-        <div class="price mt-1">$280.00</div> <!-- price-wrap.// -->
-      </figcaption>
-    </div>
-  </div> <!-- col.// -->
-  <div class="col-md-3">
-    <div href="#" class="card card-product-grid">
-      <a href="#" class="img-wrap"> <img src="assets/images/items/3.jpg"> </a>
-      <figcaption class="info-wrap">
-        <a href="#" class="title">Great product name here</a>
-        
-        <div class="rating-wrap">
-          <ul class="rating-stars">
-            <li style="width:80%" class="stars-active"> 
-              <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 
-            </li>
-          </ul>
-          <span class="label-rating text-muted"> 34 reviws</span>
-        </div>
-        <div class="price mt-1">$56.00</div> <!-- price-wrap.// -->
-      </figcaption>
-    </div>
-  </div> <!-- col.// -->
-  <div class="col-md-3">
-    <div href="#" class="card card-product-grid">
-      <a href="#" class="img-wrap"> <img src="assets/images/items/4.jpg"> </a>
-      <figcaption class="info-wrap">
-        <a href="#" class="title">Just another product name</a>
-        
-        <div class="rating-wrap">
-          <ul class="rating-stars">
-            <li style="width:80%" class="stars-active"> 
-              <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 
-            </li>
-          </ul>
-          <span class="label-rating text-muted"> 34 reviws</span>
-        </div>
-        <div class="price mt-1">$179.00</div> <!-- price-wrap.// -->
-      </figcaption>
-    </div>
-  </div> <!-- col.// -->
-</div> <!-- row.// -->
+    <div class="row">
+      @forelse($barbershop as $barber)
+        <div class="col-md-3">
+          <div class="card card-product-grid">
+            <a href="{{asset('assets/images/barbershop/banner/'.$barber->banner)}}"  class="img-wrap" data-fancybox>
+              <img src="{{asset('assets/images/barbershop/banner/'.$barber->banner)}}">
+            </a>
+            <a href="{{url('/barbershop/'.$barber->url)}}" class="nounderline" style="color:black;">
+              <figcaption class="info-wrap">
+                <p class="title">{{$barber->name}}</p>
+                <!-- Rating -->
+                <div class="rating-wrap">
+                  <ul class="rating-stars">
+                    <li style="width:80%" class="stars-active"> 
+                      <!-- <i class="fa fa-star"></i> -->
+                    </li>
+                    <li>
+                      <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 
+                    </li>
+                  </ul>
+                  <span class="label-rating text-muted"> 0 reviews</span>
+                </div>
+                <div class="mt-1">
+                  @if($barber->service_preferences == 'COD')
+                    Cash On Delivery
+                  @elseif($barber->service_preferences == 'AO')
+                    Antrian Online
+                  @elseif($barber->service_preferences == 'COA')
+                    COD & Antrian Online
+                  @endif
+                    <i class="fas fa-check-circle" style="color:green;"></i>
+                </div>
+              </figcaption>
+            </a>
+          </div>
+        </div> <!-- col.// -->
+      @empty
+        <div class="col-md-3">
+          <div href="#" class="card card-product-grid">
+            <a href="{{asset('assets/img/vector/times.png')}}" class="img-wrap" data-facybox data-caption="We're so sorry :(">
+              <img src="{{asset('assets/img/vector/times.png')}}">
+            </a>
+            <a href="#" class="nounderline" style="color:black;">
+              <figcaption class="info-wrap">
+              <p class="title">Whoops.. No Barbershop Available</p>
+              <!-- Rating -->
+              <div class="rating-wrap">
+                <ul class="rating-stars">
+                  <li style="width:80%" class="stars-active"> 
+                    <!-- Zero -->
+                  </li>
+                  <li>
+                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 
+                  </li>
+                </ul>
+                <span class="label-rating text-muted"> 0 reviews</span>
+              </div>
+              <div class="mt-1">No Service Available <i class="fas fa-times-circle" style="color:red;"></i></div>
+              </figcaption>
+            </a>
+          </div>
+        </div> <!-- col.// -->
+      @endforelse
+    </div> <!-- row.// -->
 
-</div> <!-- container .//  -->
+  </div> <!-- container .//  -->
 </section>
-<!-- ========================= SECTION CONTENT END// ========================= -->
+<!-- ========================= SECTION BARBERSHOP END// ========================= -->
 
-
-
-<!-- ========================= SECTION CONTENT ========================= -->
+<!-- ========================= SECTION MALE HAIRSTYLE ========================= -->
 <section class="section-content">
-<div class="container">
+  <div class="container">
 
-<header class="section-heading">
-  <h3 class="section-title">New arrived</h3>
-</header><!-- sect-heading -->
+    <header class="section-heading">
+      <h3 class="section-title">Hairstyle Pria Terbaru</h3>
+    </header><!-- sect-heading -->
 
-<div class="row">
-  <div class="col-md-3">
-    <div href="#" class="card card-product-grid">
-      <a href="#" class="img-wrap"> <img src="assets/images/items/5.jpg"> </a>
-      <figcaption class="info-wrap">
-        <a href="#" class="title">Just another product name</a>
-        
-        <div class="rating-wrap">
-          <ul class="rating-stars">
-            <li style="width:80%" class="stars-active"> 
-              <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 
-            </li>
-          </ul>
-          <span class="label-rating text-muted"> 34 reviws</span>
-        </div>
-        <div class="price mt-1">$179.00</div> <!-- price-wrap.// -->
-      </figcaption>
-    </div>
-  </div> <!-- col.// -->
-  <div class="col-md-3">
-    <div href="#" class="card card-product-grid">
-      <a href="#" class="img-wrap"> <img src="assets/images/items/6.jpg"> </a>
-      <figcaption class="info-wrap">
-        <a href="#" class="title">Some item name here</a>
-        
-        <div class="rating-wrap">
-          <ul class="rating-stars">
-            <li style="width:80%" class="stars-active"> 
-              <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 
-            </li>
-          </ul>
-          <span class="label-rating text-muted"> 34 reviws</span>
-        </div>
-        <div class="price mt-1">$280.00</div> <!-- price-wrap.// -->
-      </figcaption>
-    </div>
-  </div> <!-- col.// -->
-  <div class="col-md-3">
-    <div href="#" class="card card-product-grid">
-      <a href="#" class="img-wrap"> <img src="assets/images/items/7.jpg"> </a>
-      <figcaption class="info-wrap">
-        <a href="#" class="title">Great product name here</a>
-        
-        <div class="rating-wrap">
-          <ul class="rating-stars">
-            <li style="width:80%" class="stars-active"> 
-              <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 
-            </li>
-          </ul>
-          <span class="label-rating text-muted"> 34 reviws</span>
-        </div>
-        <div class="price mt-1">$56.00</div> <!-- price-wrap.// -->
-      </figcaption>
-    </div>
-  </div> <!-- col.// -->
-  <div class="col-md-3">
-    <div href="#" class="card card-product-grid">
-      <a href="#" class="img-wrap"> <img src="assets/images/items/9.jpg"> </a>
-      <figcaption class="info-wrap">
-        <a href="#" class="title">Just another product name</a>
-        
-        <div class="rating-wrap">
-          <ul class="rating-stars">
-            <li style="width:80%" class="stars-active"> 
-              <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-            </li>
-            <li>
-              <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 
-            </li>
-          </ul>
-          <span class="label-rating text-muted"> 34 reviws</span>
-        </div>
-        <div class="price mt-1">$179.00</div> <!-- price-wrap.// -->
-      </figcaption>
-    </div>
-  </div> <!-- col.// -->
-</div> <!-- row.// -->
-
-</div> <!-- container .//  -->
+    <div class="row">
+      @forelse($hairstyle as $hair)
+      @if($hair->gender == 'male')
+        <div class="col-md-3">
+          <div class="card card-product-grid">
+            <a href="{{asset('assets/images/barbershop/hairstyle/'.$hair->images)}}"  class="img-wrap" data-fancybox>
+              <img src="{{asset('assets/images/barbershop/hairstyle/'.$hair->images)}}">
+            </a>
+            <a href="{{url('/barbershop/'.$hair->barbershop->url.'/'.$hair->id)}}" class="nounderline" style="color:black;">
+              <figcaption class="info-wrap">
+                <p class="title">{{$hair->name}}</p>
+                <!-- Rating -->
+                <div class="rating-wrap">
+                  <ul class="rating-stars">
+                    <li style="width:80%" class="stars-active"> 
+                      <!-- <i class="fa fa-star"></i> -->
+                    </li>
+                    <li>
+                      <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 
+                    </li>
+                  </ul>
+                  <span class="label-rating text-muted"> 0 reviews</span>
+                </div>
+                <div class="price mt-1">Rp. <span class="uang">{{$hair->price}}</span>,-</div> <!-- price-wrap.// -->
+              </figcaption>
+            </a>
+          </div>
+        </div> <!-- col.// -->
+      @endif
+      @empty
+        <div class="col-md-3">
+          <div href="#" class="card card-product-grid">
+            <a href="{{asset('assets/img/vector/times.png')}}" class="img-wrap" data-facybox data-caption="We're so sorry :(">
+              <img src="{{asset('assets/img/vector/times.png')}}">
+            </a>
+            <a href="#" class="nounderline" style="color:black;">
+              <figcaption class="info-wrap">
+              <p>Whoops.. No Male Hairstyle Available</p>
+              <!-- Rating -->
+              <div class="rating-wrap">
+                <ul class="rating-stars">
+                  <li style="width:80%" class="stars-active"> 
+                    <!-- Zero -->
+                  </li>
+                  <li>
+                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 
+                  </li>
+                </ul>
+                <span class="label-rating text-muted"> 0 reviews</span>
+              </div>
+              <div class="price mt-1">Free <i class="fas fa-check-circle" style="color:green;"></i></div> <!-- price-wrap.// -->
+              </figcaption>
+            </a>
+          </div>
+        </div> <!-- col.// -->
+      @endforelse
+    </div> <!-- row.// -->
+    <footer class="section-footer">
+      <a href="{{url('hairstyle/male')}}" class="btn btn-outline-primary float-right">Lihat semua</a>
+    </footer>
+  </div> <!-- container .//  -->
 </section>
-<!-- ========================= SECTION CONTENT END// ========================= -->
+<!-- ========================= SECTION MALE HAIRSTYLE END// ========================= -->
 
+<!-- ========================= SECTION FEMALE HAIRSTYLE ========================= -->
+<section class="section-content">
+  <div class="container">
 
+    <header class="section-heading">
+      <h3 class="section-title">Hairstyle Wanita Terbaru</h3>
+    </header><!-- sect-heading -->
+
+    <div class="row">
+      @forelse($hairstyle as $hair)
+      @if($hair->gender == 'female')
+        <div class="col-md-3">
+          <div class="card card-product-grid">
+            <a href="{{asset('assets/images/barbershop/hairstyle/'.$hair->images)}}"  class="img-wrap" data-fancybox>
+              <img src="{{asset('assets/images/barbershop/hairstyle/'.$hair->images)}}">
+            </a>
+            <a href="{{url('/barbershop/'.$hair->barbershop->url.'/'.$hair->id)}}" class="nounderline" style="color:black;">
+              <figcaption class="info-wrap">
+                <p class="title">{{$hair->name}}</p>
+                <!-- Rating -->
+                <div class="rating-wrap">
+                  <ul class="rating-stars">
+                    <li style="width:80%" class="stars-active"> 
+                      <!-- <i class="fa fa-star"></i> -->
+                    </li>
+                    <li>
+                      <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 
+                    </li>
+                  </ul>
+                  <span class="label-rating text-muted"> 0 reviews</span>
+                </div>
+                <div class="price mt-1">Rp. <span class="uang">{{$hair->price}}</span>,-</div> <!-- price-wrap.// -->
+              </figcaption>
+            </a>
+          </div>
+        </div> <!-- col.// -->
+      @endif
+      @empty
+        <div class="col-md-3">
+          <div href="#" class="card card-product-grid">
+            <a href="{{asset('assets/img/vector/times.png')}}" class="img-wrap" data-facybox data-caption="We're so sorry :(">
+              <img src="{{asset('assets/img/vector/times.png')}}">
+            </a>
+            <a href="#" class="nounderline" style="color:black;">
+              <figcaption class="info-wrap">
+              <p>Whoops.. No Female Hairstyle Available</p>
+              <!-- Rating -->
+              <div class="rating-wrap">
+                <ul class="rating-stars">
+                  <li style="width:80%" class="stars-active"> 
+                    <!-- Zero -->
+                  </li>
+                  <li>
+                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 
+                  </li>
+                </ul>
+                <span class="label-rating text-muted"> 0 reviews</span>
+              </div>
+              <div class="price mt-1">Free <i class="fas fa-check-circle" style="color:green;"></i></div> <!-- price-wrap.// -->
+              </figcaption>
+            </a>
+          </div>
+        </div> <!-- col.// -->
+      @endforelse
+    </div> <!-- row.// -->
+    <footer class="section-footer">
+      <a href="{{url('hairstyle/female')}}" class="btn btn-outline-primary float-right">Lihat semua</a>
+    </footer>
+
+  </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION FEMALE HAIRSTYLE END// ========================= -->
 
 <!-- ========================= SECTION CONTENT ========================= -->
 <section class="section-content padding-bottom-sm">
 <div class="container">
 
 <header class="section-heading">
-  <a href="#" class="btn btn-outline-primary float-right">See all</a>
   <h3 class="section-title">Recommended</h3>
 </header><!-- sect-heading -->
 
@@ -682,28 +723,36 @@
 
 <!-- ========================= FOOTER END // ========================= -->
 <!-- Javascript Family         -->
-    <script src="{{asset('assets/js/jquery.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}" type="text/javascript"></script>
-    <script type="text/javascript" src="{{asset('assets/js/bootstrap-show-password.js')}}"></script>
-    <script src="{{asset('assets/js/toastr.min.js')}}"></script>
-    <script src="{{ asset('assets/js/upload-images.js') }}"></script>
+  <script src="{{asset('assets/js/jquery.min.js')}}" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}" type="text/javascript"></script>
+  <script type="text/javascript" src="{{asset('assets/js/bootstrap-show-password.js')}}"></script>
+  <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="{{asset('assets/js/toastr.min.js')}}"></script>
+  <script src="{{ asset('assets/js/upload-images.js') }}"></script>
 
-    <!-- Toaster -->
-    <script>
-      @if(Session::has('message'))
-        toastr.success("{{ Session::get('message') }}");
-      @elseif(Session::has('bye'))
-        toastr.error("{{ Session::get('bye') }}");
-      @endif
-    </script>
+  <!-- Toaster -->
+  <script>
+    @if(Session::has('message'))
+      toastr.success("{{ Session::get('message') }}");
+    @elseif(Session::has('bye'))
+      toastr.error("{{ Session::get('bye') }}");
+    @endif
+  </script>
 
-    <!-- Toastr Validation -->
-    <script>
-      @if($errors->any())
-        @foreach($errors->all() as $error)
-          toastr.error("{{ $error }}");
-        @endforeach
-      @endif
-    </script>
+  <!-- Toastr Validation -->
+  <script>
+    @if($errors->any())
+      @foreach($errors->all() as $error)
+        toastr.error("{{ $error }}");
+      @endforeach
+    @endif
+  </script>
+
+  <!-- Format IDR -->
+  <script>
+    // Format mata uang.
+    $( '.uang' ).mask('000.000.000', {reverse: true});
+  </script>
   </body>
 </html>

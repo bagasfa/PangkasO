@@ -44,12 +44,12 @@
                 </label>
               </div>
               <div>
-                @if($barber->service_preferences == 'CODA')
-                <input type="radio" id="CODA" name="service_preferences" value="CODA" checked>
+                @if($barber->service_preferences == 'COA')
+                <input type="radio" id="COA" name="service_preferences" value="COA" checked>
                 @else
-                <input type="radio" id="CODA" name="service_preferences" value="CODA">
+                <input type="radio" id="COA" name="service_preferences" value="COA">
                 @endif
-                <label for="CODA">
+                <label for="COA">
                   <h2>COD & Antrian Online</h2>
                   <p align="justify" class="p-1"><b>Cash On Delivery</b> (<b>COD</b>) dan <b>Antrian Online</b>, pada sistem gabungan ini pemilik barbershop bisa menggunakan fitur dari kedua sistem ini, sehingga mendapatkan keuntungan yang maksimal.</p>
                 </label>

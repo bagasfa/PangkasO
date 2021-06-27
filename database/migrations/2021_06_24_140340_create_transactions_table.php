@@ -36,7 +36,7 @@ class CreateTransactionsTable extends Migration
                 ->onUpdate('cascade');
             $table->string('jenis_layanan');
             $table->string('harga');
-            $table->string('konfirmasi');
+            $table->string('status');
             $table->string('jam_booking');
             $table->string('pesan')->nullable();
             $table->string('lokasi')->nullable();

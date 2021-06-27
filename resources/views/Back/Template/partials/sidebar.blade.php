@@ -37,6 +37,11 @@
     </li>
     @endif
     @if(auth()->user()->id_role == 1 || auth()->user()->id_role == 2)
+    <li id="barbershop" class="">
+      <a href="{{ url('/admin-panel/barbershop') }}">
+        <i class="fas fa-cut"></i> <span>Barbershop Data</span>
+      </a>
+    </li>
     <li id="users" class="nav-item dropdown">
       <a href="#" class="nav-link has-dropdown">
         <i class="fas fa-users"></i> <span>Users Data</span>

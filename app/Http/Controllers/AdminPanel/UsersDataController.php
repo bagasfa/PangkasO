@@ -10,7 +10,6 @@ use App\User;
 use App\History;
 use App\Identity;
 use App\Barbershop;
-use App\Banner;
 use Validator;
 use File;
 use DataTables;
@@ -19,7 +18,7 @@ class UsersDataController extends Controller
 {
 
     // Admin Things
-    public function admins(Request $request){
+    public function admins(){
         $counter = User::where('id_role',2)->count();
 
         if(session('success')){
@@ -131,7 +130,7 @@ class UsersDataController extends Controller
     }
 
     // Owner Things
-    public function owners(Request $request){
+    public function owners(){
         $counter = User::where('id_role',3)->count();
 
         if(session('success')){
@@ -182,11 +181,6 @@ class UsersDataController extends Controller
         $barbershop->owner_id = $user->id;
         $barbershop->save();
 
-        // Create Banner Barbershop
-        $banner = new Banner;
-        $banner->barbershop_id = $barbershop->id;
-        $banner->save();
-
         // Writing History
         $history = new History;
         $history->user_id = auth()->user()->id;
@@ -213,8 +207,7 @@ class UsersDataController extends Controller
         $ktp_user = Identity::select('ktp_user')->where('user_id',$id)->get()->first();
         File::delete('assets/images/users/identity/'.$ktp_user);
         // Hapus Banner Barbershop
-        $barber = Barbershop::where('owner_id',$id)->get()->first();
-        $banner = Banner::select('picture')->where('barbershop_id',$barber->id)->get()->first();
+        $banner = Barbershop::select('banner')->where('owner_id',$id)->get()->first();
         File::delete('assets/images/barbershop/banner/'.$banner);
 
         $user = User::find($id);
@@ -252,7 +245,7 @@ class UsersDataController extends Controller
     }
 
     // Customer Things
-    public function customers(Request $request){
+    public function customers(){
         $counter = User::where('id_role',4)->count();
 
         if(session('success')){

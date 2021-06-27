@@ -26,7 +26,7 @@
         @if(auth()->user()->id_role == 3 && auth()->user()->verify_status != 'Approved')
         <!-- Hero Verifikasi -->
         <div class="col-12 mb-4">
-          <div class="hero text-white hero-bg-image hero-bg-parallax" data-background="{{asset('assets/img/hero-banner.jpg')}}">
+          <div class="hero text-white hero-bg-image hero-bg-parallax" data-background="{{asset('assets/img/banner/hero-banner.jpg')}}">
             <div class="hero-inner">
               <h2>Welcome, {{auth()->user()->name}}!</h2>
               <p class="lead">Kamu telah berhasil menyelesaikan pendaftaranmu, ayo verifikasi data diri kamu agar bisa menggunakan semua fitur yang telah disediakan.</p>
@@ -40,7 +40,7 @@
         @elseif(auth()->user()->id_role == 3 && auth()->user()->verify_status == 'Approved' && $barber->name == NULL)
         <!-- Hero Setup Barbershop Account -->
         <div class="col-12 mb-4">
-          <div class="hero text-white hero-bg-image hero-bg-parallax" data-background="{{asset('assets/img/hero-banner2.jpg')}}">
+          <div class="hero text-white hero-bg-image hero-bg-parallax" data-background="{{asset('assets/img/banner/hero-banner2.jpg')}}">
             <div class="hero-inner">
               <h2>Selamat, {{auth()->user()->name}}!</h2>
               <p class="lead">Kamu telah berhasil mem-verifikasi identitasmu, satu langkah lagi kamu bisa menikmati semua fitur yang ada.</p>

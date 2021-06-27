@@ -75,7 +75,7 @@
           </div>
         </div>
         <!-- Side Running Background -->
-        <div class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom" data-background="{{ asset('assets/img/login-wp.jpg') }}">
+        <div class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom" data-background="{{ asset('assets/img/banner/login-wp.jpg') }}">
           <div class="absolute-bottom-left index-2">
             <div class="text-light p-5 pb-2">
               <div class="mb-5 pb-3">
@@ -130,11 +130,11 @@
           <div class="form-group">
             <label>Jenis Kelamin <i style="color: red;">*</i></label><br>
             <div class="form-check-inline">
-              <input class="form-check-input" type="radio" name="gender" value="L" id="radioMale" checked="">
+              <input class="form-check-input" type="radio" name="gender" value="male" id="radioMale" checked="">
               <label class="form-check-label">Laki - Laki</label>
             </div>
             <div class="form-check-inline">
-              <input class="form-check-input" type="radio" name="gender" value="P" id="radioFemale">
+              <input class="form-check-input" type="radio" name="gender" value="female" id="radioFemale">
               <label class="form-check-label">Perempuan</label>
             </div>
           </div>

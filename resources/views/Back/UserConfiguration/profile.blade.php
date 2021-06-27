@@ -54,31 +54,31 @@
             <!-- Gender -->
             <div class="form-check ">
               <label for="gender">Jenis Kelamin</label><br>
-              @if(auth()->user()->gender == 'L')
+              @if(auth()->user()->gender == 'male')
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="gender" value="L" id="male" checked="">
+                <input class="form-check-input" type="radio" name="gender" value="male" id="male" checked="">
                 <label class="form-check-label" for="male">Laki - Laki</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="gender" value="P" id="female">
+                <input class="form-check-input" type="radio" name="gender" value="female" id="female">
                 <label class="form-check-label" for="female">Perempuan</label>
               </div>
-              @elseif(auth()->user()->gender == 'P')
+              @elseif(auth()->user()->gender == 'female')
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="gender" value="L" id="male">
+                <input class="form-check-input" type="radio" name="gender" value="male" id="male">
                 <label class="form-check-label" for="male">Laki - Laki</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="gender" value="P" id="female" checked="">
+                <input class="form-check-input" type="radio" name="gender" value="female" id="female" checked="">
                 <label class="form-check-label" for="female">Perempuan</label>
               </div>
               @else
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="gender" value="L" id="male" checked="">
+                <input class="form-check-input" type="radio" name="gender" value="male" id="male" checked="">
                 <label class="form-check-label" for="male">Laki - Laki</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="gender" value="P" id="female">
+                <input class="form-check-input" type="radio" name="gender" value="female" id="female">
                 <label class="form-check-label" for="female">Perempuan</label>
               </div>
               @endif

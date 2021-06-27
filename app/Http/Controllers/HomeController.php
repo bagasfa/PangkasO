@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\History;
 use App\User;
 use App\Barbershop;
+use App\Hairstyle;
 
 class HomeController extends Controller
 {
@@ -15,7 +16,10 @@ class HomeController extends Controller
         //Delete History 30 Hari Sekali 
         History::where('created_at', '<', Carbon::now()->subDays(30))->delete();
 
-        return view('Front.index');
+        $barbershop = Barbershop::whereNotNull('name')->get();
+        $hairstyle = Hairstyle::orderBy('id','desc')->get();
+
+        return view('Front.index',compact('barbershop','hairstyle'));
     }
 
     public function adminDashboard(){

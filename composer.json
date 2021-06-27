@@ -17,6 +17,7 @@
         "nesbot/carbon": "^2.49",
         "realrashid/sweet-alert": "^3.2",
         "stevebauman/location": "^6.1",
+        "willvincent/laravel-rateable": "^2.3",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {

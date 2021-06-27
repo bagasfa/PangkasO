@@ -15,6 +15,7 @@ class CreateBarbershopTable extends Migration
     {
         Schema::create('barbershop', function (Blueprint $table) {
             $table->id();
+            $table->string('banner')->nullable();
             $table->string('name')->unique()->nullable();
             $table->string('service_preferences')->nullable();
             $table->string('phone_number')->unique()->nullable();

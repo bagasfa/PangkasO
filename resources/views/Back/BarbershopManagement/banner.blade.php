@@ -27,14 +27,14 @@
                   <input type='file' id="imageUpload" name="banner" accept=".png, .jpg, .jpeg" />
                   <label for="imageUpload"></label>
                 </div>
-                @if($banner->picture != NULL)
-                  <a href="{{ asset('assets/images/barbershop/banner/'.$banner->picture) }}" data-fancybox>
+                @if($barber->banner != NULL)
+                  <a href="{{ asset('assets/images/barbershop/banner/'.$barber->banner) }}" data-fancybox>
                 @else
                   <a href="{{ asset('assets/img/dummy/avatar/no-avatar.jpg') }}" data-fancybox>
                 @endif
                   <div class="banner-preview">
-                    @if($banner->picture != NULL)
-                      <div id="imagePreview" style="background-image: url('{{url('assets/images/barbershop/banner/'.$banner->picture)}}');"></div>
+                    @if($barber->banner != NULL)
+                      <div id="imagePreview" style="background-image: url('{{url('assets/images/barbershop/banner/'.$barber->banner)}}');"></div>
                     @else
                       <div id="imagePreview" style="background-image: url('{{url('assets/img/dummy/avatar/no-avatar.jpg')}}');"></div>
                     @endif

@@ -20,6 +20,15 @@ Route::post('/register','AuthController@register');
 Route::get('/logout','AuthController@logout');
 Route::post('/delete-account','AuthController@deleteAccount');
 
+// Guest Pages
+Route::get('barbershop/{url}','CustomerPages\BarbershopController@url');
+
+
+// Customers Auth Pages
+Route::group(['middleware' => ['auth','checkRole:4']], function(){
+	
+});
+
 // Admin Panel - Universal Things
 Route::group(['middleware' => ['auth','checkRole:1,2,3']], function(){
 	
@@ -28,6 +37,9 @@ Route::group(['middleware' => ['auth','checkRole:1,2,3']], function(){
 	Route::post('/admin-panel/profile/update','AdminPanel\UserConfigurationController@updateProfile');
 	Route::get('/admin-panel/password','AdminPanel\UserConfigurationController@password');
 	Route::post('/admin-panel/updatePassword','AdminPanel\UserConfigurationController@updatePassword');
+
+	// Chats
+	Route::get('/admin-panel/chats','AdminPanel\ChatController@index');
 
 });
 
@@ -43,6 +55,10 @@ Route::group(['middleware' => ['auth','checkRole:1,2']], function(){
     Route::get('/admin-panel/history/load/data-history', 'AdminPanel\HistoryController@LoadDataHistory');
 	    
 	// UsersManagement - Users Data
+	// Barbershop Data Management
+	Route::get('/admin-panel/barbershop','AdminPanel\BarbershopController@barbershop');
+	Route::get('/admin-panel/barbershop/load/table-barbershop', 'AdminPanel\BarbershopController@LoadTableBarbershop');
+    Route::get('/admin-panel/barbershop/load/data-barbershop', 'AdminPanel\BarbershopController@LoadDataBarbershop');
 	// Owner
 	Route::get('/admin-panel/owners','AdminPanel\UsersDataController@owners');
 	Route::get('/admin-panel/owners/load/table-owner', 'AdminPanel\UsersDataController@LoadTableUsers');
