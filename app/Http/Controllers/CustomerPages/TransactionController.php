@@ -56,7 +56,7 @@ class TransactionController extends Controller
         return back()->with('message','Order anda sedang diproses!'); 
     }
 
-    public function orders(){
+    public function showOrders(){
         $uID = auth()->user()->id;
         $orders = Transaction::where('user_id',$uID)->orderBy('id','desc')->get();
 

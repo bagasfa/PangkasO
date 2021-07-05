@@ -238,22 +238,33 @@ class AuthController extends Controller
 
         if($checkPassword == 'true'){
             $uID = auth()->user()->id;
-            $barber = Barbershop::where('owner_id',$uID)->get()->first();
             $identity = Identity::where('user_id',$uID)->get()->first();
-            $hairstyle = Hairstyle::where('barbershop_id',$barber->id)->get();
 
-            // Delete Avatar
-            File::delete('assets/images/users/avatar/'.auth()->user()->avatar);
-            // Delete KTP
-            File::delete('assets/images/users/identity/'.$identity->ktp);
-            // Delete Selfie KTP
-            File::delete('assets/images/users/identity/'.$identity->ktp_user);
-            // Delete Banner
-            File::delete('assets/images/barbershop/banner/'.$barber->banner);
-            foreach($hairstyle as $h){
-                File::delete('assets/images/barbershop/hairstyle/'.$h->images);
+            if(auth()->user()->id_role == 4){
+                // Delete Avatar
+                File::delete('assets/images/users/avatar/'.auth()->user()->avatar);
+                // Delete KTP
+                File::delete('assets/images/users/identity/'.$identity->ktp);
+                // Delete Selfie KTP
+                File::delete('assets/images/users/identity/'.$identity->ktp_user);
+
+            }else{
+                $barber = Barbershop::where('owner_id',$uID)->get()->first();
+                $hairstyle = Hairstyle::where('barbershop_id',$barber->id)->get();
+
+                // Delete Avatar
+                File::delete('assets/images/users/avatar/'.auth()->user()->avatar);
+                // Delete KTP
+                File::delete('assets/images/users/identity/'.$identity->ktp);
+                // Delete Selfie KTP
+                File::delete('assets/images/users/identity/'.$identity->ktp_user);
+                // Delete Banner
+                File::delete('assets/images/barbershop/banner/'.$barber->banner);
+                foreach($hairstyle as $h){
+                    File::delete('assets/images/barbershop/hairstyle/'.$h->images);
+                }
             }
-
+            
             // Writing History
             $history = new History;
             $history->user_id = 1;

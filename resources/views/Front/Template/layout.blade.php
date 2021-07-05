@@ -69,6 +69,9 @@
                 </div>
                 <div class="widget-header icontext">
                 @if(auth()->check())
+                @if(auth()->user()->id_role !=4)
+                  <a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
+                @else
                   <a href="#" data-toggle="dropdown" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
                   <div class="dropdown-menu">
                     <a class="dropdown-item" href="{{ url('/profile') }}"><i class="fas fa-user"></i> Profile</a>
@@ -79,7 +82,12 @@
                   @if(auth()->user()->verify_status != 'Approved')
                     <a class="dropdown-item" href="{{ url('/verify') }}"><i class="fas fa-id-card"></i> Verify Identity</a>
                   @endif
+                  @if(auth()->user()->id_role == 4 && auth()->user()->verify_status == 'Approved')
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-danger" href="" data-toggle="modal" data-target="#deleteAccount"><i class="fas fa-times text-danger"></i> Delete My Account</a>
+                  @endif
                   </div>
+                @endif
                 @else
                   <a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
                 @endif
@@ -255,6 +263,37 @@
       </div>
     </div>
     <!-- ========================= UBAH PASSWORD MODAL END // ========================= -->
+
+    <!-- ========================= DELETE ACCOUNT MODAL END ========================= -->
+    <div class="modal fade" id="deleteAccount" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Delete Account</h5>
+            <button class="close btn-close" type="button" data-dismiss="modal" aria-label="Close">
+            </button>
+          </div>
+          <form action="{{url('/delete-account')}}" method="POST">
+          <div class="modal-body">
+            {{csrf_field()}}
+            <p>Konfirmasi password jika anda ingin menghapus akun ini.</p>
+            <div class="input-group" id="show_hide_password">
+              <input name="password" type="password" class="form-control" placeholder="Password">
+              <!-- Show Hide Password Component -->
+              <a href=""><div class="input-group-addon eye">
+                <i class="fa fa-eye-slash" aria-hidden="true"></i>
+              </div></a>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary">Konfirmasi</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- ========================= DELETE ACCOUNT MODAL END // ========================= -->
 
     <!-- ========================= LOGIN MODAL ========================= -->
     <div class="modal fade" id="loginForm" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="true">

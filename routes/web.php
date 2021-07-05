@@ -13,22 +13,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Guest Things
-Route::get('/', 'HomeController@index');
-Route::post('/delete-account','Auth\AuthController@deleteAccount');
-Route::get('/test-view','HomeController@test');
+
 
 // Auth Things
-Route::get('/login', 'Auth\AuthController@login')->name('login');
-Route::post('/postLogin','Auth\AuthController@postLogin');
-Route::post('/register','Auth\AuthController@register');
-Route::post('/registerCustomer','Auth\AuthController@registerCustomer');
-Route::get('/logout','Auth\AuthController@logout');
-Route::get('/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-Route::post('/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+	// Login
+	Route::get('/login', 'Auth\AuthController@login')->name('login');
+	Route::post('/postLogin','Auth\AuthController@postLogin');
+	// Register
+	Route::post('/register','Auth\AuthController@register');
+	Route::post('/registerCustomer','Auth\AuthController@registerCustomer');
+	// Logout
+	Route::get('/logout','Auth\AuthController@logout');
+	// Forgot Password
+	Route::get('/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+	Route::post('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+	Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+	Route::post('/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+	// Delete Account
+	Route::post('/delete-account','Auth\AuthController@deleteAccount');
 
 // Guest Pages
+	// Homepage
+	Route::get('/', 'HomeController@index');
 	// Barbershop Pages
 	Route::get('/barbershop','CustomerPages\BarbershopController@barbershop');
 	Route::get('/barbershop/{url}','CustomerPages\BarbershopController@url');
@@ -50,7 +56,7 @@ Route::group(['middleware' => ['auth','checkRole:1,2,3']], function(){
 	Route::post('/admin-panel/profile/update','AdminPanel\UserConfigurationController@updateProfile');
 	Route::get('/admin-panel/password','AdminPanel\UserConfigurationController@password');
 	Route::post('/admin-panel/updatePassword','AdminPanel\UserConfigurationController@updatePassword');
-	
+
 	// Export Transaction
 	Route::get('/transactions/export/excel','AdminPanel\TransactionController@excel');
 
@@ -193,7 +199,7 @@ Route::group(['middleware' => ['auth','checkRole:4']], function(){
 	Route::post('/rating/barbershop/{id}', 'CustomerPages\RatingController@barbershop');
 
 	// Order List
-	Route::get('/orders','CustomerPages\TransactionController@orders');
+	Route::get('/orders','CustomerPages\TransactionController@showOrders');
 	Route::get('/orders/history','CustomerPages\TransactionController@history');
 	Route::get('/orders/cancel/{id}','CustomerPages\TransactionController@cancel');
 	Route::get('/orders/abort/{id}','CustomerPages\TransactionController@abort');
