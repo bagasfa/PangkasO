@@ -18,7 +18,6 @@ class CreateHistoryTable extends Migration
             $table->string('nama');
             $table->string('aksi');
             $table->string('keterangan');
-            $table->string('status')->nullable();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')
                 ->references('id')

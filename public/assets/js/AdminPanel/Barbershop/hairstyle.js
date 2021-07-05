@@ -1,6 +1,19 @@
 $(document).ready(function(){
-  // Format mata uang.
-  $( '.uang' ).mask('000.000.000', {reverse: true});
+  // Detail Deskripsi Modal
+  $('body').on('click', '.btn-detail', function(e) {
+    e.preventDefault();
+    var id = $(this).attr('data-id');
+    $.ajax({
+      url: '/owner-panel/hairstyle/edit/' + id,
+      type: 'GET',
+      success: function(res) {
+        $('#detail').modal({ backdrop: 'static', keyboard: false });
+        $('#detail').modal('show');
+        document.getElementById('detail-deskripsi').innerHTML = res.values.deskripsi;
+      }
+    });
+    return false;
+  });
 
   // Open Edit Modal
   $('body').on('click', '.btn-edit-hairstyle', function(e) {

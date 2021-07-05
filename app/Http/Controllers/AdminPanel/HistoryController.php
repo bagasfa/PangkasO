@@ -27,8 +27,12 @@ class HistoryController extends Controller
     }
 
     public function LoadDataHistory(){
-        $history = History::orderBy('id','desc')->get();
-
+        if(auth()->user()->id_role == 1){
+            $history = History::orderBy('id','desc')->get();
+        }elseif(auth()->user()->id_role == 2){
+            $history = History::where('user_id','!=',1)->orderBy('id','desc')->get();
+        }
+        
         return Datatables::of($history)->addIndexColumn()
         ->editColumn('created_at', function($history){
             return date('H:i:s | d-m-Y', strtotime($history->created_at));

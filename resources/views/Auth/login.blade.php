@@ -1,94 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Login Page</title>
+@extends('Auth.layout.app')
 
-  <!-- Logo title -->
-  <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/ub.png')}}">
+@section('title','Login Page')
 
-  <!-- General CSS Files -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+@section('content')
+  <section class="section">
+    <div class="d-flex flex-wrap align-items-stretch">
+      <div class="col-lg-4 col-md-6 col-12 order-lg-1 min-vh-100 order-2 bg-white">
+        <div class="p-4 m-3">
+          <a class="back-btn" href="/">
+            <label>< Kembali</label>
+          </a>
+          
+          <!-- Logo -->
+          <a href="{{url('/')}}">
+            <center><img src="{{asset('assets/img/logo/logo-horizontal.png')}}" width="50%" alt="PangkasO"></center>
+          </a>
 
-  <!-- Template CSS -->
-  <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/css/toastr.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/css/stisla.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
-
-</head>
-
-<!-- Main Body -->
-<body>
-  <div id="app">
-    <section class="section">
-      <div class="d-flex flex-wrap align-items-stretch">
-        <div class="col-lg-4 col-md-6 col-12 order-lg-1 min-vh-100 order-2 bg-white">
-          <div class="p-4 m-3">
-            <a class="back-btn" href="/">
-              <label>< Kembali</label>
-            </a>
-            <!-- Judul Form -->
-            <center><h1 class="logo">Sign In</h1></center>
-            
-            <!-- Form Login -->
-            <form method="POST" action="{{ url('/postLogin') }}">
-              {{csrf_field()}}
-              <!-- Email -->
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input id="email" type="email" class="form-control" name="email" placeholder="E-Mail" tabindex="1" required autofocus>
-              </div>
-              <!-- Password -->
-              <div class="form-group">
-                <div class="d-block">
-                  <label for="password" class="control-label">Password</label>
-                </div>
-                <div class="input-group" id="show_hide_password">
-                  <input name="password" type="password" minlength="8" class="form-control" tabindex="2" id="password" placeholder="Password" required="">
-                  <!-- Show Hide Password Component -->
-                  <a href=""><div class="input-group-addon eye">
-                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                  </div></a>
-                </div>
-                <div class="invalid-feedback">
-                  Harap Isi Password
-                </div>
-              </div>
-              <div class="form-group text-right">
-                <!-- Register Button -->
-                <div class="text-left">
-                  <p>Ingin bergabung ? Mulai bisnis anda <a href="" data-toggle="modal" data-target="#formOwner">disini</a></p>
-                </div>
-                <!-- Login Button -->
-                <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
-                  Masuk
-                </button>
-              </div>
-            </form>
-            <!-- Copyright -->
-            <div class="text-center mt-5 text-small">
-              Copyright &copy; {{ date('Y') }}
+          <!-- Form Login -->
+          <form method="POST" action="{{ url('/postLogin') }}">
+            {{csrf_field()}}
+            <!-- Email -->
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input id="email" type="email" class="form-control" name="email" placeholder="E-Mail" tabindex="1" required autofocus>
             </div>
-          </div>
-        </div>
-        <!-- Side Running Background -->
-        <div class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom" data-background="{{ asset('assets/img/banner/login-wp.jpg') }}">
-          <div class="absolute-bottom-left index-2">
-            <div class="text-light p-5 pb-2">
-              <div class="mb-5 pb-3">
-                <h1 class="mb-2 display-4 font-weight-bold brand-logo">PangkasO</h1>
+            <!-- Password -->
+            <div class="form-group">
+              <div class="d-block">
+                <label for="password" class="control-label">Password</label>
               </div>
-              Photo by <a class="text-light bb" target="_blank" href="https://unsplash.com/@jeppemoenster">Jeppe Mønster</a> on <a class="text-light bb" target="_blank" href="https://unsplash.com">Unsplash</a>
+              <div class="input-group" id="show_hide_password">
+                <input name="password" type="password" minlength="8" class="form-control" tabindex="2" id="password" placeholder="Password" required="">
+                <!-- Show Hide Password Component -->
+                <a href=""><div class="input-group-addon eye">
+                  <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                </div></a>
+              </div>
+              <div class="invalid-feedback">
+                Harap Isi Password
+              </div>
             </div>
+            <div class="form-group text-right">
+              <div class="row">
+                <!-- Register Link -->
+              <div class="text-left col-8">
+                <p>Ingin bergabung ? Mulai bisnis anda <a href="" data-toggle="modal" data-target="#formOwner">disini</a></p>
+              </div>
+              <div class="col-4">
+                <p><a href="{{ route('password.request') }}" class="nounderline">Lupa Password ?</a></p>
+              </div>
+              </div>
+              
+              <!-- Login Button -->
+              <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
+                Masuk
+              </button>
+            </div>
+          </form>
+          <!-- Copyright -->
+          <div class="text-center mt-5 text-small">
+            Copyright &copy; {{ date('Y') }}
           </div>
         </div>
       </div>
-    </section>
-  </div>
-
+      <!-- Side Running Background -->
+      <div class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom" data-background="{{ asset('assets/img/banner/login-wp.jpg') }}">
+        <div class="absolute-bottom-left index-2">
+          <div class="text-light p-5 pb-2">
+            <div class="mb-5 pb-3">
+              <h1 class="mb-2 display-4 brand-logo">PangkasO</h1>
+            </div>
+            Photo by <a class="text-light bb" target="_blank" href="https://unsplash.com/@jeppemoenster">Jeppe Mønster</a> on <a class="text-light bb" target="_blank" href="https://unsplash.com">Unsplash</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+@endsection
+@push('modal')
   <!-- Modal Owner-->
   <div class="modal fade" id="formOwner" tabindex="-1" role="dialog" aria-labelledby="formOwner" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -176,36 +165,7 @@
     </div>
   </div>
   <!-- End of Modal Owner -->
-
-  <!-- Online JS Scripts -->
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js" ></script>
-
-  <!-- Offline JS File -->
-  <script type="text/javascript" src="{{asset('assets/js/bootstrap-show-password.js')}}"></script>
-  <script src="{{asset('assets/js/toastr.min.js')}}"></script>
-  <script src="{{ asset('assets/js/scripts.js') }}"></script>
+@endpush
+@push('javascript')
   <script src="{{ asset('assets/js/upload-images.js') }}"></script>
-
-  <!-- Toaster -->
-  <script>
-    @if(Session::has('message'))
-      toastr.success("{{ Session::get('message') }}");
-    @elseif(Session::has('bye'))
-      toastr.error("{{ Session::get('bye') }}");
-    @endif
-  </script>
-
-  <!-- Toastr Validation -->
-  <script>
-    @if($errors->any())
-      @foreach($errors->all() as $error)
-        toastr.error("{{ $error }}");
-      @endforeach
-    @endif
-  </script>
-
-</body>
-</html>
+@endpush

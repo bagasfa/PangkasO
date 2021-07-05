@@ -9,6 +9,7 @@ use App\History;
 use App\User;
 use App\Barbershop;
 use App\Hairstyle;
+use App\Transaction;
 
 class HomeController extends Controller
 {
@@ -16,33 +17,65 @@ class HomeController extends Controller
         //Delete History 30 Hari Sekali 
         History::where('created_at', '<', Carbon::now()->subDays(30))->delete();
 
-        $barbershop = Barbershop::whereNotNull('name')->get();
-        $hairstyle = Hairstyle::orderBy('id','desc')->get();
+        $barbershop = Barbershop::whereNotNull('name')->limit(4)->get();
+        $hairstyle = Hairstyle::orderBy('id','desc')->limit(4)->get();
 
-        return view('Front.index',compact('barbershop','hairstyle'));
+        return view('Front.home',compact('barbershop','hairstyle'));
+    }
+
+    public function search(Request $request){
+        $data = Hairstyle::where('name', 'LIKE', '%'.$request->search.'%')->get();
+
+        return view('Front.Hairstyle.search',compact('data'));
+    }
+
+    public function pendingCounter(){
+        $data = Transaction::where('status','Pending')->where('user_id',auth()->user()->id)->count();
+
+        if($data !=null){
+            return response()->json([
+                "message" => "Succes",
+                "values" => $data,
+            ]);
+        }
+        else{
+            return response()->json([
+                "message" => "Empty",
+                'values' => "",
+            ]);
+        }
     }
 
     public function adminDashboard(){
         $user = User::all();
+        $transaksi = Transaction::orderBy('id','desc')->get();
+
         if(session('success')){
             Alert::success(session('success'));
         }elseif(session('error')){
             Alert::error(session('error'));
         }
 
-        return view('Back.Dashboard.dashboard',compact('user'));
+        return view('Back.Dashboard.dashboard',compact('user','transaksi'));
     }
 
     public function ownerDashboard(){
         $user = User::all();
         $uID = auth()->user()->id;
-        $barber = Barbershop::select('name')->where('owner_id',$uID)->get()->first();
+        $barber = Barbershop::where('owner_id',$uID)->first();
+        $transaksi = Transaction::where('barbershop_id',$barber->id)
+                                                                    ->where('status','Pending')
+                                                                    ->where('status','Requested')
+                                                                    ->where('status','Confirmed')
+                                                                    ->orderBy('id','desc')->get();
+        $layanan = Transaction::all();
+
         if(session('success')){
             Alert::success(session('success'));
         }elseif(session('error')){
             Alert::error(session('error'));
         }
 
-        return view('Back.Dashboard.dashboard',compact('user','barber'));
+        return view('Back.Dashboard.dashboard',compact('user','barber','transaksi','layanan'));
     }
 }

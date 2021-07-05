@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
           $table->string('phone_number')->unique();
           $table->string('avatar')->nullable();
           $table->string('verify_status')->nullable();
-          $table->string('address')->nullable();
+          $table->mediumText('address')->nullable();
           $table->string('latitude')->nullable();
           $table->string('longitude')->nullable();
           $table->bigInteger('id_role')->unsigned();

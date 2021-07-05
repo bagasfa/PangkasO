@@ -10,3 +10,7 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+public/assets/images/barbershop/banner/
+public/assets/images/barbershop/hairstyle/
+public/assets/images/users/avatar/
+public/assets/images/users/identity/

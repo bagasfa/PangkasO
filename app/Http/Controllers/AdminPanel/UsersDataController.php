@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Mail;
 use App\User;
 use App\History;
 use App\Identity;
@@ -73,7 +74,7 @@ class UsersDataController extends Controller
         $history->keterangan = "Menambahkan Akun '".$request->email."' sebagai Admin";
         $history->save();
 
-        // Mail::to($request->email)->send(new PenggunaMail());
+        Mail::to($request->email)->send(new UsersMail());
 
         return response([
             'message' => 'sukses',
@@ -189,7 +190,7 @@ class UsersDataController extends Controller
         $history->keterangan = "Menambahkan Akun '".$request->email."' sebagai Owner";
         $history->save();
 
-        // Mail::to($request->email)->send(new PenggunaMail());
+        Mail::to($request->email)->send(new UsersMail());
 
         return response([
             'message' => 'sukses',

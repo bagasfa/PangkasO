@@ -14,20 +14,33 @@ use Illuminate\Support\Facades\Route;
 */
 // Guest Things
 Route::get('/', 'HomeController@index');
-Route::get('/login', 'AuthController@login')->name('login');
-Route::post('/postLogin','AuthController@postLogin');
-Route::post('/register','AuthController@register');
-Route::get('/logout','AuthController@logout');
-Route::post('/delete-account','AuthController@deleteAccount');
+Route::post('/delete-account','Auth\AuthController@deleteAccount');
+Route::get('/test-view','HomeController@test');
+
+// Auth Things
+Route::get('/login', 'Auth\AuthController@login')->name('login');
+Route::post('/postLogin','Auth\AuthController@postLogin');
+Route::post('/register','Auth\AuthController@register');
+Route::post('/registerCustomer','Auth\AuthController@registerCustomer');
+Route::get('/logout','Auth\AuthController@logout');
+Route::get('/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
 // Guest Pages
-Route::get('barbershop/{url}','CustomerPages\BarbershopController@url');
+	// Barbershop Pages
+	Route::get('/barbershop','CustomerPages\BarbershopController@barbershop');
+	Route::get('/barbershop/{url}','CustomerPages\BarbershopController@url');
+	// Selected Hairstyle
+	Route::get('/barbershop/{url}/{id}','CustomerPages\HairstyleController@selectedHairstyle');
 
+	// Hairstyle Pages
+	Route::get('/hairstyle','CustomerPages\HairstyleController@hairstyle');
+	Route::get('/hairstyle/search','HomeController@search');
+	Route::get('/hairstyle/male','CustomerPages\HairstyleController@maleHairstyle');
+	Route::get('/hairstyle/female','CustomerPages\HairstyleController@femaleHairstyle');
 
-// Customers Auth Pages
-Route::group(['middleware' => ['auth','checkRole:4']], function(){
-	
-});
 
 // Admin Panel - Universal Things
 Route::group(['middleware' => ['auth','checkRole:1,2,3']], function(){
@@ -37,9 +50,9 @@ Route::group(['middleware' => ['auth','checkRole:1,2,3']], function(){
 	Route::post('/admin-panel/profile/update','AdminPanel\UserConfigurationController@updateProfile');
 	Route::get('/admin-panel/password','AdminPanel\UserConfigurationController@password');
 	Route::post('/admin-panel/updatePassword','AdminPanel\UserConfigurationController@updatePassword');
-
-	// Chats
-	Route::get('/admin-panel/chats','AdminPanel\ChatController@index');
+	
+	// Export Transaction
+	Route::get('/transactions/export/excel','AdminPanel\TransactionController@excel');
 
 });
 
@@ -79,6 +92,12 @@ Route::group(['middleware' => ['auth','checkRole:1,2']], function(){
     // Verifying
     Route::get('/admin-panel/verify/approve/{id}','AdminPanel\VerifyUsersController@approve');
     Route::get('/admin-panel/verify/reject/{id}','AdminPanel\VerifyUsersController@reject');
+
+    // Transaction History
+    Route::get('/admin-panel/transactions/history','AdminPanel\TransactionController@historyAdmin');
+	Route::get('/admin-panel/transactions/load/table-transaksi', 'AdminPanel\TransactionController@LoadTableTransaksi');
+    Route::get('/admin-panel/transactions/load/data-transaksi', 'AdminPanel\TransactionController@LoadDataTransaksi');
+    Route::get('/admin-panel/transactions/delete/{id}', 'AdminPanel\TransactionController@destroy');
     
 });
 
@@ -111,6 +130,21 @@ Route::group(['middleware' => ['auth','checkRole:2']], function(){
 Route::group(['middleware' => ['auth','checkRole:3']], function(){
 	// Owner Dashboard
 	Route::get('/owner-panel/dashboard','HomeController@ownerDashboard');
+
+	// Order List
+	Route::get('/owner-panel/orders','AdminPanel\TransactionController@orders');
+	Route::get('/owner-panel/orders/confirm/{id}','AdminPanel\TransactionController@confirm');
+	Route::get('/owner-panel/orders/reject/{id}','AdminPanel\TransactionController@reject');
+	Route::post('/owner-panel/orders/cancel/','AdminPanel\TransactionController@close');
+	Route::get('/owner-panel/orders/cancel/{id}','AdminPanel\TransactionController@cancel');
+	Route::get('/owner-panel/orders/complete/{id}','AdminPanel\TransactionController@complete');
+
+	// Orders History
+	Route::get('/owner-panel/orders/history','AdminPanel\TransactionController@history');
+	Route::get('/owner-panel/transactions/load/table-transaksi', 'AdminPanel\TransactionController@LoadTableTransaksi');
+    Route::get('/owner-panel/transactions/load/data-transaksi', 'AdminPanel\TransactionController@LoadDataTransaksiBarber');
+
+	// Varify Identity
 	Route::get('/owner-panel/get-verify','AdminPanel\UserConfigurationController@getVerify');
 	Route::post('/owner-panel/send-verify','AdminPanel\UserConfigurationController@putVerify');
 
@@ -134,6 +168,39 @@ Route::group(['middleware' => ['auth','checkRole:3']], function(){
 	// Service Preferences
 	Route::get('/owner-panel/service-pref','AdminPanel\BarbershopController@servicePref');
 	Route::post('/owner-panel/service-pref/update','AdminPanel\BarbershopController@servicePrefUpdate');
+});
+
+// Customers Things
+Route::group(['middleware' => ['auth','checkRole:4']], function(){
+
+	// Pending Counter
+	Route::get('/pending-counter','HomeController@pendingCounter');
+
+	// Customer Configuration (Update Profile & Password)
+	Route::get('/profile','CustomerPages\CustomerConfigurationController@profile');
+	Route::post('/profile/update','CustomerPages\CustomerConfigurationController@updateProfile');
+	Route::post('/password/update','CustomerPages\CustomerConfigurationController@updatePassword');
+
+	// Verifikasi
+	Route::get('/verify','CustomerPages\CustomerConfigurationController@getVerify');
+	Route::post('/verify/send-verify','CustomerPages\CustomerConfigurationController@putVerify');
+
+	// Order (Proses Transaksi)
+	Route::post('/order','CustomerPages\TransactionController@order');
+
+	// Rate Hairstyle After Order Complete
+	Route::post('/rating/hairstyle/{id}', 'CustomerPages\RatingController@hairstyle');
+	Route::post('/rating/barbershop/{id}', 'CustomerPages\RatingController@barbershop');
+
+	// Order List
+	Route::get('/orders','CustomerPages\TransactionController@orders');
+	Route::get('/orders/history','CustomerPages\TransactionController@history');
+	Route::get('/orders/cancel/{id}','CustomerPages\TransactionController@cancel');
+	Route::get('/orders/abort/{id}','CustomerPages\TransactionController@abort');
+
+	// Aktivitas
+	Route::get('/activity','CustomerPages\CustomerConfigurationController@activity');
+
 });
 
 ?>

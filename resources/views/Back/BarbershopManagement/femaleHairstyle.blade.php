@@ -34,7 +34,7 @@
             </div>
             <div class="card-text">
               @if($h->deskripsi)
-                {{$h->deskripsi}}
+                <a href="" class="badge btn-detail badge-primary" data-id="{{$h->id}}">Deskripsi</a>
               @else
                 Tidak Ada Deskripsi.
               @endif
@@ -51,6 +51,23 @@
     </div>  
   </div>
 </section>
+
+<!-- Detail Deskripsi Hairstyle Modal-->
+<div class="modal fade" id="detail" tabindex="-1" role="dialog" aria-labelledby="AddHairstyleModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detail Deskripsi</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <p align="justify" id="detail-deskripsi"></p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Add Hairstyle Modal-->
 <div class="modal fade" id="addHairstyle" tabindex="-1" role="dialog" aria-labelledby="AddHairstyleModal" aria-hidden="true">
@@ -86,7 +103,7 @@
           <!-- Deskripsi -->
           <div class="form-group">
             <label for="deskripsi">Deskripsi</label>
-            <textarea class="form-control" name="deskripsi" id="deskripsi"></textarea>
+            <textarea class="form-control" style="height:200px;" name="deskripsi" id="deskripsi"></textarea>
           </div>
           <!-- Upload image input-->
           <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
@@ -152,7 +169,7 @@
           <!-- Deskripsi -->
           <div class="form-group">
             <label for="edit-deskripsi">Deskripsi</label>
-            <textarea class="form-control" name="edit-deskripsi" id="edit-deskripsi"></textarea>
+            <textarea class="form-control" style="height:200px;" name="edit-deskripsi" id="edit-deskripsi"></textarea>
           </div>
           <div class="form-group mt-3">
               <label for="images">Gambar Preview Hairstyle</label>
@@ -193,6 +210,5 @@
 @endpush
 @push('javascript')
   <script src="{{ asset('assets/js/upload-images.js') }}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="{{ asset('assets/js/AdminPanel/Barbershop/hairstyle.js') }}"></script>
 @endpush

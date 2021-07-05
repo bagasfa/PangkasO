@@ -10,6 +10,242 @@ html {
 /* ========================
 INCLUDE STYLES AND COMPONENTS
 ===================== */
+
+/* ================== CUSTOMS  =================== */
+
+.float-right{
+  float: right;
+}
+
+.deskripsi
+{
+  font-size:1.3em;
+}
+
+.order-title{
+  font-size: 1.25em;
+}
+
+/*Button Custom*/
+.draw-border {
+   box-shadow: inset 0 0 0 4px #58afd1;
+   color: #58afd1;
+   transition: color 0.25s 0.0833333333s;
+   position: relative;
+}
+ .draw-border::before, .draw-border::after {
+   border: 0 solid transparent;
+   box-sizing: border-box;
+   content: '';
+   pointer-events: none;
+   position: absolute;
+   width: 0;
+   height: 0;
+   bottom: 0;
+   right: 0;
+}
+ .draw-border::before {
+   border-bottom-width: 4px;
+   border-left-width: 4px;
+}
+ .draw-border::after {
+   border-top-width: 4px;
+   border-right-width: 4px;
+}
+ .draw-border:hover {
+   color: #ffe593;
+}
+ .draw-border:hover::before, .draw-border:hover::after {
+   border-color: #ffe593;
+   transition: border-color 0s, width 0.25s, height 0.25s;
+   width: 100%;
+   height: 100%;
+}
+ .draw-border:hover::before {
+   transition-delay: 0s, 0s, 0.25s;
+}
+ .draw-border:hover::after {
+   transition-delay: 0s, 0.25s, 0s;
+}
+ .but {
+   background: none;
+   border: none;
+   border-radius: 10%;
+   cursor: pointer;
+   line-height: 1.5;
+   font: 700 1.1rem 'Roboto Slab', sans-serif;
+   padding: 1em 1.5em;
+   letter-spacing: 0.05rem;
+}
+ .but:focus {
+   outline: 2px dotted #55d7dc;
+}
+
+/*Button Custom 2*/
+.but-2 {
+  border: none;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  background-color: #222;
+  padding: 17px 60px;
+  margin: 0 auto;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.20);
+}
+
+.but-2 span {
+  position: relative; 
+  z-index: 1;
+}
+
+.but-2:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 490%;
+  width: 140%;
+  background: #78c7d2;
+  -webkit-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+  -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
+  transform: translateX(-98%) translateY(-25%) rotate(45deg);
+}
+
+.but-2:hover:after {
+  -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+  transform: translateX(-9%) translateY(-25%) rotate(45deg);
+}
+
+/*Back to Top*/
+.scrollToTop{
+    width:auto; 
+    height:auto;
+    border-radius: 50%;
+    padding:13px 19px 13px 16px; 
+    text-align:center; 
+    background: #fff;
+    box-shadow:0 0 5px 2px rgb(78, 115, 223);
+    font-weight: bold;
+    color:rgb(78, 115, 223);
+    text-decoration: none;
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    display:none;
+    transition: 0.5s;
+}
+.scrollToTop:hover{
+    transform: rotate(365deg);
+    text-decoration:none;
+    box-shadow:0 0 25px 3px rgb(78, 115, 223);
+}
+
+/*Banner Profile Barbershop*/
+.parallax-window {
+  background: transparent;
+  position: relative;
+  min-height: 500px;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: scroll;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.parallax-window-2 {
+  min-height: 220px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  background: transparent;
+  position: relative;
+}
+
+.parallax-mirror {
+  z-index: 999 !important;
+}
+
+.tm-header {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  color: white;
+  z-index: 1000;
+}
+
+.tm-header-inner {
+  padding: 40px 50px;
+}
+
+@media (max-width: 991px) {
+  .tm-header-inner {
+    padding: 30px 15px;
+  }
+}
+
+.tm-site-text-box {
+  display: inline-block;
+}
+
+.tm-site-title {
+  font-size: 2.2rem;
+  font-weight: 400;
+  margin-bottom: 5px;
+}
+
+.tm-site-description {
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+.tm-nav {
+  text-align: right;
+  margin-top: 30px;
+}
+
+.tm-nav-ul {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tm-nav-li {
+  list-style: none;
+  display: block;
+  margin-bottom: 0;
+  padding-right: 25px;
+  padding-left: 25px;
+}
+
+@media (max-width: 991px) {
+  .tm-nav-li {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}
+
+.tm-nav-link {
+  color: white;
+  text-decoration: none;
+  padding-bottom: 10px;
+}
+
+.tm-nav-link.active,
+.tm-nav-link:hover {
+  border-bottom: 1px solid white;
+}
+
+/* ================== END OF CUSTOMS // =================== */
+
 /* ================== HELPERS  =================== */
 a:hover {
   text-decoration: none;

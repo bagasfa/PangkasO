@@ -25,33 +25,33 @@
             <form action="{{ url('/admin-panel/updatePassword') }}" method="POST" enctype="multipart/form-data">
               {{csrf_field()}}
               <div class="form-group">
-                  <label for="oldPassword">Password Lama <i style="color: red;">*</i></label>
-                  <div class="input-group" id="show_hide_password">
-                    <input name="oldPassword" type="password" class="form-control" id="oldPassword" required="">
-                    <a href=""><div class="input-group-addon eye">
-                      <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                    </div></a>
-                  </div>
+                <label for="oldPassword">Password Lama <i style="color: red;">*</i></label>
+                <div class="input-group" id="show_hide_password">
+                  <input name="oldPassword" type="password" class="form-control" id="oldPassword" required="">
+                  <a href=""><div class="input-group-addon eye">
+                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                  </div></a>
+                </div>
               </div><hr>
 
               <div class="form-group">
-                  <label for="newPassword">Password Baru <i style="color: red;">*</i></label>
-                  <div class="input-group" id="show_hide_password">
-                    <input name="newPassword" type="password" class="form-control" id="newPassword" required="">
-                    <a href=""><div class="input-group-addon eye">
-                      <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                    </div></a>
-                  </div>
+                <label for="newPassword">Password Baru <i style="color: red;">*</i></label>
+                <div class="input-group" id="show_hide_password">
+                  <input name="newPassword" type="password" class="form-control" id="newPassword" required="">
+                  <a href=""><div class="input-group-addon eye">
+                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                  </div></a>
+                </div>
               </div>
 
               <div class="form-group">
-                  <label for="confirmPassword">Konfirmasi Password Baru <i style="color: red;">*</i></label>
-                  <div class="input-group" id="show_hide_password">
-                    <input name="confirmPassword" type="password" class="form-control" id="confirmPassword" required="">
-                    <a href=""><div class="input-group-addon eye">
-                      <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                    </div></a>
-                  </div>
+                <label for="confirmPassword">Konfirmasi Password Baru <i style="color: red;">*</i></label>
+                <div class="input-group" id="show_hide_password">
+                  <input name="confirmPassword" type="password" class="form-control" id="confirmPassword" required="">
+                  <a href=""><div class="input-group-addon eye">
+                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                  </div></a>
+                </div>
               </div>
 
               <span><i style="color: red;">*</i> : Required</span>

@@ -20,7 +20,7 @@ class CreateBarbershopTable extends Migration
             $table->string('service_preferences')->nullable();
             $table->string('phone_number')->unique()->nullable();
             $table->string('url')->unique()->nullable();
-            $table->string('address')->nullable();
+            $table->mediumText('address')->nullable();
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->bigInteger('owner_id')->unsigned();

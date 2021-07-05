@@ -8,7 +8,7 @@ use App\User;
 class History extends Model
 {
     protected $table = 'history';
-    protected $fillable = ['nama','aksi','keterangan','status','user_id'];
+    protected $fillable = ['nama','aksi','keterangan','user_id'];
 
     public function user()
     {

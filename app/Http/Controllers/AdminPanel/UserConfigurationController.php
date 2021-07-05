@@ -12,7 +12,6 @@ use App\Identity;
 use App\User;
 use App\History;
 use App\Barbershop;
-use Illuminate\Support\Facades\DB;
 
 class UserConfigurationController extends Controller
 {
@@ -57,7 +56,7 @@ class UserConfigurationController extends Controller
 
         $history = History::where('nama',$user->name)->get();
         if($history){
-            DB::table('history')->where('nama','=',auth()->user()->name)->update(array('nama' => $request->name));
+            History::where('nama','=',auth()->user()->name)->update(array('nama' => $request->name));
         }
         $user->name = $request->name;
         $user->email = $request->email;

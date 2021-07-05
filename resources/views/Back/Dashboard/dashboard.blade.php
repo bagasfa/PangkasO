@@ -53,6 +53,84 @@
         <!-- End of Hero Setup Barbershop Account -->
         @endif
       </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h4>Transaksi Terbaru</h4>
+              <div class="card-header-action">
+              @if(auth()->user()->id_role != 3)
+              @else
+                <a href="{{'/owner-panel/orders'}}" class="btn btn-primary">Lihat Semua <i class="fas fa-chevron-right"></i></a>
+              @endif
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive table-invoice">
+                <table class="table table-striped">
+                  <tr>
+                    <th>ID Transaksi</th>
+                    <th>Customer</th>
+                    @if(auth()->user()->id_role != 3)
+                    <th>Barbershop</th>
+                    @endif
+                    <th>Jenis</th>
+                    <th>Status</th>
+                    <th>Transaksi</th>
+                  </tr>
+                  @forelse($transaksi as $trans)
+                  <tr>
+                    <td>{{$trans->no_antri}}</td>
+                    <td class="font-weight-600">{{$trans->user->name}}</td>
+                    @if(auth()->user()->id_role != 3)
+                    <td class="font-weight-600">{{$trans->barbershop->name}}</td>
+                    @endif
+                    <td class="font-weight-600">
+                    @switch($trans->jenis_layanan)
+                      @case('COD')
+                        Cash On Delivery
+                        @break
+                      @case('AO')
+                        Antrian Online
+                        @break
+                    @endswitch
+                    </td>
+                    <td>
+                    @switch($trans->status)
+                      @case('Pending')
+                      <div class="badge badge-secondary">{{$trans->status}}</div>
+                        @break
+                      @case('Confirmed')
+                      <div class="badge badge-success">{{$trans->status}}</div>
+                        @break
+                      @case('Requested')
+                      <div class="badge badge-warning">{{$trans->status}}</div>
+                        @break
+                      @case('Canceled')
+                      <div class="badge badge-danger">{{$trans->status}}</div>
+                        @break
+                      @case('Completed')
+                      <div class="badge badge-primary">{{$trans->status}}</div>
+                        @break
+                      @case('Rejected')
+                      <div class="badge badge-danger">{{$trans->status}}</div>
+                        @break
+                    @endswitch
+                    </td>
+                    <td>{{$trans->updated_at->diffForHumans()}}</td>
+                  </tr>
+                  @empty
+                  <tr>
+                    <td colspan="5" align="center">Tidak ada Transaksi</td>
+                  </tr>
+                  @endforelse
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
     </div>
   </section>
 @endsection

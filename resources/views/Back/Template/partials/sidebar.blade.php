@@ -1,9 +1,9 @@
 <aside id="sidebar-wrapper">
   <div class="sidebar-brand">
-    <a href="">{{ config('app.name') }}</a>
+    <a href=""><img src="{{asset('assets/img/logo/logo-horizontal.png')}}" width="60%"></a>
   </div>
   <div class="sidebar-brand sidebar-brand-sm">
-    <a href="#">{{ strtoupper(substr(config('app.name'), 0, 2)) }}</a>
+    <a href="#"><img src="{{asset('assets/img/logo/logo.png')}}" width="100%"></a>
   </div>
   <ul class="sidebar-menu">
     <li class="menu-header">Dashboard</li>
@@ -83,8 +83,8 @@
         </li>
       </ul>
     </li>
-    <li>
-      <a class="nav-link" href="{{url('/admin-panel/trasactions-history')}}">
+    <li id="order-history">
+      <a class="nav-link" href="{{url('/admin-panel/transactions/history')}}">
         <i class="fas fa-receipt"></i> <span>Transactions History</span>
       </a>
     </li>
@@ -132,8 +132,8 @@
         <i class="fas fa-hand-holding-heart"></i> <span>Service Preferences</span>
       </a>
     </li>
-    <li id="transactions">
-      <a class="nav-link" href="{{url('/owner-panel/trasactions-history')}}">
+    <li id="order-history">
+      <a class="nav-link" href="{{url('/owner-panel/orders/history')}}">
         <i class="fas fa-history"></i> <span>Transactions History</span>
       </a>
     </li>

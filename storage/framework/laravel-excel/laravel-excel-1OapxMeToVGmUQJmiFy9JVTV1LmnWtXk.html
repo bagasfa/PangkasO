@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>Export</title>
+  <link rel="stylesheet" href="http://localhost:8000/assets/css/stisla.css">
+</head>
+
+<body>
+  <div>
+    	<table class="table table-responsive table-bordered table-striped" width="100%">
+		    <thead>
+			    <tr>
+			        <th>#</th>
+			        <th>ID_Antri</th>
+			        <th>Jenis Layanan</th>
+			        <th>Nama Pemesan</th>
+			        <th>Barbershop</th>
+			        <th>Hairstyle</th>
+			        <th>Gender Haircut</th>
+			        <th>Harga</th>
+			        <th>Jam COD</th>
+			        <th>Status Order</th>
+			        <th>Notes Pemesan</th>
+			        <th>Lokasi COD</th>
+			        <th>Order Selesai</th>
+			    </tr>
+		    </thead>
+		    <tbody>
+			    			        <tr>
+			            <td align="center">1</td>
+			            <td align="center">AO/2021.07.02/OD/001</td>
+			            <td align="center">AO</td>
+			            <td>Customer</td>
+			            <td>Brotherhoods</td>
+			            <td>Model Cewe High Class</td>
+			            <td align="center">female</td>
+			            <td align="center" width="80px">Rp. <span class="uang">25000</span></td>
+			            <td align="center"></td>
+			            <td align="center">Canceled</td>
+			            <td>Yang sangar ya bang</td>
+			            <td></td>
+			            <td align="center">2021-07-03 01:01:05</td>
+			        </tr>
+			    			        <tr>
+			            <td align="center">2</td>
+			            <td align="center">AO/2021.07.02/OD/002</td>
+			            <td align="center">AO</td>
+			            <td>Customer</td>
+			            <td>Brotherhoods</td>
+			            <td>Model Cewe High Class</td>
+			            <td align="center">female</td>
+			            <td align="center" width="80px">Rp. <span class="uang">25000</span></td>
+			            <td align="center"></td>
+			            <td align="center">Completed</td>
+			            <td>Batal</td>
+			            <td></td>
+			            <td align="center">2021-07-03 02:11:32</td>
+			        </tr>
+			    			        <tr>
+			            <td align="center">3</td>
+			            <td align="center">AO/2021.07.03/OD/001</td>
+			            <td align="center">AO</td>
+			            <td>Customer</td>
+			            <td>Brotherhoods</td>
+			            <td>Mohawk</td>
+			            <td align="center">male</td>
+			            <td align="center" width="80px">Rp. <span class="uang">20000</span></td>
+			            <td align="center"></td>
+			            <td align="center">Rejected</td>
+			            <td>Mohawk yang kece kaya preman</td>
+			            <td></td>
+			            <td align="center">2021-07-03 02:26:38</td>
+			        </tr>
+			    			        <tr>
+			            <td align="center">4</td>
+			            <td align="center">COD/2021.07.03/OD/001</td>
+			            <td align="center">COD</td>
+			            <td>Customer</td>
+			            <td>Brotherhoods</td>
+			            <td>Mohawk</td>
+			            <td align="center">male</td>
+			            <td align="center" width="80px">Rp. <span class="uang">20000</span></td>
+			            <td align="center">19:16 | 03-07-2021</td>
+			            <td align="center">Completed</td>
+			            <td></td>
+			            <td><a href="https://www.google.com/maps/?q=-6.563281191224281,106.74492303115233">Lihat Lokasi</a></td>
+			            <td align="center">2021-07-03 18:16:22</td>
+			        </tr>
+			    		    </tbody>
+		</table>
+  </div>
+
+  <script src="http://localhost:8000/assets/js/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+    // Format mata uang.
+      $( '.uang' ).mask('000.000.000', {reverse: true});
+  </script>
+</body>
+</html>

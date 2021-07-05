@@ -162,48 +162,6 @@ a:not(.btn-social-icon):not(.btn-social):not(.page-link) .fab {
   font-size: 20px;
 }
 
-/*for Desktop 1920px*/
-@media only screen and (max-width: 1920px) {
-  #clock{
-    margin-left: 82%;
-  }
-}
-
-/*for Desktop 1360px & 1366px*/
-@media only screen and (max-width: 1366px) {
-  #clock{
-    margin-left: 75%;
-  }
-}
-
-/*for Tablet 1024p*/
-@media only screen and (max-width: 1024px) {
-  #clock{
-    margin-left: 72%;
-  }
-}
-
-/*for Mobile 768p*/
-@media only screen and (max-width: 800px) {
-  #clock{
-    margin-left: 62%;
-  }
-}
-
-/*iphone 6/6s/7/8*/
-@media only screen and (max-width: 600px) {
-  #clock{
-    margin-left: 60%;
-  }
-}
-
-/*iphone x/ xs/ xr*/
-@media only screen and (max-width: 400px) {
-  #clock{
-    margin-left: 50%;
-  }
-}
-
 #shadow{
   height:20px;
   border-radius:30px;
@@ -2584,7 +2542,13 @@ pre {
           animation-fill-mode: forwards;
   -webkit-animation-timing-function: linear;
           animation-timing-function: linear;
-  background-size: 100%; }
+  background-size: 100%; 
+  transition: 0.5s;
+}
+
+  .background-walk-y:hover{
+    filter: grayscale(50%);
+  }
 
 @media (max-width: 1199.98px) {
   .background-walk-y {

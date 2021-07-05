@@ -54,8 +54,8 @@
                     </div>
                     <!-- Latitude Longitude -->
                     <div class="input-group" id="input-group">
-                      <input type="text" name="lat" class="form-control" id="input-lat" placeholder="Latitude" hidden>
-                      <input type="text" name="long" class="form-control" id="input-lng" placeholder="Longitude" hidden>   
+                      <input type="text" name="lat" class="form-control text-center" id="input-lat" placeholder="Latitude" readonly="true">
+                      <input type="text" name="long" class="form-control text-center" id="input-lng" placeholder="Longitude" readonly="true">   
                     </div>
                     <div id="map" data-height="400"></div>
                   </div>
@@ -75,7 +75,7 @@
 </section>
 @endsection
 @push('javascript')
-  <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDVdq9z2G2lIc0pn2FK7lHeCIWvNEXQMmQ&sensor=true"></script>
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyAO6ndHIJPAnQbMMh8k0jq86Mq6gmX_61o&sensor=true"></script>
   <script src="{{ asset('assets/js/gmaps.min.js') }}"></script>
   <!-- Draggable Maker -->
   <script type="text/javascript">

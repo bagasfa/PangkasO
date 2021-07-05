@@ -15,7 +15,7 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->integer('no_antri')->nullable();
+            $table->string('no_antri')->nullable();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')
                 ->references('id')
@@ -37,9 +37,11 @@ class CreateTransactionsTable extends Migration
             $table->string('jenis_layanan');
             $table->string('harga');
             $table->string('status');
-            $table->string('jam_booking');
+            $table->string('jam_booking')->nullable();
             $table->string('pesan')->nullable();
             $table->string('lokasi')->nullable();
+            $table->string('hairstyle_rating')->nullable();
+            $table->string('barbershop_rating')->nullable();
             $table->timestamps();
         });
     }
