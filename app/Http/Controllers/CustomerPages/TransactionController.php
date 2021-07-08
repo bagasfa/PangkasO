@@ -59,6 +59,11 @@ class TransactionController extends Controller
     public function showOrders(){
         $uID = auth()->user()->id;
         $orders = Transaction::where('user_id',$uID)->orderBy('id','desc')->get();
+        $empty = Transaction::where('user_id',$uID)
+                            ->where('status','Pending')
+                            ->orWhere('status','Requested')
+                            ->orWhere('status','Confirmed')
+                            ->get();
 
         if(session('success')){
             Alert::success(session('success'));
@@ -66,7 +71,7 @@ class TransactionController extends Controller
             Alert::error(session('error'));
         }
 
-        return view('Front.Transactions.order', compact('orders'));
+        return view('Front.Transactions.order', compact('orders','empty'));
     }
 
     public function history(){

@@ -32,9 +32,7 @@
 		                        <div class="float-right dropdown">
 		                          <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
 		                          <div class="dropdown-menu">
-		                            <div class="dropdown-title">Options</div>		                            
-		                            <a href="#" class="dropdown-item has-icon"><i class="fas fa-comment-dots"></i> Chat</a>
-		                            <div class="dropdown-divider"></div>
+		                            <div class="dropdown-title">Options</div> 
 		                            <a href="{{ url('/orders/cancel/'.$order->id) }}" class="dropdown-item has-icon text-danger"><i class="fas fa-times"></i> Cancel Order</a>
 		                          </div>
 		                        </div>
@@ -76,9 +74,7 @@
 		                        <div class="float-right dropdown">
 		                          <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
 		                          <div class="dropdown-menu">
-		                            <div class="dropdown-title">Options</div>		                            
-		                            <a href="#" class="dropdown-item has-icon"><i class="fas fa-comment-dots"></i> Chat</a>
-		                            <div class="dropdown-divider"></div>
+		                            <div class="dropdown-title">Options</div>
 		                            <a href="{{ url('/orders/cancel/'.$order->id) }}" class="dropdown-item has-icon text-danger"><i class="fas fa-times"></i> Cancel Order</a>
 		                          </div>
 		                        </div>
@@ -122,9 +118,7 @@
 		                        <div class="float-right dropdown">
 		                          <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
 		                          <div class="dropdown-menu">
-		                            <div class="dropdown-title">Options</div>		                            
-		                            <a href="#" class="dropdown-item has-icon"><i class="fas fa-comment-dots"></i> Chat</a>
-		                            <div class="dropdown-divider"></div>
+		                            <div class="dropdown-title">Options</div>
 		                            <a href="{{ url('/orders/abort/'.$order->id) }}" class="dropdown-item has-icon text-danger"><i class="fas fa-times"></i> Cancel</a>
 		                          </div>
 		                        </div>
@@ -172,6 +166,25 @@
 	                      <span>Kamu belum membuat orderan</span>
 	                    </div>
 	                  </div>
+        			@endforelse
+        			@forelse($empty as $e)
+        			@empty
+        			<div class="col-12">
+			            <div class="card">
+			              <div class="card-body">
+			                <div class="empty-state" data-height="400">
+			                  <div class="empty-state-icon">
+			                    <i class="fas fa-times"></i>
+			                  </div>
+			                  <h2>Order Kosong</h2>
+			                  <p class="lead">
+			                    Mohon maaf kamu tidak memiliki orderan saat ini.
+			                  </p>
+			                  <a href="{{ url('/hairstyle') }}" class="btn btn-primary mt-4">Order Sekarang</a>
+			                </div>
+			              </div>
+			            </div>
+			        </div> <!-- col.// -->
         			@endforelse
         			</div>
         		</div>

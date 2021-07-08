@@ -48,6 +48,9 @@
 			        	@case('Hapus')
 			        	<i class="fas fa-trash-alt"></i>
 			        		@break
+			        	@case('Rate')
+			        	<i class="fas fa-star text-warning"></i>
+			        		@break
 			        @endswitch
 			        </div>
 			        <div class="activity-detail">

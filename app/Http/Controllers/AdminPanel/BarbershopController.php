@@ -84,7 +84,6 @@ class BarbershopController extends Controller
         $messages = array(
             'name.required' => 'Kolom Nama Barbershop tidak boleh kosong!',
             'name.unique' => 'Nama Barbershop sudah digunakan!',
-            'banner.mimes' => 'Mohon gunakan format gambar : .jpeg | .jpg | .png',
             'banner.max' => 'Ukuran gambar anda melebihi 4MB!',
             'phone_number.required' => 'Kolom Nomor Telpon tidak boleh kosong!',
             'phone_number.unique' => 'Nomor sudah digunakan!',
@@ -92,7 +91,7 @@ class BarbershopController extends Controller
         );
 
         $validateData = $request->validate([
-            'banner' => 'image|mimes:jpeg,png,jpg|max:4096',
+            'banner' => 'image|max:4096',
             'name' => 'required|unique:barbershop,name,'.$barber->id,
             'phone_number' => 'required|unique:barbershop,phone_number,'.$barber->id,
             'address' => 'required'

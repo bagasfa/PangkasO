@@ -28,13 +28,6 @@
 		                        		Antrian Online
 		                        	@endif
 		                        </span>
-		                        <div class="float-right dropdown">
-		                          <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
-		                          <div class="dropdown-menu">
-		                            <div class="dropdown-title">Options</div>		                            
-		                            <a href="#" class="dropdown-item has-icon"><i class="fas fa-comment-dots"></i> Chat</a>
-		                          </div>
-		                        </div>
 		                      </div>
 		                      <span class="badge badge-success">{{$order->no_antri}}</span>
 		                      <br>
@@ -160,13 +153,6 @@
 		                        		Antrian Online
 		                        	@endif
 		                        </span>
-		                        <div class="float-right dropdown">
-		                          <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
-		                          <div class="dropdown-menu">
-		                            <div class="dropdown-title">Options</div>		                            
-		                            <a href="#" class="dropdown-item has-icon"><i class="fas fa-comment-dots"></i> Chat</a>
-		                          </div>
-		                        </div>
 		                      </div>
 		                      <span class="badge badge-danger">{{$order->no_antri}}</span>
 		                      <br>
@@ -204,13 +190,6 @@
 		                        		Antrian Online
 		                        	@endif
 		                        </span>
-		                        <div class="float-right dropdown">
-		                          <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
-		                          <div class="dropdown-menu">
-		                            <div class="dropdown-title">Options</div>		                            
-		                            <a href="#" class="dropdown-item has-icon"><i class="fas fa-comment-dots"></i> Chat</a>
-		                          </div>
-		                        </div>
 		                      </div>
 		                      <span class="badge badge-danger">{{$order->no_antri}}</span>
 		                      <br>

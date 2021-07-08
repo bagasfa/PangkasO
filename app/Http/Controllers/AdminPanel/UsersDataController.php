@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\UsersMail;
 use App\User;
 use App\History;
 use App\Identity;

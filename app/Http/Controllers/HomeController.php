@@ -18,9 +18,10 @@ class HomeController extends Controller
         History::where('created_at', '<', Carbon::now()->subDays(30))->delete();
 
         $barbershop = Barbershop::whereNotNull('name')->limit(4)->get();
-        $hairstyle = Hairstyle::orderBy('id','desc')->limit(4)->get();
+        $male = Hairstyle::where('gender','male')->orderBy('id','desc')->limit(4)->get();
+        $female = Hairstyle::where('gender','female')->orderBy('id','desc')->limit(4)->get();
 
-        return view('Front.home',compact('barbershop','hairstyle'));
+        return view('Front.home',compact('barbershop','male', 'female'));
     }
 
     public function search(Request $request){

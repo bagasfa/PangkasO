@@ -470,6 +470,9 @@
       
       $(document).ready(function(){
 
+        @guest
+        @else
+        @if(auth()->user()->id_role == 4)
         // Order Pending Counter
         $.ajax({
           url: '/pending-counter',
@@ -478,6 +481,8 @@
             document.getElementById('pending-counter').innerHTML = res.values;
           }
         });
+        @endif
+        @endguest
 
         // Back to Top button
         $(window).scroll(function(){
