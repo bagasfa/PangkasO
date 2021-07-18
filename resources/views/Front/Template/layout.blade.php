@@ -59,10 +59,13 @@
             <div class="col-lg-4 col-sm-6 col-12">
               <div class="widgets-wrap float-md-right">
                 <div class="widget-header" style="margin-right: 5px;">
-                  <a href="{{ url('/orders') }}" class="icon icon-sm rounded-circle border"><i class="fa fa-receipt"></i></a>
                   @guest
+                  <a href="" class="icon icon-sm rounded-circle border" data-toggle="modal" data-target="#loginForm"><i class="fa fa-receipt"></i></a>
                   @else
-                  @if(auth()->user()->id_role == 4)
+                  @if(auth()->user()->id_role != 4)
+                  <a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-receipt"></i></a>
+                  @else
+                  <a href="{{ url('/orders') }}" class="icon icon-sm rounded-circle border"><i class="fa fa-receipt"></i></a>
                   <span id="pending-counter" class="badge badge-pill badge-danger notify" style="font-size: 0.7em; top: -10px; left: 28px;"></span>
                   @endif
                   @endguest
@@ -89,7 +92,7 @@
                   </div>
                 @endif
                 @else
-                  <a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
+                  <a href="" class="icon icon-sm rounded-circle border" data-toggle="modal" data-target="#loginForm"><i class="fa fa-user"></i></a>
                 @endif
                   
                 @if(auth()->check())

@@ -50,18 +50,18 @@
         @if(auth()->check())
   				@if(auth()->user()->verify_status != 'Approved')
   					@if($barbershop->service_preferences == 'COD')
-  						<button class="btn btn-primary col-12" data-toggle="modal" data-target="#verify">COD (Only)</button>
+  						<button class="btn btn-primary col-12" data-toggle="modal" data-target="#verify">COD</button>
   					@elseif($barbershop->service_preferences == 'AO')
-  						<button class="btn btn-info col-12" data-toggle="modal" data-target="#verify">Antri Online (Only)</button>
+  						<button class="btn btn-info col-12" data-toggle="modal" data-target="#verify">Antri Online</button>
   					@elseif($barbershop->service_preferences == 'COA')
   						<button class="btn btn-primary col-6 col-md-6 col-lg-6" data-toggle="modal" data-target="#verify">COD</button>
   						<button class="btn btn-info col-6 col-md-6 col-lg-6" data-toggle="modal" data-target="#verify">Antri Online</button>
   					@endif
   				@else
   					@if($barbershop->service_preferences == 'COD')
-  						<button class="btn btn-primary col-12" data-toggle="modal" data-target="#cod">COD (Only)</button>
+  						<button class="btn btn-primary col-12" data-toggle="modal" data-target="#cod">COD</button>
   					@elseif($barbershop->service_preferences == 'AO')
-  						<button class="btn btn-info col-12" data-toggle="modal" data-target="#antri">Antri Online (Only)</button>
+  						<button class="btn btn-info col-12" data-toggle="modal" data-target="#antri">Antri Online</button>
   					@elseif($barbershop->service_preferences == 'COA')
   						<button class="btn btn-primary col-6 col-md-6 col-lg-6" data-toggle="modal" data-target="#cod">COD</button>
   						<button class="btn btn-info col-6 col-md-6 col-lg-6" data-toggle="modal" data-target="#antri">Antri Online</button>
@@ -69,9 +69,9 @@
   				@endif
 				@else
           @if($barbershop->service_preferences == 'COD')
-              <button class="btn btn-primary col-12" data-toggle="modal" data-target="#loginForm">COD (Only)</button>
+              <button class="btn btn-primary col-12" data-toggle="modal" data-target="#loginForm">COD</button>
             @elseif($barbershop->service_preferences == 'AO')
-              <button class="btn btn-info col-12" data-toggle="modal" data-target="#loginForm">Antri Online (Only)</button>
+              <button class="btn btn-info col-12" data-toggle="modal" data-target="#loginForm">Antri Online</button>
             @elseif($barbershop->service_preferences == 'COA')
               <button class="btn btn-primary col-6 col-md-6 col-lg-6" data-toggle="modal" data-target="#loginForm">COD</button>
               <button class="btn btn-info col-6 col-md-6 col-lg-6" data-toggle="modal" data-target="#loginForm">Antri Online</button>
