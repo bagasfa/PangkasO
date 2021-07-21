@@ -47,6 +47,9 @@ use Illuminate\Support\Facades\Route;
 	Route::get('/hairstyle/male','CustomerPages\HairstyleController@maleHairstyle');
 	Route::get('/hairstyle/female','CustomerPages\HairstyleController@femaleHairstyle');
 
+	// Urutan Pesanan
+	Route::get('/orders/{url}','CustomerPages\TransactionController@orderList');
+
 
 // Admin Panel - Universal Things
 Route::group(['middleware' => ['auth','checkRole:1,2,3']], function(){

@@ -35,6 +35,11 @@
 									<i class="fas fa-map-marker-alt"></i> Lokasi Kami
 								</a>
 							</li>
+							<li class="tm-nav-li">
+								<a href="{{url('orders/'.$barbershop->url)}}" target="_blank" class="tm-nav-link active nounderline">
+									<i class="fas fa-sort-numeric-down"></i> Antrian Terkini
+								</a>
+							</li>
 						</ul>
 					</nav>	
 				</div>

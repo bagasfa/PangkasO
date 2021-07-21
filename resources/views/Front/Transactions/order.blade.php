@@ -75,6 +75,7 @@
 		                          <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
 		                          <div class="dropdown-menu">
 		                            <div class="dropdown-title">Options</div>
+		                            <a href="{{ url('/orders/'.$order->barbershop->url) }}" class="dropdown-item has-icon"><i class="fas fa-sort-numeric-down"></i> Lihat Antrian</a>
 		                            <a href="{{ url('/orders/cancel/'.$order->id) }}" class="dropdown-item has-icon text-danger"><i class="fas fa-times"></i> Cancel Order</a>
 		                          </div>
 		                        </div>

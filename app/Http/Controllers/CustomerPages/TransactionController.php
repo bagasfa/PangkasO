@@ -74,6 +74,13 @@ class TransactionController extends Controller
         return view('Front.Transactions.order', compact('orders','empty'));
     }
 
+    public function orderList($url){
+        $barber = Barbershop::where('url',$url)->first();
+        $orderList = Transaction::where('barbershop_id',$barber->id)->where('status','Confirmed')->get();
+
+        return view('Front.Transactions.list',compact('barber','orderList'));
+    }
+
     public function history(){
         $uID = auth()->user()->id;
         $orders = Transaction::where('user_id',$uID)->orderBy('id','desc')->get();
