@@ -113,7 +113,6 @@ Route::group(['middleware' => ['auth','checkRole:1,2']], function(){
 // Admin Panel - Superadmin Only
 Route::group(['middleware' => ['auth','checkRole:1']], function(){
 
-	
 	// Roles
 	Route::get('/admin-panel/roles','AdminPanel\RolesController@index');
 	Route::get('/admin-panel/roles/load/table-roles', 'AdminPanel\RolesController@LoadTableRoles');
@@ -128,11 +127,6 @@ Route::group(['middleware' => ['auth','checkRole:1']], function(){
     Route::get('/admin-panel/admins/load/data-admin', 'AdminPanel\UsersDataController@LoadDataAdmin');
     Route::get('/admin-panel/admins/delete/{id}', 'AdminPanel\UsersDataController@destroyAdmin');
     Route::post('/admin-panel/admins/add', 'AdminPanel\UsersDataController@storeAdmin');
-});
-
-// Admin Panel - Admin Only
-Route::group(['middleware' => ['auth','checkRole:2']], function(){
-
 });
 
 // Owner Panel - Owner Only
@@ -153,7 +147,7 @@ Route::group(['middleware' => ['auth','checkRole:3']], function(){
 	Route::get('/owner-panel/transactions/load/table-transaksi', 'AdminPanel\TransactionController@LoadTableTransaksi');
     Route::get('/owner-panel/transactions/load/data-transaksi', 'AdminPanel\TransactionController@LoadDataTransaksiBarber');
 
-	// Varify Identity
+	// Verify Identity
 	Route::get('/owner-panel/get-verify','AdminPanel\UserConfigurationController@getVerify');
 	Route::post('/owner-panel/send-verify','AdminPanel\UserConfigurationController@putVerify');
 
